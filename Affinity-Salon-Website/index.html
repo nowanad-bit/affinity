@@ -1,0 +1,370 @@
+# Full Updated HTML Website
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Affinity Luxury Salon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+    }
+
+    .hero-bg {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+      url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1974&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      transition: 0.4s ease;
+    }
+  </style>
+</head>
+
+<body class="text-white">
+
+  <!-- Hero Section -->
+  <section class="hero-bg min-h-screen flex items-center justify-center text-center px-6">
+    <div class="max-w-4xl">
+
+      <div class="flex justify-center mb-6">
+        <img src="logo.png" alt="Affinity Salon Logo" class="w-40 md:w-52 object-contain" />
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        Affinity Luxury Salon
+      </h1>
+
+      <p class="text-lg md:text-2xl text-gray-300 mb-10">
+        Premium Hair • Beauty • Makeup • Nails in Chandigarh
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+
+        <a
+          href="https://wa.me/918427769960"
+          target="_blank"
+          class="bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold"
+        >
+          Book on WhatsApp
+        </a>
+
+        <a
+          href="tel:+918427769960"
+          class="border border-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-white hover:text-black transition"
+        >
+          Call Now
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="py-24 px-6 bg-zinc-950">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+
+      <img
+        src="KALI7081.jpg"
+        class="rounded-3xl shadow-2xl"
+      />
+
+      <div>
+        <p class="uppercase tracking-[0.3em] text-sm text-gray-400 mb-3">About Us</p>
+
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+          Redefining Beauty & Luxury
+        </h2>
+
+        <p class="text-gray-300 text-lg leading-relaxed mb-6">
+          Affinity Luxury Salon delivers premium salon experiences with expert stylists,
+          luxury interiors, modern beauty treatments, and personalized care.
+        </p>
+
+        <p class="text-gray-400 leading-relaxed">
+          From hair transformations to bridal makeup and nail artistry,
+          every service is designed to make you look and feel exceptional.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto text-center">
+
+      <p class="uppercase tracking-[0.3em] text-sm text-gray-400 mb-3">
+        Gallery
+      </p>
+
+      <h2 class="text-4xl md:text-5xl font-bold mb-16">
+        Affinity Luxury Salon Interiors
+      </h2>
+
+      <div class="gallery grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <img src="KALI7081.jpg" class="rounded-3xl h-80 w-full object-cover" />
+
+        <img src="KALI7219.jpg" class="rounded-3xl h-80 w-full object-cover" />
+
+        <img src="KALI7237.jpg" class="rounded-3xl h-80 w-full object-cover" />
+
+        <img src="KALI7258.JPG" class="rounded-3xl h-80 w-full object-cover" />
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Stylists -->
+  <section class="py-24 px-6 bg-zinc-950">
+    <div class="max-w-7xl mx-auto text-center">
+
+      <h2 class="text-4xl md:text-5xl font-bold mb-16">
+        Professional Hair Stylists
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+          <h3 class="text-3xl font-bold mb-3">Sunny Ali</h3>
+          <p class="text-gray-400">Senior Hair Artist</p>
+
+          <div class="mt-5 flex flex-col gap-3">
+            <a href="https://www.instagram.com/sunny_ali_hair_artist" target="_blank" class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">Instagram Profile</a>
+            <a href="https://wa.me/919872366050" target="_blank" class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">WhatsApp: 9872366050</a>
+          </div>
+        </div>
+
+        <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+          <h3 class="text-3xl font-bold mb-3">Imran Ahmad</h3>
+          <p class="text-gray-400">Senior Hair Artist</p>
+
+          <div class="mt-5 flex flex-col gap-3">
+            <a href="https://www.instagram.com/imran.hairartist" target="_blank" class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">Instagram Profile</a>
+            <a href="https://wa.me/919779813285" target="_blank" class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">WhatsApp: 9779813285</a>
+          </div>
+        </div>
+
+        <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+          <h3 class="text-3xl font-bold mb-3">Azeem Alvi</h3>
+          <p class="text-gray-400">Senior Hair Artist</p>
+
+          <div class="mt-5 flex flex-col gap-3">
+            <a href="https://www.instagram.com/hair_artist_azeem" target="_blank" class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">Instagram Profile</a>
+            <a href="https://wa.me/917696887421" target="_blank" class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">WhatsApp: 7696887421</a>
+          </div>
+        </div>
+<!-- Remaining Hair Stylists -->
+
+<div class="bg-black border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Saleem Salmani</h3>
+  <p class="text-gray-400">Senior Hair Artist</p>
+
+  <div class="mt-5 flex flex-col gap-3">
+    <a href="https://www.instagram.com/saleem_hair_art" target="_blank"
+      class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      Instagram Profile
+    </a>
+
+    <a href="https://wa.me/919780422854" target="_blank"
+      class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      WhatsApp: 9780422854
+    </a>
+  </div>
+</div>
+
+<div class="bg-black border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Naushad</h3>
+  <p class="text-gray-400">Senior Hair Artist</p>
+
+  <div class="mt-5 flex flex-col gap-3">
+    <a href="https://www.instagram.com/hairartist_naushad" target="_blank"
+      class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      Instagram Profile
+    </a>
+
+    <a href="https://wa.me/919888055835" target="_blank"
+      class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      WhatsApp: 9888055835
+    </a>
+  </div>
+</div>
+
+<div class="bg-black border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Jassi</h3>
+  <p class="text-gray-400">Senior Hair Artist</p>
+
+  <div class="mt-5 flex flex-col gap-3">
+    <a href="https://www.instagram.com/jassi.hairstylist" target="_blank"
+      class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      Instagram Profile
+    </a>
+
+    <a href="https://wa.me/919855001529" target="_blank"
+      class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      WhatsApp: 9855001529
+    </a>
+  </div>
+</div>
+
+<!-- Beauticians -->
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Nisha Sharma</h3>
+  <p class="text-gray-400">Senior Beautician & Makeup Artist</p>
+
+  <div class="mt-5 flex flex-col gap-3">
+    <a href="https://www.instagram.com/nisha_mua_artist" target="_blank"
+      class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      Instagram Profile
+    </a>
+
+    <a href="https://wa.me/919780823215" target="_blank"
+      class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      WhatsApp: 9780823215
+    </a>
+  </div>
+</div>
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Binu</h3>
+  <p class="text-gray-400">Senior Beautician</p>
+</div>
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Nima</h3>
+  <p class="text-gray-400">Senior Beautician</p>
+</div>
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Uma</h3>
+  <p class="text-gray-400">Senior Beautician</p>
+</div>
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Urvisha</h3>
+  <p class="text-gray-400">Senior Beautician</p>
+</div>
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+  <h3 class="text-3xl font-bold mb-3">Neeraj</h3>
+  <p class="text-gray-400">Makeup Artist</p>
+
+  <div class="mt-5 flex flex-col gap-3">
+    <a href="https://www.instagram.com/makeup_by_neerajsidhu_1" target="_blank"
+      class="bg-white text-black px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      Instagram Profile
+    </a>
+
+    <a href="https://wa.me/919501791259" target="_blank"
+      class="border border-white px-4 py-2 rounded-xl text-sm font-semibold text-center">
+      WhatsApp: 9501791259
+    </a>
+  </div>
+</div>
+<!-- Pedicurists Section -->
+
+<section class="py-24 px-6 bg-zinc-950">
+  <div class="max-w-7xl mx-auto text-center">
+
+    <p class="uppercase tracking-[0.3em] text-sm text-gray-400 mb-3">
+      Pedicure Experts
+    </p>
+
+    <h2 class="text-4xl md:text-5xl font-bold mb-16">
+      Senior Pedicurists
+    </h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+        <h3 class="text-3xl font-bold mb-3">Aryan</h3>
+        <p class="text-gray-400">Senior Pedicurist</p>
+      </div>
+
+      <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+        <h3 class="text-3xl font-bold mb-3">Akash</h3>
+        <p class="text-gray-400">Senior Pedicurist</p>
+      </div>
+
+      <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+        <h3 class="text-3xl font-bold mb-3">Rohan</h3>
+        <p class="text-gray-400">Senior Pedicurist</p>
+      </div>
+
+      <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+        <h3 class="text-3xl font-bold mb-3">Monu</h3>
+        <p class="text-gray-400">Senior Pedicurist</p>
+      </div>
+
+      <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+        <h3 class="text-3xl font-bold mb-3">Vikram</h3>
+        <p class="text-gray-400">Senior Pedicurist</p>
+      </div>
+
+      <div class="bg-black border border-zinc-800 rounded-3xl p-8">
+        <h3 class="text-3xl font-bold mb-3">Mukesh</h3>
+        <p class="text-gray-400">Senior Pedicurist</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto bg-zinc-900 rounded-[40px] p-10 md:p-16 text-center">
+
+      <h2 class="text-4xl md:text-5xl font-bold mb-8">
+        Contact Affinity Luxury Salon
+      </h2>
+
+      <p class="text-gray-300 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+        Call or WhatsApp us directly for appointments and bookings.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+
+        <a
+          href="tel:+918427769960"
+          class="bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold"
+        >
+          Call Now
+        </a>
+
+        <a
+          href="https://wa.me/918427769960"
+          target="_blank"
+          class="border border-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-white hover:text-black transition"
+        >
+          Book on WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="border-t border-zinc-800 py-8 text-center text-gray-500 text-sm">
+    © 2026 Affinity Luxury Salon • All Rights Reserved
+  </footer>
+
+</body>
+</html>
+```
