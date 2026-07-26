@@ -4,8 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Affinity Luxury Salon - Premium Hair & Beauty in Chandigarh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23ffd700'>✨</text></svg>">
+  
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="s6Zzs_etGK05IrF7wdavX96h8zCpP4JE2m2QLYeXRw8" />
+  
+  <!-- SEO Meta Description -->
+  <meta name="description" content="Affinity Luxury Salon in Chandigarh offers premium hair & beauty services. Expert stylists, modern facilities, and personalized treatments for all hair types.">
+  
+  <!-- Open Graph Tags (Social Media Sharing) -->
+  <meta property="og:title" content="Affinity Luxury Salon - Premium Hair & Beauty in Chandigarh">
+  <meta property="og:description" content="Expert hair styling, coloring, and beauty treatments at Chandigarh's leading luxury salon.">
+  <meta property="og:type" content="business.business">
+  <meta property="og:url" content="https://affinitychandigarh.com">
+  <meta property="og:image" content="https://affinitychandigarh.com/assets/logo.png">
+  
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Affinity Luxury Salon - Premium Hair & Beauty">
+  <meta name="twitter:description" content="Experience premium hair and beauty services in Chandigarh.">
+  <meta name="twitter:image" content="https://affinitychandigarh.com/assets/logo.png">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://affinitychandigarh.com">
+  
+  <!-- Local Business Schema (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Affinity Luxury Salon",
+    "image": "https://affinitychandigarh.com/assets/logo.png",
+    "description": "Premium hair styling, coloring, and beauty services in Chandigarh",
+    "telephone": "+91-8427769960",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "SCO 166-167, Sector 9C, Madhya Marg",
+      "addressLocality": "Chandigarh",
+      "postalCode": "160009",
+      "addressCountry": "IN"
+    },
+    "url": "https://affinitychandigarh.com",
+    "openingHours": [
+      "Mo-Su 10:00-20:00"
+    ],
+    "priceRange": "₹₹₹",
+    "sameAs": [
+      "https://www.instagram.com/affinityluxurysalonchandigarh_",
+      "https://www.facebook.com/affinitysalonchandigarh"
+    ]
+  }
+  </script>
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="keywords" content="luxury salon Chandigarh, hair styling, hair coloring, beauty services, bridal makeup, premium salon">
+  <meta name="author" content="Affinity Luxury Salon">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="7 days">
+  
+  <!-- Font Optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23D4AF37'>✨</text></svg>">
   
   <style>
     * {
@@ -19,8 +79,8 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: #000;
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
       color: #fff;
       line-height: 1.6;
     }
@@ -39,50 +99,52 @@
       position: fixed;
       top: 0;
       width: 100%;
-      z-index: 50;
-      transition: all 0.3s ease;
-      padding: 1rem 0;
-    }
-
-    nav.scrolled {
-      background: rgba(0, 0, 0, 0.95);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+      z-index: 100;
+      padding: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(10, 10, 10, 0.98);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      padding: 1rem 1.5rem;
     }
 
     nav img {
-      height: 60px;
+      height: 50px;
       object-fit: contain;
     }
 
-    .nav-links {
+    .nav-center {
       display: none;
-      gap: 2rem;
-      font-size: 0.875rem;
+      gap: 3rem;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
 
     @media (min-width: 768px) {
-      .nav-links {
+      .nav-center {
         display: flex;
       }
     }
 
     .nav-link {
       position: relative;
+      color: #ccc;
       transition: color 0.3s ease;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
     }
 
     .nav-link:hover {
-      color: #ffd700;
+      color: #D4AF37;
     }
 
     .nav-link::after {
@@ -92,7 +154,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #ffd700;
+      background: #D4AF37;
       transition: width 0.3s ease;
     }
 
@@ -100,294 +162,289 @@
       width: 100%;
     }
 
-    /* Buttons */
-    .btn-primary {
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      color: #000;
-      padding: 1rem 2rem;
-      border-radius: 1rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-      display: inline-block;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
+    .nav-right {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
     }
 
-    .btn-primary:hover {
+    /* Button */
+    .btn {
+      background: #D4AF37;
+      color: #000;
+      padding: 0.75rem 1.75rem;
+      border-radius: 0.25rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
       transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
     }
 
     .btn-outline {
-      border: 2px solid #ffd700;
-      color: #ffd700;
-      padding: 1rem 2rem;
-      border-radius: 1rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-block;
-      cursor: pointer;
       background: transparent;
-      font-size: 1rem;
+      border: 2px solid #D4AF37;
+      color: #D4AF37;
+      padding: 0.65rem 1.65rem;
     }
 
     .btn-outline:hover {
-      background: #ffd700;
+      background: #D4AF37;
       color: #000;
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-    }
-
-    /* Badge */
-    .badge {
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      color: #000;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 1rem;
-    }
-
-    /* Gradient Text */
-    .gradient-text {
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
     /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
       min-height: 100vh;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
+      gap: 4rem;
+      padding: 6rem 3rem;
       margin-top: 60px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.5rem;
+      }
     }
 
     .hero-content {
-      max-width: 56rem;
+      max-width: 600px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid #D4AF37;
+      color: #D4AF37;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
     }
 
     .hero h1 {
       font-size: 3.5rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .hero h1 {
-        font-size: 5rem;
+        font-size: 4.5rem;
       }
     }
 
-    .hero p {
-      font-size: 1.125rem;
-      color: #d1d5db;
-      margin-bottom: 1rem;
+    .hero-highlight {
+      color: #D4AF37;
     }
 
-    .hero-subtitle {
-      color: #9ca3af;
-      margin-bottom: 3rem;
-      max-width: 42rem;
-      margin-left: auto;
-      margin-right: auto;
+    .hero p {
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+      line-height: 1.8;
     }
 
     .hero-buttons {
       display: flex;
-      flex-direction: column;
       gap: 1rem;
-      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      display: none;
     }
 
     @media (min-width: 768px) {
-      .hero-buttons {
-        flex-direction: row;
+      .hero-image {
+        display: block;
+        width: 100%;
+        height: 500px;
+        background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        opacity: 0.2;
       }
     }
 
-    /* Sections */
+    /* Section Spacing */
     section {
-      padding: 4rem 1.5rem;
-      max-width: 1280px;
+      padding: 5rem 3rem;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
+    @media (max-width: 768px) {
+      section {
+        padding: 3rem 1.5rem;
+      }
+    }
+
+    /* Section Header */
     .section-header {
       text-align: center;
       margin-bottom: 4rem;
     }
 
     .section-header h2 {
-      font-size: 2.25rem;
-      font-weight: bold;
-      margin-top: 1rem;
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
     }
 
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
       .section-header h2 {
-        font-size: 3rem;
+        font-size: 2rem;
       }
+    }
+
+    .section-header p {
+      font-size: 1.1rem;
+      color: #aaa;
     }
 
     /* About Section */
     .about {
-      background: #18181b;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     }
 
-    .about-container {
+    .about-grid {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 4rem;
+      align-items: center;
     }
 
-    @media (min-width: 768px) {
-      .about-container {
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        gap: 4rem;
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    .about img {
-      border-radius: 1.5rem;
-      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+    .about-img {
       width: 100%;
-      height: auto;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .about-text h3 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
     }
 
     .about-text p {
-      color: #d1d5db;
-      font-size: 1.125rem;
+      font-size: 1rem;
+      color: #aaa;
       margin-bottom: 1.5rem;
       line-height: 1.8;
     }
 
-    .stats {
+    .about-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
 
-    .stat {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2.25rem;
-      font-weight: bold;
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .stat-box h4 {
+      font-size: 2rem;
+      color: #D4AF37;
       margin-bottom: 0.5rem;
     }
 
-    .stat-label {
-      color: #9ca3af;
-      font-size: 0.875rem;
+    .stat-box p {
+      font-size: 0.9rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     /* Services Section */
     .services {
-      background: #000;
+      background: #0a0a0a;
     }
 
     .services-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
     }
 
-    @media (min-width: 768px) {
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .service-card {
-      background: #27272a;
-      border: 1px solid #3f3f46;
-      border-radius: 1.5rem;
+    .service-box {
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
       padding: 2rem;
+      border-radius: 0.5rem;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
-    .service-card:hover {
+    .service-box:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: #D4AF37;
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
     }
 
-    .service-card .emoji {
-      font-size: 2.25rem;
+    .service-box .emoji {
+      font-size: 2rem;
       margin-bottom: 1rem;
     }
 
-    .service-card h3 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
+    .service-box h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
     }
 
-    .service-card .price {
-      font-size: 1.5rem;
-      font-weight: bold;
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .service-box .price {
+      color: #D4AF37;
+      font-size: 1.2rem;
+      font-weight: 700;
       margin-top: 1rem;
     }
 
-    .service-card .unit {
-      color: #9ca3af;
-      font-size: 0.875rem;
-      margin-top: 0.5rem;
-    }
-
-    .service-category {
-      margin-bottom: 3rem;
-    }
-
-    .service-category h3 {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 3rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .service-box p {
+      color: #888;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
 
     /* Gallery Section */
     .gallery {
-      background: #18181b;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     }
 
     .gallery-grid {
       display: grid;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
 
     @media (min-width: 1024px) {
@@ -396,382 +453,276 @@
       }
     }
 
-    .gallery img {
-      border-radius: 1.5rem;
-      height: 20rem;
+    .gallery-img {
       width: 100%;
+      aspect-ratio: 1;
       object-fit: cover;
-      transition: transform 0.5s ease, filter 0.5s ease;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.4s ease;
     }
 
-    .gallery img:hover {
+    .gallery-img:hover {
       transform: scale(1.05);
-      filter: brightness(1.1);
-    }
-
-    /* Testimonials Section */
-    .testimonials {
-      background: #000;
-    }
-
-    .testimonials-grid {
-      display: grid;
-      gap: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      .testimonials-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .testimonial-card {
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 237, 74, 0.05));
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      border-radius: 1.5rem;
-      padding: 2rem;
-      transition: all 0.3s ease;
-    }
-
-    .testimonial-card:hover {
-      border-color: #ffd700;
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
-    }
-
-    .stars {
-      color: #ffd700;
-      margin-bottom: 1rem;
-      font-size: 1.25rem;
-    }
-
-    .testimonial-text {
-      color: #d1d5db;
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-
-    .testimonial-author {
-      font-weight: bold;
-    }
-
-    .testimonial-service {
-      color: #9ca3af;
-      font-size: 0.875rem;
+      border-color: #D4AF37;
+      box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
     }
 
     /* Team Section */
     .team {
-      background: #18181b;
+      background: #0a0a0a;
     }
 
     .team-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
 
-    @media (min-width: 768px) {
-      .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .team-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
     .team-card {
-      background: #000;
-      border: 1px solid #3f3f46;
-      border-radius: 1.5rem;
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
       padding: 2rem;
+      border-radius: 0.5rem;
+      text-align: center;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .team-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #ffd700, #ffed4e);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-
-    .team-card:hover::before {
-      transform: scaleX(1);
     }
 
     .team-card:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: #D4AF37;
       transform: translateY(-8px);
-      border-color: #ffd700;
-      background: rgba(20, 20, 20, 0.8);
     }
 
-    .team-card h3 {
-      font-size: 1.25rem;
-      font-weight: bold;
+    .team-card h4 {
+      font-size: 1.2rem;
       margin-bottom: 0.5rem;
     }
 
     .team-card .role {
-      font-size: 0.875rem;
-      font-weight: bold;
+      color: #D4AF37;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       margin-bottom: 1rem;
     }
 
-    .team-card .role.hair {
-      color: #fbbf24;
-    }
-
-    .team-card .role.makeup {
-      color: #f472b6;
-    }
-
-    .team-card .role.nails {
-      color: #2dd4bf;
-    }
-
-    .team-card .description {
-      color: #9ca3af;
-      font-size: 0.875rem;
+    .team-card p {
+      color: #888;
+      font-size: 0.9rem;
       margin-bottom: 1.5rem;
-      margin-top: 0.5rem;
     }
 
     .team-buttons {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
     .team-buttons a {
       padding: 0.5rem 1rem;
-      border-radius: 0.75rem;
-      font-size: 0.875rem;
-      font-weight: 600;
+      font-size: 0.8rem;
+      border-radius: 0.25rem;
       text-align: center;
       transition: all 0.3s ease;
     }
 
-    .team-buttons .btn-primary {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
+    /* Testimonials */
+    .testimonials {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     }
 
-    .team-buttons .btn-outline {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      border-color: #D4AF37;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    }
+
+    .stars {
+      color: #D4AF37;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .testimonial-text {
+      color: #aaa;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .testimonial-author {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .testimonial-service {
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: #0a0a0a;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-box {
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-box:hover {
+      border-color: #D4AF37;
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    .contact-box .emoji {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-box h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-box p, .contact-box a {
+      color: #aaa;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-box a:hover {
+      color: #D4AF37;
+    }
+
+    /* Google Reviews Section */
+    .google-reviews {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     }
 
     /* CTA Section */
     .cta {
-      background: #18181b;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
       text-align: center;
-    }
-
-    .cta-box {
-      background: linear-gradient(to right, #000, #27272a);
-      border: 1px solid #3f3f46;
-      border-radius: 2.5rem;
-      padding: 3rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    @media (min-width: 768px) {
-      .cta-box {
-        padding: 4rem;
-      }
-    }
-
-    .cta-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 16rem;
-      height: 16rem;
-      background: radial-gradient(circle, rgba(255, 213, 0, 0.1), transparent);
-      border-radius: 50%;
-      margin-right: -8rem;
-      margin-top: -8rem;
-    }
-
-    .cta-content {
-      position: relative;
-      z-index: 10;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
 
     .cta h2 {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .cta h2 {
-        font-size: 2.5rem;
-      }
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
 
     .cta p {
-      color: #d1d5db;
-      font-size: 1.125rem;
-      margin-bottom: 2.5rem;
-      max-width: 28rem;
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+      max-width: 600px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .cta-buttons {
       display: flex;
-      flex-direction: column;
       gap: 1rem;
       justify-content: center;
-    }
-
-    @media (min-width: 768px) {
-      .cta-buttons {
-        flex-direction: row;
-      }
-    }
-
-    /* Contact Section */
-    .contact {
-      background: #000;
-    }
-
-    .contact-grid {
-      display: grid;
-      gap: 3rem;
-    }
-
-    @media (min-width: 768px) {
-      .contact-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .contact-card {
-      background: #27272a;
-      border-radius: 1.5rem;
-      padding: 2rem;
-      border: 1px solid #3f3f46;
-    }
-
-    .contact-card .emoji {
-      font-size: 2.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .contact-card h3 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-
-    .contact-card p {
-      color: #d1d5db;
-      font-size: 0.875rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
-    .contact-card a {
-      color: #d1d5db;
-      transition: color 0.3s ease;
-    }
-
-    .contact-card a:hover {
-      color: #fbbf24;
+      flex-wrap: wrap;
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid #3f3f46;
-      background: #000;
-      padding: 3rem 1.5rem;
+      background: #0a0a0a;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 3rem;
+      text-align: center;
     }
 
-    .footer-container {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .footer-grid {
+    .footer-content {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 2rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
-    @media (min-width: 768px) {
-      .footer-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .footer-section h4 {
-      font-weight: bold;
+    .footer-col h4 {
+      font-size: 1rem;
       margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #D4AF37;
     }
 
-    .footer-section ul {
+    .footer-col ul {
       list-style: none;
     }
 
-    .footer-section ul li {
+    .footer-col ul li {
       margin-bottom: 0.5rem;
     }
 
-    .footer-section a {
-      color: #9ca3af;
-      font-size: 0.875rem;
+    .footer-col a {
+      color: #888;
+      font-size: 0.9rem;
       transition: color 0.3s ease;
     }
 
-    .footer-section a:hover {
-      color: #fbbf24;
+    .footer-col a:hover {
+      color: #D4AF37;
     }
 
     .footer-logo img {
-      height: 70px;
-      object-fit: contain;
+      height: 60px;
       margin-bottom: 1rem;
+      object-fit: contain;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 1.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .social-icons a {
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #D4AF37;
     }
 
     .footer-bottom {
-      border-top: 1px solid #3f3f46;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
       padding-top: 2rem;
-      text-align: center;
-      color: #9ca3af;
-      font-size: 0.875rem;
-    }
-
-    .footer-bottom p:first-child {
-      margin-bottom: 0.5rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .section-header h2 {
-        font-size: 1.875rem;
-      }
-
-      .btn-primary, .btn-outline {
-        width: 100%;
-        text-align: center;
-      }
+      color: #666;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -780,67 +731,64 @@
 
   <!-- Navigation -->
   <nav>
-    <div class="nav-container">
-      <img src="assets/logo.png" alt="Affinity Salon Logo" />
-      
-      <div class="nav-links">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#team" class="nav-link">Team</a>
-        <a href="#testimonials" class="nav-link">Reviews</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
+    <img src="assets/logo.png" alt="Affinity Logo" />
+    
+    <div class="nav-center">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
 
-      <a href="https://wa.me/918427769960" class="btn-primary">Book Now</a>
+    <div class="nav-right">
+      <a href="https://wa.me/918427769960" class="btn">Book Now</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="badge">LUXURY SALON IN CHANDIGARH</div>
-
-      <h1>Redefine Your <span class="gradient-text">Beauty</span></h1>
-
-      <p class="hero-subtitle">Premium Hair • Beauty • Makeup • Nails • Bridal Services</p>
-
-      <p class="hero-subtitle">Award-winning stylists. Luxury interiors. Personalized beauty experiences.</p>
+      <div class="hero-tag">Luxury Salon Chandigarh</div>
+      
+      <h1>Enhance Your <span class="hero-highlight">Beauty</span></h1>
+      
+      <p>Experience premium hair care, makeup, and beauty services with award-winning stylists in a luxurious setting.</p>
 
       <div class="hero-buttons">
-        <a href="https://wa.me/918427769960" target="_blank" class="btn-primary">📱 Book on WhatsApp</a>
-        <a href="tel:+918427769960" class="btn-outline">📞 Call Now: +91 8427769960</a>
+        <a href="https://wa.me/918427769960" class="btn">Book Appointment</a>
+        <a href="tel:+918427769960" class="btn btn-outline">Call: +91 8427769960</a>
       </div>
+    </div>
+
+    <div class="hero-image">
+      ✨
     </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="about">
-    <div class="about-container">
-      <div>
-        <img src="KALI7081.jpg" alt="Affinity Salon Interior" />
-      </div>
+    <div class="about-grid">
+      <img src="KALI7081.jpg" alt="Affinity Salon" class="about-img" />
 
       <div class="about-text">
-        <div class="badge">ABOUT US</div>
-
-        <h2>Luxury Redefined</h2>
-
+        <h3>Redefining Beauty & Luxury</h3>
+        
         <p>Affinity Luxury Salon is Chandigarh's premier destination for premium beauty services. With award-winning stylists and state-of-the-art facilities, we deliver transformative experiences.</p>
 
         <p>From intricate hair artistry to bridal makeup, every service reflects our commitment to excellence and personalized care.</p>
 
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Happy Clients</div>
+        <div class="about-stats">
+          <div class="stat-box">
+            <h4>500+</h4>
+            <p>Happy Clients</p>
           </div>
-          <div class="stat">
-            <div class="stat-number">12+</div>
-            <div class="stat-label">Expert Stylists</div>
+          <div class="stat-box">
+            <h4>3.8★</h4>
+            <p>Google Rating</p>
           </div>
-          <div class="stat">
-            <div class="stat-number">6+</div>
-            <div class="stat-label">Years Excellence</div>
+          <div class="stat-box">
+            <h4>472</h4>
+            <p>Reviews</p>
           </div>
         </div>
       </div>
@@ -849,147 +797,96 @@
 
   <!-- Services Section -->
   <section id="services" class="services">
-    <div>
-      <div class="section-header">
-        <div class="badge">OUR SERVICES</div>
-        <h2>Premium Beauty <span class="gradient-text">Services</span></h2>
+    <div class="section-header">
+      <h2>Our <span class="hero-highlight">Services</span></h2>
+      <p>Premium beauty services for everyone</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- Gents Services -->
+      <div class="service-box">
+        <div class="emoji">✂️</div>
+        <h4>Haircut (Gents)</h4>
+        <p>Expert cuts & styles</p>
+        <div class="price">₹1,000</div>
       </div>
 
-      <!-- Gents Services -->
-      <div class="service-category">
-        <h3>👨 Gents Services</h3>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="emoji">✂️</div>
-            <h3>Haircut</h3>
-            <div class="price">₹1,000</div>
-            <div class="unit">Expert cuts & styles</div>
-          </div>
+      <div class="service-box">
+        <div class="emoji">🎨</div>
+        <h4>Hair Color (Gents)</h4>
+        <p>Professional coloring</p>
+        <div class="price">₹2,000</div>
+      </div>
 
-          <div class="service-card">
-            <div class="emoji">💧</div>
-            <h3>Hair Wash</h3>
-            <div class="price">₹500</div>
-            <div class="unit">Premium wash & care</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">🎨</div>
-            <h3>Hair Color</h3>
-            <div class="price">₹2,000</div>
-            <div class="unit">Professional coloring</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">🧔</div>
-            <h3>Beard Trim</h3>
-            <div class="price">₹1,500</div>
-            <div class="unit">Precision beard care</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">✨</div>
-            <h3>Facial</h3>
-            <div class="price">₹3,000+</div>
-            <div class="unit">Premium skincare</div>
-          </div>
-        </div>
+      <div class="service-box">
+        <div class="emoji">🧔</div>
+        <h4>Beard Trim</h4>
+        <p>Precision beard care</p>
+        <div class="price">₹1,500</div>
       </div>
 
       <!-- Ladies Services -->
-      <div class="service-category">
-        <h3>👩 Ladies Services</h3>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="emoji">✂️</div>
-            <h3>Haircut</h3>
-            <div class="price">₹2,000</div>
-            <div class="unit">Expert cuts & layers</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">💧</div>
-            <h3>Hair Wash</h3>
-            <div class="price">₹1,000</div>
-            <div class="unit">Luxury hair wash</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">💨</div>
-            <h3>Blow Dry</h3>
-            <div class="price">₹1,000+</div>
-            <div class="unit">Professional styling</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">🎨</div>
-            <h3>Hair Color</h3>
-            <div class="price">₹8,000+</div>
-            <div class="unit">Premium coloring</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">💇‍♀️</div>
-            <h3>Hair Styling</h3>
-            <div class="price">₹1,000 - 1,500</div>
-            <div class="unit">Event styling</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">💄</div>
-            <h3>Makeup</h3>
-            <div class="price">₹5,000+</div>
-            <div class="unit">Professional makeup</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">👰</div>
-            <h3>Bridal Makeup</h3>
-            <div class="price">₹2,0000+</div>
-            <div class="unit">Bridal transformation</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">💅</div>
-            <h3>Nail Art</h3>
-            <div class="price">₹1,500+</div>
-            <div class="unit">Custom designs</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">✨</div>
-            <h3>Facials</h3>
-            <div class="price">₹6,000+</div>
-            <div class="unit">Premium skincare</div>
-          </div>
-
-          <div class="service-card">
-            <div class="emoji">💎</div>
-            <h3>Bridal Package</h3>
-            <div class="price">₹20,000+</div>
-            <div class="unit">Complete bridal</div>
-          </div>
-        </div>
+      <div class="service-box">
+        <div class="emoji">✂️</div>
+        <h4>Haircut (Ladies)</h4>
+        <p>Expert cuts & layers</p>
+        <div class="price">₹2,000</div>
       </div>
 
-      <!-- Spa & Wellness -->
-      <div class="service-category">
-        <h3>💆 Spa & Wellness (All)</h3>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="emoji">🧖</div>
-            <h3>Body Spa - 60 min</h3>
-            <div class="price">₹5,000</div>
-            <div class="unit">Relaxation therapy</div>
-          </div>
+      <div class="service-box">
+        <div class="emoji">💄</div>
+        <h4>Makeup</h4>
+        <p>Professional makeup</p>
+        <div class="price">₹5,000+</div>
+      </div>
 
-          <div class="service-card">
-            <div class="emoji">🧖</div>
-            <h3>Body Spa - 90 min</h3>
-            <div class="price">₹7,000</div>
-            <div class="unit">Premium rejuvenation</div>
-          </div>
-        </div>
+      <div class="service-box">
+        <div class="emoji">👰</div>
+        <h4>Bridal Makeup</h4>
+        <p>Bridal transformation</p>
+        <div class="price">₹2,000+</div>
+      </div>
+
+      <div class="service-box">
+        <div class="emoji">💅</div>
+        <h4>Nail Art</h4>
+        <p>Custom designs</p>
+        <div class="price">₹1,500+</div>
+      </div>
+
+      <div class="service-box">
+        <div class="emoji">🧖</div>
+        <h4>Body Spa (60min)</h4>
+        <p>Relaxation therapy</p>
+        <div class="price">₹5,000</div>
+      </div>
+
+      <div class="service-box">
+        <div class="emoji">🎨</div>
+        <h4>Hair Color (Ladies)</h4>
+        <p>Premium coloring</p>
+        <div class="price">₹8,000+</div>
+      </div>
+
+      <div class="service-box">
+        <div class="emoji">✨</div>
+        <h4>Facials</h4>
+        <p>Premium skincare</p>
+        <div class="price">₹6,000+</div>
+      </div>
+
+      <div class="service-box">
+        <div class="emoji">💆</div>
+        <h4>Body Spa (90min)</h4>
+        <p>Premium rejuvenation</p>
+        <div class="price">₹7,000</div>
+      </div>
+
+      <div class="service-box">
+        <div class="emoji">💎</div>
+        <h4>Bridal Package</h4>
+        <p>Complete bridal</p>
+        <div class="price">₹20,000+</div>
       </div>
     </div>
   </section>
@@ -997,43 +894,43 @@
   <!-- Gallery Section -->
   <section id="gallery" class="gallery">
     <div class="section-header">
-      <div class="badge">GALLERY</div>
-      <h2>Luxury <span class="gradient-text">Interiors</span></h2>
+      <h2>Gallery</h2>
+      <p>Luxury interiors & results</p>
     </div>
 
     <div class="gallery-grid">
-      <img src="KALI7081.jpg" alt="Salon Interior 1" />
-      <img src="KALI7219.jpg" alt="Salon Interior 2" />
-      <img src="KALI7237.jpg" alt="Salon Interior 3" />
-      <img src="KALI7258.JPG" alt="Salon Interior 4" />
+      <img src="KALI7081.jpg" alt="Gallery 1" class="gallery-img" />
+      <img src="KALI7219.jpg" alt="Gallery 2" class="gallery-img" />
+      <img src="KALI7237.jpg" alt="Gallery 3" class="gallery-img" />
+      <img src="KALI7258.JPG" alt="Gallery 4" class="gallery-img" />
     </div>
   </section>
 
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
     <div class="section-header">
-      <div class="badge">CLIENT REVIEWS</div>
-      <h2>Trusted by <span class="gradient-text">500+ Clients</span></h2>
+      <h2>Client <span class="hero-highlight">Reviews</span></h2>
+      <p>Trusted by 500+ happy clients</p>
     </div>
 
     <div class="testimonials-grid">
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Best salon experience ever! The team is professional, friendly, and delivers stunning results. Highly recommend!"</p>
+        <p class="testimonial-text">"Best salon experience! Professional team, stunning results. Highly recommend!"</p>
         <div class="testimonial-author">Priya Sharma</div>
         <div class="testimonial-service">Bridal Makeup Package</div>
       </div>
 
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Sunny Ali transformed my hair completely. The quality and attention to detail is unmatched in Chandigarh!"</p>
+        <p class="testimonial-text">"Sunny Ali is amazing! Hair transformation was perfect. Quality & detail unmatched!"</p>
         <div class="testimonial-author">Anisha Patel</div>
         <div class="testimonial-service">Hair Styling Service</div>
       </div>
 
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Luxury at its finest. The ambiance, service, and results exceeded my expectations. Worth every penny!"</p>
+        <p class="testimonial-text">"Luxury at its finest. Ambiance, service & results exceeded expectations!"</p>
         <div class="testimonial-author">Deepika Singh</div>
         <div class="testimonial-service">Bridal Package</div>
       </div>
@@ -1043,220 +940,196 @@
   <!-- Team Section -->
   <section id="team" class="team">
     <div class="section-header">
-      <div class="badge">EXPERT TEAM</div>
-      <h2>Award-Winning <span class="gradient-text">Stylists</span></h2>
+      <h2>Expert <span class="hero-highlight">Team</span></h2>
+      <p>Award-winning stylists & professionals</p>
     </div>
 
-    <!-- Hair Stylists -->
     <div class="team-grid">
       <div class="team-card">
-        <h3>Sunny Ali</h3>
-        <div class="role hair">⭐ Senior Hair Artist</div>
-        <p class="description">10+ years | Hair Transformation Specialist</p>
+        <h4>Sunny Ali</h4>
+        <div class="role">Senior Hair Artist</div>
+        <p>10+ years | Hair Transformation Specialist</p>
         <div class="team-buttons">
-          <a href="https://www.instagram.com/sunny_ali_hair_artist" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/919872366050" target="_blank" class="btn-outline">💬 WhatsApp: 9872366050</a>
+          <a href="https://www.instagram.com/sunny_ali_hair_artist" target="_blank" class="btn" style="font-size: 0.75rem;">📸 Instagram</a>
+          <a href="https://wa.me/919872366050" target="_blank" class="btn btn-outline" style="font-size: 0.75rem;">💬 WhatsApp</a>
         </div>
       </div>
 
       <div class="team-card">
-        <h3>Imran Ahmad</h3>
-        <div class="role hair">⭐ Senior Hair Artist</div>
-        <p class="description">8+ years | Color & Styling Expert</p>
+        <h4>Imran Ahmad</h4>
+        <div class="role">Senior Hair Artist</div>
+        <p>8+ years | Color & Styling Expert</p>
         <div class="team-buttons">
-          <a href="https://www.instagram.com/imran.hairartist" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/919779813285" target="_blank" class="btn-outline">💬 WhatsApp: 9779813285</a>
+          <a href="https://www.instagram.com/imran.hairartist" target="_blank" class="btn" style="font-size: 0.75rem;">📸 Instagram</a>
+          <a href="https://wa.me/919779813285" target="_blank" class="btn btn-outline" style="font-size: 0.75rem;">💬 WhatsApp</a>
         </div>
       </div>
 
       <div class="team-card">
-        <h3>Azeem Alvi</h3>
-        <div class="role hair">⭐ Senior Hair Artist</div>
-        <p class="description">7+ years | Modern Cuts Specialist</p>
+        <h4>Azeem Alvi</h4>
+        <div class="role">Senior Hair Artist</div>
+        <p>7+ years | Modern Cuts Specialist</p>
         <div class="team-buttons">
-          <a href="https://www.instagram.com/hair_artist_azeem" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/917696887421" target="_blank" class="btn-outline">💬 WhatsApp: 7696887421</a>
+          <a href="https://www.instagram.com/hair_artist_azeem" target="_blank" class="btn" style="font-size: 0.75rem;">📸 Instagram</a>
+          <a href="https://wa.me/917696887421" target="_blank" class="btn btn-outline" style="font-size: 0.75rem;">💬 WhatsApp</a>
         </div>
       </div>
 
       <div class="team-card">
-        <h3>Saleem Salmani</h3>
-        <div class="role hair">⭐ Senior Hair Artist</div>
-        <p class="description">9+ years | Precision Barber</p>
+        <h4>Nisha Sharma</h4>
+        <div class="role">Makeup Artist</div>
+        <p>Certified | Bridal & Makeup Specialist</p>
         <div class="team-buttons">
-          <a href="https://www.instagram.com/saleem_hair_art" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/919780422854" target="_blank" class="btn-outline">💬 WhatsApp: 9780422854</a>
+          <a href="https://www.instagram.com/nisha_mua_artist" target="_blank" class="btn" style="font-size: 0.75rem;">📸 Instagram</a>
+          <a href="https://wa.me/919780823215" target="_blank" class="btn btn-outline" style="font-size: 0.75rem;">💬 WhatsApp</a>
         </div>
       </div>
 
       <div class="team-card">
-        <h3>Naushad</h3>
-        <div class="role hair">⭐ Senior Hair Artist</div>
-        <p class="description">6+ years | Trending Styles Expert</p>
+        <h4>Saleem Salmani</h4>
+        <div class="role">Senior Hair Artist</div>
+        <p>9+ years | Precision Barber</p>
         <div class="team-buttons">
-          <a href="https://www.instagram.com/hairartist_naushad" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/919888055835" target="_blank" class="btn-outline">💬 WhatsApp: 9888055835</a>
+          <a href="https://www.instagram.com/saleem_hair_art" target="_blank" class="btn" style="font-size: 0.75rem;">📸 Instagram</a>
+          <a href="https://wa.me/919780422854" target="_blank" class="btn btn-outline" style="font-size: 0.75rem;">💬 WhatsApp</a>
         </div>
       </div>
 
       <div class="team-card">
-        <h3>Jassi</h3>
-        <div class="role hair">⭐ Senior Hair Artist</div>
-        <p class="description">5+ years | Women's Hair Specialist</p>
+        <h4>Naushad</h4>
+        <div class="role">Senior Hair Artist</div>
+        <p>6+ years | Trending Styles Expert</p>
         <div class="team-buttons">
-          <a href="https://www.instagram.com/jassi.hairstylist" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/919855001529" target="_blank" class="btn-outline">💬 WhatsApp: 9855001529</a>
+          <a href="https://www.instagram.com/hairartist_naushad" target="_blank" class="btn" style="font-size: 0.75rem;">📸 Instagram</a>
+          <a href="https://wa.me/919888055835" target="_blank" class="btn btn-outline" style="font-size: 0.75rem;">💬 WhatsApp</a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="team-card">
-        <h3>Nisha Sharma</h3>
-        <div class="role makeup">💄 Makeup Artist</div>
-        <p class="description">Certified | Bridal & Makeup Specialist</p>
-        <div class="team-buttons">
-          <a href="https://www.instagram.com/nisha_mua_artist" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/919780823215" target="_blank" class="btn-outline">💬 WhatsApp: 9780823215</a>
-        </div>
+  <!-- Google Reviews Section -->
+  <section class="google-reviews">
+    <div class="section-header">
+      <h2><span class="hero-highlight">3.8★</span> Rated on Google</h2>
+      <p>472 reviews from happy clients</p>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <p style="font-size: 1.2rem; color: #D4AF37; margin-bottom: 1rem;">⭐⭐⭐⭐☆</p>
+      <a href="https://www.google.com/search?q=affinity+salon+chandigarh" target="_blank" class="btn">Read All Reviews on Google →</a>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Staff professionally trained offer service with smile.."</p>
+        <div class="testimonial-service">Google Review</div>
       </div>
 
-      <div class="team-card">
-        <h3>Neeraj Sidhu</h3>
-        <div class="role makeup">💄 Makeup Artist</div>
-        <p class="description">Certified | Party & Event Specialist</p>
-        <div class="team-buttons">
-          <a href="https://www.instagram.com/makeup_by_neerajsidhu_1" target="_blank" class="btn-primary">📸 Instagram</a>
-          <a href="https://wa.me/919501791259" target="_blank" class="btn-outline">💬 WhatsApp: 9501791259</a>
-        </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Luxurious experience, expert care, and my skin was left glowing and refreshed."</p>
+        <div class="testimonial-service">Google Review</div>
       </div>
 
-      <div class="team-card">
-        <h3>Beauty Team</h3>
-        <div class="role makeup">💄 Beauticians</div>
-        <p class="description">Binu • Nima • Uma • Urvisha - Professional facial, skincare & wellness experts</p>
-      </div>
-
-      <div class="team-card">
-        <h3>Aryan</h3>
-        <div class="role nails">💅 Senior Pedicurist</div>
-        <p class="description">Expert in nail art, designs & wellness</p>
-      </div>
-
-      <div class="team-card">
-        <h3>Akash</h3>
-        <div class="role nails">💅 Senior Pedicurist</div>
-        <p class="description">Precision manicure & pedicure specialist</p>
-      </div>
-
-      <div class="team-card">
-        <h3>Rohan</h3>
-        <div class="role nails">💅 Senior Pedicurist</div>
-        <p class="description">Luxury foot care & nail treatments</p>
-      </div>
-
-      <div class="team-card">
-        <h3>Monu</h3>
-        <div class="role nails">💅 Senior Pedicurist</div>
-        <p class="description">Custom designs & gel extensions</p>
-      </div>
-
-      <div class="team-card">
-        <h3>Vikram</h3>
-        <div class="role nails">💅 Senior Pedicurist</div>
-        <p class="description">Bridal nail packages & premium care</p>
-      </div>
-
-      <div class="team-card">
-        <h3>Mukesh</h3>
-        <div class="role nails">💅 Senior Pedicurist</div>
-        <p class="description">Trending nail art & seasonal designs</p>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Absolutely love Affinity Salon! Sunny Ali is hands down the best when it comes to hair colour"</p>
+        <div class="testimonial-service">Guneet Cheema Nagra</div>
       </div>
     </div>
   </section>
 
   <!-- CTA Section -->
   <section class="cta">
-    <div class="cta-box">
-      <div class="cta-content">
-        <div class="badge">LIMITED TIME OFFER</div>
-        <h2>Get 20% OFF Your First Service</h2>
-        <p>Book your appointment today and experience luxury beauty like never before. Valid for all new clients.</p>
+    <h2>Get 20% OFF Your First Service</h2>
+    <p>Book your appointment today and experience luxury beauty like never before. Valid for all new clients.</p>
 
-        <div class="cta-buttons">
-          <a href="https://wa.me/918427769960" target="_blank" class="btn-primary">📱 Book on WhatsApp</a>
-          <a href="tel:+918427769960" class="btn-outline">📞 +91 8427769960</a>
-        </div>
-      </div>
+    <div class="cta-buttons">
+      <a href="https://wa.me/918427769960" target="_blank" class="btn">📱 Book on WhatsApp</a>
+      <a href="tel:+918427769960" class="btn btn-outline">📞 +91 8427769960</a>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="contact">
+    <div class="section-header">
+      <h2>Get In <span class="hero-highlight">Touch</span></h2>
+    </div>
+
     <div class="contact-grid">
-      <div class="contact-card">
+      <div class="contact-box">
         <div class="emoji">📍</div>
-        <h3>Location</h3>
-        <p>Affinity Salon<br/>SCO 166-167, Sector 9C<br/>Madhya Marg<br/>Near Grewal Eye Institute<br/>Chandigarh</p>
-        <a href="https://maps.google.com/?q=Affinity+Salon+Sector+9C+Chandigarh" target="_blank" class="btn-primary" style="display: inline-block; padding: 0.5rem 1rem; font-size: 0.875rem;">📍 Open in Maps</a>
+        <h4>Location</h4>
+        <p>SCO 166-167<br/>Sector 9C, Madhya Marg<br/>Near Grewal Eye Institute<br/>Chandigarh, 160009</p>
+        <a href="https://maps.google.com/?q=Affinity+Salon+Chandigarh" target="_blank">Open in Maps →</a>
       </div>
 
-      <div class="contact-card">
+      <div class="contact-box">
         <div class="emoji">⏰</div>
-        <h3>Hours</h3>
-        <p><strong>Monday - Sunday</strong><br/>10:00 AM - 8:00 PM<br/><br/><small>Open all days</small><br/><small>By appointment</small></p>
+        <h4>Hours</h4>
+        <p><strong>Mon - Sun</strong><br/>10:00 AM - 8:00 PM<br/>By Appointment</p>
       </div>
 
-      <div class="contact-card">
+      <div class="contact-box">
         <div class="emoji">📞</div>
-        <h3>Contact</h3>
-        <p><strong style="color: #9ca3af;">Phone</strong><br/><a href="tel:+918427769960">+91 8427769960</a></p>
-        <p><strong style="color: #9ca3af;">WhatsApp</strong><br/><a href="https://wa.me/918427769960">Chat Now</a></p>
-        <p><strong style="color: #9ca3af;">Email</strong><br/><a href="mailto:affinity.chandigarh@gmail.com">affinity.chandigarh@gmail.com</a></p>
+        <h4>Contact</h4>
+        <a href="tel:+918427769960">+91 8427769960</a><br/>
+        <a href="https://wa.me/918427769960">WhatsApp Chat</a><br/>
+        <a href="mailto:affinity.chandigarh@gmail.com">affinity.chandigarh@gmail.com</a>
       </div>
+    </div>
+
+    <!-- Google Maps -->
+    <div style="margin-top: 3rem; border-radius: 0.5rem; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.7508748854566!2d76.79146!3d30.7334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fede2a1816439%3A0x3a56ea79643c26d1!2sAffinity%20Salon!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="400" style="border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-section footer-logo">
-          <img src="assets/logo.png" alt="Affinity Salon Logo" />
-          <p>Premium luxury salon in Chandigarh.</p>
+    <div class="footer-content">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <img src="assets/logo.png" alt="Affinity" />
         </div>
-        
-        <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Contact Info</h4>
-          <ul>
-            <li><a href="tel:+918427769960">+91 8427769960</a></li>
-            <li><a href="mailto:affinity.chandigarh@gmail.com">affinity.chandigarh@gmail.com</a></li>
-            <li><a href="https://wa.me/918427769960">WhatsApp Booking</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Follow Us</h4>
-          <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
-            <a href="https://www.instagram.com/affinityluxurysalonchandigarh_" target="_blank" title="Instagram">📸</a>
-            <a href="https://www.facebook.com/affinitysalonchandigarh" target="_blank" title="Facebook">📘</a>
-            <a href="mailto:affinity.chandigarh@gmail.com" title="Email">📧</a>
-          </div>
-        </div>
+        <p style="color: #888; font-size: 0.9rem;">Premium luxury salon in Chandigarh.</p>
       </div>
 
-      <div class="footer-bottom">
-        <p>© 2026 Affinity Luxury Salon • All Rights Reserved</p>
-        <p>SCO 166-167, Sector 9C, Chandigarh • +91 8427769960</p>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Hair Styling</a></li>
+          <li><a href="#services">Makeup</a></li>
+          <li><a href="#services">Bridal</a></li>
+          <li><a href="#services">Spa</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/affinityluxurysalonchandigarh_" target="_blank" title="Instagram">📸</a>
+          <a href="https://www.facebook.com/affinitysalonchandigarh" target="_blank" title="Facebook">📘</a>
+          <a href="mailto:affinity.chandigarh@gmail.com" title="Email">📧</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 1992-2026 Affinity Luxury Salon • All Rights Reserved</p>
+      <p>SCO 166-167, Sector 9C, Chandigarh, 160009 • +91 8427769960</p>
+      <p style="font-size: 0.8rem; color: #666; margin-top: 1.5rem;">Designed by <a href="https://adharlimbu.online" target="_blank" style="color: #D4AF37;">Darjeeling Web Studio</a></p>
     </div>
   </footer>
 
