@@ -1,0 +1,17 @@
+# Affinity Luxury Salon - Robots.txt
+# This file tells search engines how to crawl your website
+
+User-agent: *
+Allow: /
+Disallow: 
+
+# Sitemap location
+Sitemap: https://affinitychandigarh.com/sitemap.xml
+
+# Crawl delay (optional - prevents server overload)
+Crawl-delay: 1
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
