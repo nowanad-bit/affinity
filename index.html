@@ -134,6 +134,45 @@
       }
     }
 
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #D4AF37;
+      border-radius: 0.25rem;
+      padding: 0.55rem 0.8rem;
+      font: 600 0.85rem 'Poppins', sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    @media (max-width: 767px) {
+      .menu-toggle {
+        display: block;
+        margin-left: auto;
+        margin-right: 0.75rem;
+      }
+
+      nav.menu-open .nav-center {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0a0a0a;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        padding: 0.5rem 1.5rem 1rem;
+      }
+
+      nav.menu-open .nav-center a {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      }
+    }
+
     .nav-link {
       position: relative;
       color: #ccc;
@@ -217,6 +256,8 @@
     @media (max-width: 768px) {
       .hero {
         grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 2.5rem;
         padding: 3rem 1.5rem;
       }
     }
@@ -271,7 +312,17 @@
     }
 
     .hero-image {
-      display: none;
+      width: 100%;
+      height: 260px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     @media (min-width: 768px) {
@@ -484,6 +535,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     .team-card {
@@ -740,7 +797,9 @@
   <nav>
     <img src="assets/logo.png" alt="Affinity Logo" />
     
-    <div class="nav-center">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navMenu">Menu</button>
+
+    <div class="nav-center" id="navMenu">
       <a href="#about" class="nav-link">About</a>
       <a href="#services" class="nav-link">Services</a>
       <a href="#team" class="nav-link">Team</a>
@@ -1089,7 +1148,7 @@
 
     <!-- Google Maps -->
     <div style="margin-top: 3rem; border-radius: 0.5rem; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.7508748854566!2d76.79146!3d30.7334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fede2a1816439%3A0x3a56ea79643c26d1!2sAffinity%20Salon!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="400" style="border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps?q=Affinity+Luxury+Salon,+SCO+166-167,+Sector+9C,+Chandigarh+160009&output=embed" width="100%" height="400" style="border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
 
@@ -1143,6 +1202,19 @@
   <!-- Navbar Scroll Effect -->  
   <script>
     const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    menuToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('menu-open');
+      menuToggle.setAttribute('aria-expanded', open);
+      menuToggle.textContent = open ? 'Close' : 'Menu';
+    });
+    document.querySelectorAll('.nav-center a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = 'Menu';
+      });
+    });
     window.addEventListener('scroll', () => {
       if (window.scrollY > 100) {
         nav.classList.add('scrolled');
