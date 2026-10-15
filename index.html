@@ -198,11 +198,10 @@ section[id] { scroll-margin-top: 76px; }
 
 /* About */
 .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 100px); align-items: center; }
-.about-photos { position: relative; aspect-ratio: 5 / 6; max-width: 100%; }
+.about-photos { position: relative; aspect-ratio: 4 / 3.4; max-width: 100%; }
 .about-photos img { position: absolute; object-fit: cover; border: 1px solid var(--line); }
-.about-photos .p1 { inset: 0 22% 18% 0; width: 78%; height: 82%; }
-.about-photos .p2 { right: 0; bottom: 0; width: 52%; height: 46%; box-shadow: 0 30px 60px rgba(0,0,0,.6); border: 6px solid var(--bg); outline: 1px solid var(--line); }
-.about-photos .stamp { position: absolute; left: 6%; bottom: 4%; background: var(--gold); color: #0b0b0b; padding: 18px 22px; display: grid; gap: 4px; }
+.about-photos .p1 { inset: 0; width: 100%; height: 100%; object-position: 90% center; }
+.about-photos .stamp { position: absolute; left: -14px; bottom: 28px; background: var(--gold); color: #0b0b0b; padding: 18px 22px; display: grid; gap: 4px; }
 .about-photos .stamp b { font: 600 2rem/1 var(--f-display); }
 .about-photos .stamp span { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; }
 .about-text { display: grid; gap: 22px; }
@@ -390,8 +389,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
   <section class="band" id="about" aria-labelledby="about-title">
     <div class="wrap about">
       <div class="about-photos reveal">
-        <img class="p1" src="KALI7081.jpg" alt="Lounge with blue velvet sofa, chandelier and portrait wall" width="243" height="174" loading="lazy">
-        <img class="p2" src="KALI7237.jpg" alt="Styling stations with lit mirrors" width="243" height="174" loading="lazy">
+        <picture><source srcset="assets/img/reception.avif" type="image/avif"><img class="p1" src="assets/img/reception.jpg" alt="Reception desk beside the marble Affinity Salon wall, with the lounge behind" width="1200" height="800" loading="lazy"></picture>
         <div class="stamp"><b>3.8 ★</b><span>On Google</span></div>
       </div>
       <div class="about-text reveal">
