@@ -55,7 +55,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap">
 <link rel="preload" as="image" href="hero-salon.avif" type="image/avif">
 <style>
 /* Layout: black-marble hero from the salon's own sign, then calm dark bands lit with brushed gold, like the reception wall. */
@@ -71,7 +71,7 @@
   --gold-bright: #e3c47f;
   --wa: #25d366;
 
-  --f-brand: "Cinzel", "Trajan Pro", Georgia, serif;
+  --f-brand: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
   --f-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --f-body: "Jost", "Segoe UI", system-ui, sans-serif;
 
@@ -142,9 +142,12 @@ section[id] { scroll-margin-top: 76px; }
 }
 .site-header.solid { background: rgba(11, 11, 11, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: var(--line); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 76px; }
-.brand { display: grid; line-height: 1; gap: 6px; }
-.brand b { font: 600 1.45rem/1 var(--f-brand); letter-spacing: 0.16em; }
-.brand small { font: 500 0.6rem/1 var(--f-body); letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); }
+/* Brand lockup rebuilt from the salon's logo: box mark, AFFINITY, and LUXURY SALON between rules */
+.brand { display: inline-grid; justify-items: center; line-height: 1; gap: 5px; color: var(--ink); }
+.brand i { display: block; width: 26px; height: 7px; border: 1px solid currentColor; background: linear-gradient(90deg, transparent 50%, currentColor 50%); }
+.brand b { font: 400 1.55rem/1 var(--f-brand); letter-spacing: 0.12em; }
+.brand small { display: flex; align-items: center; gap: 8px; font: 400 0.56rem/1 var(--f-brand); letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
+.brand small::before, .brand small::after { content: ""; width: 16px; height: 1px; background: currentColor; }
 .nav-links { display: flex; align-items: center; gap: 34px; list-style: none; margin: 0; padding: 0; }
 .nav-links a:not(.btn) { font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,238,230,.8); position: relative; padding-block: 6px; }
 .nav-links a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--gold); transition: right .3s ease; }
@@ -169,8 +172,8 @@ section[id] { scroll-margin-top: 76px; }
 .hero { position: relative; min-height: min(100svh, 900px); display: grid; align-items: end; overflow: hidden; isolation: isolate; }
 .hero-media { position: absolute; inset: -6% 0; z-index: -2; background: #111 image-set(url("hero-salon.avif") type("image/avif"), url("assets/img/hero.jpg") type("image/jpeg")) center 42% / cover no-repeat; animation: settle 2.4s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes settle { from { transform: scale(1.12); } to { transform: scale(1.02); } }
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(11,11,11,.55) 0%, rgba(11,11,11,.2) 35%, rgba(11,11,11,.9) 82%, #0b0b0b 100%), linear-gradient(90deg, rgba(11,11,11,.7) 0%, rgba(11,11,11,0) 65%); }
-.hero-inner { padding-top: 150px; padding-bottom: clamp(56px, 8vw, 96px); display: grid; gap: 28px; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(11,11,11,.55) 0%, rgba(11,11,11,.2) 35%, rgba(11,11,11,.9) 82%, #0b0b0b 100%), linear-gradient(90deg, rgba(11,11,11,.92) 0%, rgba(11,11,11,.75) 38%, rgba(11,11,11,.15) 72%); }
+.hero-inner { width: 100%; padding-top: 150px; padding-bottom: clamp(56px, 8vw, 96px); display: grid; gap: 28px; }
 .hero h1 { font-size: var(--s-hero); max-width: 13ch; letter-spacing: -0.01em; }
 .hero .lede { max-width: 50ch; color: rgba(242,238,230,.86); font-size: clamp(1.05rem, 1.5vw, 1.2rem); font-weight: 300; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
@@ -345,7 +348,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
 
 <header class="site-header" id="header">
   <nav class="wrap nav" aria-label="Main">
-    <a class="brand" href="#top" aria-label="Affinity Luxury Salon home"><b>AFFINITY</b><small>Luxury Salon</small></a>
+    <a class="brand" href="#top" aria-label="Affinity Luxury Salon home"><i aria-hidden="true"></i><b>AFFINITY</b><small>Luxury Salon</small></a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
@@ -603,7 +606,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="brand" href="#top"><b>AFFINITY</b><small>Luxury Salon</small></a>
+        <a class="brand" href="#top"><i aria-hidden="true"></i><b>AFFINITY</b><small>Luxury Salon</small></a>
         <p>Hair, makeup, bridal, skin and spa in Sector 9C, Chandigarh.</p>
       </div>
       <div>
