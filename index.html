@@ -251,6 +251,12 @@ section[id] { scroll-margin-top: 76px; }
 .artist-links a.book { background: var(--gold); color: #0b0b0b; border-color: var(--gold); }
 .artist-links a.book:hover { background: var(--gold-bright); color: #0b0b0b; }
 .artist-links svg { width: 16px; height: 16px; }
+/* Featured artist with a portfolio page: full-width card with a photo */
+.artist-feature { grid-column: 1 / -1; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 30px; align-items: center; padding: 22px; }
+.artist-feature img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; border: 1px solid var(--line); }
+.artist-feature .artist-body { display: grid; gap: 16px; max-width: 620px; }
+.artist-feature h3 { font-size: 2.3rem; }
+@media (max-width: 620px) { .artist-feature { grid-template-columns: 1fr; } .artist-feature img { aspect-ratio: 1; object-position: 50% 30%; } .artist-feature .artist-links { flex-wrap: wrap; } .artist-feature .artist-links a.book { flex-basis: 100%; } }
 @media (max-width: 980px) { .team { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .team { grid-template-columns: 1fr; } }
 
@@ -463,6 +469,14 @@ html.motion .reveal.in { opacity: 1; transform: none; }
         <p>Message any artist directly on WhatsApp, or see their latest work on Instagram.</p>
       </div>
       <div class="team">
+        <article class="artist artist-feature reveal">
+          <img src="neeraj-sidhu/img/services.jpg" alt="Bridal look by Neeraj Sidhu in a red dupatta and kundan necklace" width="518" height="731" loading="lazy">
+          <div class="artist-body">
+            <div><p class="role">Bridal &amp; occasion makeup artist</p><h3>Neeraj Sidhu</h3></div>
+            <p><span class="years">9 years, 1000+ clients.</span> Bridal, engagement, reception, mehendi and party looks. See his portfolio and packages.</p>
+            <div class="artist-links"><a class="book" href="neeraj-sidhu/">Portfolio &amp; prices</a><a href="https://wa.me/919501791259" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/makeup_by_neerajsidhu_1/" target="_blank" rel="noopener noreferrer">Instagram</a></div>
+          </div>
+        </article>
         <article class="artist reveal">
           <span class="monogram" aria-hidden="true">SA</span>
           <div><p class="role">Senior hair artist</p><h3>Sunny Ali</h3></div>
@@ -557,7 +571,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
             <div class="field">
               <label for="b-artist">Artist</label>
               <select id="b-artist" name="artist">
-                <option>Any artist</option><option>Sunny Ali</option><option>Saleem Salmani</option><option>Imran Ahmad</option><option>Azeem Alvi</option><option>Naushad</option><option>Nisha Sharma</option>
+                <option>Any artist</option><option>Neeraj Sidhu (makeup)</option><option>Sunny Ali</option><option>Saleem Salmani</option><option>Imran Ahmad</option><option>Azeem Alvi</option><option>Naushad</option><option>Nisha Sharma</option>
               </select>
             </div>
           </div>
@@ -609,7 +623,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
       </div>
       <div>
         <h4>Explore</h4>
-        <ul><li><a href="#services">Services &amp; prices</a></li><li><a href="#team">Artists</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#visit">Visit &amp; book</a></li></ul>
+        <ul><li><a href="#services">Services &amp; prices</a></li><li><a href="#team">Artists</a></li><li><a href="neeraj-sidhu/">Neeraj Sidhu, bridal makeup</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#visit">Visit &amp; book</a></li></ul>
       </div>
       <div>
         <h4>Follow</h4>
