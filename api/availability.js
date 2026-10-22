@@ -1,4 +1,5 @@
-// Artist availability: when each artist can next take a booking, and which days are off.
+// Artist availability: when each artist can next take a booking, and which days are off
+// (single blocked dates and a weekly off day such as every Tuesday).
 //
 // GET  /api/availability  -> public JSON the site uses to show waits and limit the booking date
 // POST /api/availability  -> admin save; needs the X-Admin-Password header to match ADMIN_PASSWORD
@@ -46,11 +47,16 @@ function cleanArtist(raw, today) {
   const blocked = Array.isArray(src.blocked)
     ? [...new Set(src.blocked.filter((d) => isRealDate(d) && d >= today))].sort().slice(0, MAX_BLOCKED)
     : [];
+  // Weekly off days as weekday numbers (0 = Sunday). At least one day a week stays open.
+  const weeklyOff = Array.isArray(src.weeklyOff)
+    ? [...new Set(src.weeklyOff.filter((n) => Number.isInteger(n) && n >= 0 && n <= 6))].sort().slice(0, 6)
+    : [];
   return {
     accepting: src.accepting !== false,
     nextAvailable: next,
     note: typeof src.note === 'string' ? src.note.replace(/\s+/g, ' ').trim().slice(0, MAX_NOTE) : '',
     blocked,
+    weeklyOff,
   };
 }
 

@@ -1,7 +1,8 @@
 // Shows each artist's wait time and keeps booking dates on days they can take.
 // Reads /api/availability (set from /admin). If that fails, the site works as before.
 //
-//   [data-availability="sunny-ali"]   filled with "Next available: Sat, 15 Nov" and the admin note
+//   [data-availability="sunny-ali"]   filled with "Next available: Sat, 15 Nov", weekly off days
+//                                     and the admin note
 //   form[data-booking]                date input limited to the chosen artist's open days.
 //                                     The artist comes from the selected <option data-artist>
 //                                     or from the form's own data-artist.
@@ -23,12 +24,25 @@
   }
 
   var today = iso(new Date());
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  // First day on or after `from` that is past the artist's wait and not blocked
+  function weekday(s) { return new Date(s + 'T00:00:00').getDay(); }
+  function weeklyOff(a) { return a.weeklyOff || []; }
+  function isOff(a, d) { return a.blocked.indexOf(d) !== -1 || weeklyOff(a).indexOf(weekday(d)) !== -1; }
+
+  // "Off every Tuesday" / "Off every Monday and Tuesday"
+  function offText(a) {
+    var names = weeklyOff(a).map(function (n) { return DAYS[n]; });
+    if (!names.length) return '';
+    var last = names.pop();
+    return 'Off every ' + (names.length ? names.join(', ') + ' and ' : '') + last;
+  }
+
+  // First day on or after `from` that is past the artist's wait and not a day off
   function firstOpen(a, from) {
     var d = from > today ? from : today;
     if (a.nextAvailable && a.nextAvailable > d) d = a.nextAvailable;
-    for (var i = 0; i < 400 && a.blocked.indexOf(d) !== -1; i++) d = addDays(d, 1);
+    for (var i = 0; i < 400 && isOff(a, d); i++) d = addDays(d, 1);
     return d;
   }
 
@@ -43,11 +57,12 @@
     var b = document.createElement('b');
     b.textContent = main;
     el.appendChild(b);
-    if (a.note) {
+    [a.accepting ? offText(a) : '', a.note].forEach(function (text) {
+      if (!text) return;
       var n = document.createElement('span');
-      n.textContent = a.note;
+      n.textContent = text;
       el.appendChild(n);
-    }
+    });
     el.hidden = false;
   }
 
@@ -84,12 +99,16 @@
       var open = firstOpen(a, today);
       date.min = open;
       var v = date.value;
-      if (v && (v < open || a.blocked.indexOf(v) !== -1)) {
+      if (v && (v < open || isOff(a, v))) {
         invalid = true;
-        say(a.name + ' is not available on ' + nice(v) + '. The next open day is ' + nice(firstOpen(a, v < open ? open : v)) + '.', true);
+        var why = v >= open && weeklyOff(a).indexOf(weekday(v)) !== -1
+          ? a.name + ' is off on ' + DAYS[weekday(v)] + 's.'
+          : a.name + ' is not available on ' + nice(v) + '.';
+        say(why + ' The next open day is ' + nice(firstOpen(a, v < open ? open : v)) + '.', true);
         return;
       }
       var msg = open > today ? a.name + "'s next available day is " + nice(open) + '.' : '';
+      if (offText(a)) msg = (msg ? msg + ' ' : '') + offText(a) + '.';
       if (a.note) msg = (msg ? msg + ' ' : '') + a.note;
       say(msg, false);
     }

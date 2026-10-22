@@ -92,6 +92,10 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
 .chips button { width: 30px; height: 30px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 1.1rem; line-height: 1; }
 .chips button:hover { background: rgba(240,160,144,.15); color: var(--bad); }
 .muted { color: var(--ink-soft); font-size: 0.85rem; }
+.weekdays { display: flex; flex-wrap: wrap; gap: 8px; }
+.day-btn { min-width: 52px; min-height: 42px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 2px; background: transparent; font-size: 0.85rem; cursor: pointer; }
+.day-btn:hover { border-color: var(--gold); }
+.day-btn[aria-pressed="true"] { background: rgba(240,160,144,.14); border-color: var(--bad); color: var(--bad); text-decoration: line-through; }
 
 /* Save bar */
 .savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: rgba(11,11,11,.96); border-top: 1px solid var(--line-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
@@ -171,7 +175,11 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
       </div>
     </div>
     <div>
-      <span class="lbl">Days off (blocked)</span>
+      <span class="lbl">Weekly day off (tap to turn on or off)</span>
+      <div class="weekdays" data-weekdays role="group"></div>
+    </div>
+    <div>
+      <span class="lbl">Other days off (holidays, leave)</span>
       <div class="blocked-add">
         <div><label class="lbl">From</label><input type="date" data-block-from></div>
         <div><label class="lbl">To (optional)</label><input type="date" data-block-to></div>
@@ -207,9 +215,18 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
       ? { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }
       : { weekday: 'short', day: 'numeric', month: 'short' });
   }
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  function weekday(s) { return new Date(s + 'T00:00:00').getDay(); }
+  function isOff(a, d) { return a.blocked.indexOf(d) !== -1 || a.weeklyOff.indexOf(weekday(d)) !== -1; }
+  function offText(a) {
+    var names = a.weeklyOff.map(function (n) { return DAYS[n]; });
+    if (!names.length) return '';
+    var last = names.pop();
+    return 'Off every ' + (names.length ? names.join(', ') + ' and ' : '') + last;
+  }
   function firstOpen(a) {
     var d = a.nextAvailable && a.nextAvailable > today ? a.nextAvailable : today;
-    for (var i = 0; i < 400 && a.blocked.indexOf(d) !== -1; i++) d = addDays(d, 1);
+    for (var i = 0; i < 400 && isOff(a, d); i++) d = addDays(d, 1);
     return d;
   }
 
@@ -229,7 +246,7 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
   function payload() {
     var out = {};
     artists.forEach(function (a) {
-      out[a.id] = { accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked };
+      out[a.id] = { accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked, weeklyOff: a.weeklyOff };
     });
     return { artists: out };
   }
@@ -255,7 +272,15 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
     b.textContent = 'Clients see: ' + (!a.accepting ? 'Not taking new bookings right now'
       : open > today ? 'Next available: ' + nice(open) : 'Available from today');
     pv.appendChild(b);
-    if (a.note) { var sm = document.createElement('small'); sm.textContent = a.note; pv.appendChild(sm); }
+    [a.accepting ? offText(a) : '', a.note].forEach(function (text) {
+      if (!text) return;
+      var sm = document.createElement('small');
+      sm.textContent = text;
+      pv.appendChild(sm);
+    });
+    card.querySelectorAll('[data-day]').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', String(a.weeklyOff.indexOf(Number(btn.getAttribute('data-day'))) !== -1));
+    });
 
     card.querySelector('[data-f="accepting"]').checked = a.accepting;
     card.querySelector('[data-f="nextAvailable"]').value = a.nextAvailable;
@@ -284,7 +309,7 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
   function changed(card, a) {
     renderCard(card, a);
     var original = JSON.parse(saved).artists[a.id];
-    card.classList.toggle('dirty', JSON.stringify(original) !== JSON.stringify({ accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked }));
+    card.classList.toggle('dirty', JSON.stringify(original) !== JSON.stringify({ accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked, weeklyOff: a.weeklyOff }));
     refreshDirty();
   }
 
@@ -314,6 +339,23 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
           changed(card, a);
         });
       });
+      var week = card.querySelector('[data-weekdays]');
+      week.setAttribute('aria-label', 'Weekly days off for ' + a.name);
+      [1, 2, 3, 4, 5, 6, 0].forEach(function (n) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'day-btn';
+        btn.setAttribute('data-day', n);
+        btn.setAttribute('aria-label', DAYS[n] + ' off');
+        btn.textContent = DAYS[n].slice(0, 3);
+        btn.addEventListener('click', function () {
+          var on = a.weeklyOff.indexOf(n) !== -1;
+          if (!on && a.weeklyOff.length >= 6) { setStatus('At least one day a week must stay open.', 'bad'); return; }
+          a.weeklyOff = on ? a.weeklyOff.filter(function (v) { return v !== n; }) : a.weeklyOff.concat(n).sort();
+          changed(card, a);
+        });
+        week.appendChild(btn);
+      });
       card.querySelector('[data-block-add]').addEventListener('click', function () {
         var from = card.querySelector('[data-block-from]');
         var to = card.querySelector('[data-block-to]');
@@ -335,7 +377,7 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
 
   function load(data) {
     artists = data.artists.map(function (a) {
-      return { id: a.id, name: a.name, role: a.role, accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked.slice() };
+      return { id: a.id, name: a.name, role: a.role, accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked.slice(), weeklyOff: (a.weeklyOff || []).slice() };
     });
     saved = JSON.stringify(payload());
     render();
