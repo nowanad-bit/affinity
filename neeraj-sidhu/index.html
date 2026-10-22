@@ -217,6 +217,15 @@
     .book-form input, .book-form select { width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line-dark); border-radius: 3px; background: var(--ink-2); color: var(--ivory); font: 400 16px var(--sans); color-scheme: dark; }
     .book-form input:focus, .book-form select:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
     .form-title { margin: 56px 0 0; font-family: var(--serif); font-size: 30px; }
+    .date-hint { grid-column: 1 / -1; margin: 0; font-size: 14px; color: var(--gold); }
+    .date-hint.is-error { color: #f0a090; }
+    /* Wait time set from /admin */
+    .availability { display: inline-grid; gap: 2px; margin: 16px auto 0; padding: 10px 16px; border: 1px solid var(--line-dark); border-radius: 999px; font-size: 14px; }
+    .availability b { font-weight: 500; color: var(--ivory); }
+    .availability span { color: var(--muted-light); }
+    .availability.is-open b::before, .availability.is-wait b::before, .availability.is-closed b::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--gold); vertical-align: 1px; }
+    .availability.is-open b::before { background: #6fbf73; }
+    .availability.is-closed b::before { background: #f0a090; }
 
     footer { padding: 28px 24px 110px; text-align: center; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted-light); border-top: 1px solid var(--line-dark); }
     footer a { color: var(--gold); text-decoration: none; }
@@ -495,7 +504,8 @@
           </div>
         </div>
         <h3 class="form-title">Check your date on WhatsApp</h3>
-        <form class="book-form" id="bookForm">
+        <p class="availability" data-availability="neeraj-sidhu" hidden></p>
+        <form class="book-form" id="bookForm" data-booking data-artist="neeraj-sidhu">
           <label>Your name<input name="name" autocomplete="name" required></label>
           <label>Occasion
             <select name="occasion">
@@ -509,6 +519,7 @@
           </label>
           <label>Date<input name="date" type="date"></label>
           <button class="btn btn-wa" type="submit">Send</button>
+          <p class="date-hint" data-date-hint hidden></p>
         </form>
         <div class="actions">
           <a class="btn btn-wa" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20check%20a%20date%20for%20makeup." target="_blank" rel="noopener">WhatsApp</a>
@@ -620,5 +631,6 @@
       });
     })();
   </script>
+  <script src="/assets/availability.js" defer></script>
 </body>
 </html>

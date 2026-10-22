@@ -3,7 +3,8 @@
 
 User-agent: *
 Allow: /
-Disallow: 
+Disallow: /admin
+Disallow: /api/
 
 # Sitemap location
 Sitemap: https://www.affinitychandigarh.com/sitemap.xml

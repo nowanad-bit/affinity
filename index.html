@@ -309,6 +309,14 @@ form > p { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 6px; }
 .field textarea { min-height: 96px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
 .form-error { color: #f0a090; font-size: 0.9rem; }
+.date-hint { margin-top: -6px; font-size: 0.9rem; color: var(--gold-bright); }
+.date-hint.is-error { color: #f0a090; }
+/* Wait time from /admin, on each artist card */
+.availability { display: grid; gap: 2px; padding: 10px 12px; border-left: 2px solid var(--gold); background: rgba(201,164,92,.07); font-size: 0.88rem; }
+.availability b { font-weight: 500; color: var(--ink); }
+.availability span { color: var(--ink-soft); }
+.availability.is-open { border-left-color: #6fbf73; }
+.availability.is-closed { border-left-color: #f0a090; }
 form .btn { width: 100%; margin-top: 6px; }
 .form-ready { display: grid; gap: 12px; padding: 18px; border: 1px dashed var(--gold); }
 .form-ready p { font-size: 0.95rem; }
@@ -478,6 +486,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
           <div class="artist-body">
             <div><p class="role">Bridal &amp; occasion makeup artist</p><h3>Neeraj Sidhu</h3></div>
             <p><span class="years">9 years, 1000+ clients.</span> Bridal, engagement, reception, mehendi and party looks. See his portfolio and packages.</p>
+            <p class="availability" data-availability="neeraj-sidhu" hidden></p>
             <div class="artist-links"><a class="book" href="neeraj-sidhu/">Portfolio &amp; prices</a><a href="https://wa.me/919501791259" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/makeup_by_neerajsidhu_1/" target="_blank" rel="noopener noreferrer">Instagram</a></div>
           </div>
         </article>
@@ -485,36 +494,42 @@ html.motion .reveal.in { opacity: 1; transform: none; }
           <span class="monogram" aria-hidden="true">SA</span>
           <div><p class="role">Senior hair artist</p><h3>Sunny Ali</h3></div>
           <p><span class="years">10+ years.</span> Hair transformation specialist.</p>
+          <p class="availability" data-availability="sunny-ali" hidden></p>
           <div class="artist-links"><a class="book" href="https://wa.me/919872366050" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/sunny_ali_hair_artist" target="_blank" rel="noopener noreferrer">Instagram</a></div>
         </article>
         <article class="artist reveal">
           <span class="monogram" aria-hidden="true">SS</span>
           <div><p class="role">Senior hair artist</p><h3>Saleem Salmani</h3></div>
           <p><span class="years">9+ years.</span> Precision barber.</p>
+          <p class="availability" data-availability="saleem-salmani" hidden></p>
           <div class="artist-links"><a class="book" href="https://wa.me/919780422854" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/saleem_hair_art" target="_blank" rel="noopener noreferrer">Instagram</a></div>
         </article>
         <article class="artist reveal">
           <span class="monogram" aria-hidden="true">IA</span>
           <div><p class="role">Senior hair artist</p><h3>Imran Ahmad</h3></div>
           <p><span class="years">8+ years.</span> Colour and styling expert.</p>
+          <p class="availability" data-availability="imran-ahmad" hidden></p>
           <div class="artist-links"><a class="book" href="https://wa.me/919779813285" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/imran.hairartist" target="_blank" rel="noopener noreferrer">Instagram</a></div>
         </article>
         <article class="artist reveal">
           <span class="monogram" aria-hidden="true">AA</span>
           <div><p class="role">Senior hair artist</p><h3>Azeem Alvi</h3></div>
           <p><span class="years">7+ years.</span> Modern cuts specialist.</p>
+          <p class="availability" data-availability="azeem-alvi" hidden></p>
           <div class="artist-links"><a class="book" href="https://wa.me/917696887421" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/hair_artist_azeem" target="_blank" rel="noopener noreferrer">Instagram</a></div>
         </article>
         <article class="artist reveal">
           <span class="monogram" aria-hidden="true">N</span>
           <div><p class="role">Senior hair artist</p><h3>Naushad</h3></div>
           <p><span class="years">6+ years.</span> Trending styles expert.</p>
+          <p class="availability" data-availability="naushad" hidden></p>
           <div class="artist-links"><a class="book" href="https://wa.me/919888055835" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/hairartist_naushad" target="_blank" rel="noopener noreferrer">Instagram</a></div>
         </article>
         <article class="artist reveal">
           <span class="monogram" aria-hidden="true">NS</span>
           <div><p class="role">Makeup artist</p><h3>Nisha Sharma</h3></div>
           <p><span class="years">Certified.</span> Bridal and makeup specialist.</p>
+          <p class="availability" data-availability="nisha-sharma" hidden></p>
           <div class="artist-links"><a class="book" href="https://wa.me/919780823215" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/nisha_mua_artist" target="_blank" rel="noopener noreferrer">Instagram</a></div>
         </article>
       </div>
@@ -567,7 +582,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
         <h2 id="visit-title">See you in <em>Sector 9C</em></h2>
       </div>
       <div class="visit">
-        <form id="book" class="reveal" novalidate>
+        <form id="book" class="reveal" data-booking novalidate>
           <h3>Request an appointment</h3>
           <p>Fill this in and we'll open WhatsApp with your request ready to send.</p>
           <div class="row">
@@ -575,7 +590,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
             <div class="field">
               <label for="b-artist">Artist</label>
               <select id="b-artist" name="artist">
-                <option>Any artist</option><option>Neeraj Sidhu (makeup)</option><option>Sunny Ali</option><option>Saleem Salmani</option><option>Imran Ahmad</option><option>Azeem Alvi</option><option>Naushad</option><option>Nisha Sharma</option>
+                <option>Any artist</option><option data-artist="neeraj-sidhu">Neeraj Sidhu (makeup)</option><option data-artist="sunny-ali">Sunny Ali</option><option data-artist="saleem-salmani">Saleem Salmani</option><option data-artist="imran-ahmad">Imran Ahmad</option><option data-artist="azeem-alvi">Azeem Alvi</option><option data-artist="naushad">Naushad</option><option data-artist="nisha-sharma">Nisha Sharma</option>
               </select>
             </div>
           </div>
@@ -596,6 +611,7 @@ html.motion .reveal.in { opacity: 1; transform: none; }
               <select id="b-time" name="time"><option>Morning (10 am – 1 pm)</option><option>Afternoon (1 – 4 pm)</option><option>Evening (4 – 8 pm)</option></select>
             </div>
           </div>
+          <p class="date-hint" data-date-hint hidden></p>
           <div class="field"><label for="b-note">Anything we should know?</label><textarea id="b-note" name="note" placeholder="Hair length, reference look, event date…"></textarea></div>
           <p class="form-error" id="formError" hidden>Please add your name so we know who is booking.</p>
           <button class="btn btn-gold" type="submit">Continue on WhatsApp</button>
@@ -728,5 +744,6 @@ html.motion .reveal.in { opacity: 1; transform: none; }
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
+<script src="assets/availability.js" defer></script>
 </body>
 </html>

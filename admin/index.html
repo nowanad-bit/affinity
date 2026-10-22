@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Artist Availability | Affinity Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="/assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Staff tool: one card per artist, built for a phone at the reception desk */
+:root {
+  --bg: #0b0b0b;
+  --surface: #131211;
+  --surface-2: #1a1917;
+  --ink: #f2eee6;
+  --ink-soft: #a7a097;
+  --line: rgba(201, 164, 92, 0.18);
+  --line-strong: rgba(201, 164, 92, 0.42);
+  --gold: #c9a45c;
+  --gold-bright: #e3c47f;
+  --ok: #6fbf73;
+  --bad: #f0a090;
+  --f-display: "Cormorant Garamond", Georgia, serif;
+  --f-body: "Jost", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.5 var(--f-body); -webkit-font-smoothing: antialiased; }
+[hidden] { display: none !important; }
+h1, h2 { margin: 0; font-family: var(--f-display); font-weight: 500; line-height: 1.1; }
+p { margin: 0; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+header { border-bottom: 1px solid var(--line); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; }
+.brand { font: 500 0.78rem var(--f-body); letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+.link { background: none; border: 0; padding: 8px 0; color: var(--ink-soft); font-size: 0.85rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1px solid var(--gold); border-radius: 2px; background: var(--gold); color: #0b0b0b; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; }
+.btn:hover { background: var(--gold-bright); }
+.btn:disabled { opacity: 0.55; cursor: progress; }
+.btn-line { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-line:hover { background: transparent; border-color: var(--gold); color: var(--gold-bright); }
+.chip-btn { min-height: 38px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; font-size: 0.82rem; cursor: pointer; }
+.chip-btn:hover { border-color: var(--gold); color: var(--gold-bright); }
+
+input[type="date"], input[type="text"], input[type="password"] { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid rgba(242,238,230,.18); border-radius: 2px; background: var(--bg); }
+input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* Login */
+.login { max-width: 380px; margin: 12vh auto 0; padding: 28px; background: var(--surface); border: 1px solid var(--line-strong); display: grid; gap: 16px; }
+.login h1 { font-size: 2rem; }
+.login p { color: var(--ink-soft); font-size: 0.92rem; }
+.error { color: var(--bad); font-size: 0.92rem; }
+
+/* Artists */
+.intro { padding: 28px 0 8px; display: grid; gap: 6px; }
+.intro h1 { font-size: clamp(2rem, 6vw, 2.6rem); }
+.intro p { color: var(--ink-soft); font-size: 0.95rem; }
+.list { display: grid; gap: 16px; padding: 16px 0 120px; }
+.card { background: var(--surface); border: 1px solid var(--line); padding: 18px; display: grid; gap: 16px; }
+.card.dirty { border-color: var(--line-strong); }
+.card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.card-head h2 { font-size: 1.6rem; }
+.card-head .role { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.preview { padding: 10px 12px; border-left: 2px solid var(--gold); background: rgba(201,164,92,.07); font-size: 0.9rem; }
+.preview b { font-weight: 500; }
+.preview.is-open { border-left-color: var(--ok); }
+.preview.is-closed { border-left-color: var(--bad); }
+.preview small { display: block; color: var(--ink-soft); font-size: 0.82rem; }
+
+.switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.85rem; white-space: nowrap; user-select: none; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch .track { position: relative; width: 46px; height: 26px; border-radius: 999px; background: #3a3632; transition: background .2s; }
+.switch .track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); transition: transform .2s; }
+.switch input:checked + .track { background: var(--ok); }
+.switch input:checked + .track::after { transform: translateX(20px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.blocked-add { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 8px; align-items: end; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; list-style: none; padding: 0; }
+.chips li { display: inline-flex; align-items: center; gap: 4px; padding: 4px 4px 4px 12px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 0.85rem; }
+.chips button { width: 30px; height: 30px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 1.1rem; line-height: 1; }
+.chips button:hover { background: rgba(240,160,144,.15); color: var(--bad); }
+.muted { color: var(--ink-soft); font-size: 0.85rem; }
+
+/* Save bar */
+.savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: rgba(11,11,11,.96); border-top: 1px solid var(--line-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.savebar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+.status { font-size: 0.88rem; color: var(--ink-soft); }
+.status.ok { color: var(--ok); }
+.status.bad { color: var(--bad); }
+
+@media (max-width: 520px) {
+  .row { grid-template-columns: 1fr; }
+  .blocked-add { grid-template-columns: 1fr 1fr; }
+  .blocked-add .btn { grid-column: 1 / -1; }
+  .card-head { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">Affinity · Admin</a>
+    <button class="link" id="logout" type="button" hidden>Sign out</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <form class="login" id="login">
+    <h1>Artist availability</h1>
+    <p>Staff only. Enter the admin password to change booking dates.</p>
+    <div>
+      <label class="lbl" for="pw">Password</label>
+      <input id="pw" type="password" autocomplete="current-password" required>
+    </div>
+    <p class="error" id="loginError" role="alert" hidden></p>
+    <button class="btn" type="submit" id="loginBtn">Sign in</button>
+  </form>
+
+  <section id="app" hidden>
+    <div class="intro">
+      <h1>Artist availability</h1>
+      <p>Set when each artist can take new bookings. Clients see this on the website, and the booking form only allows open days.</p>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+</main>
+
+<div class="savebar" id="savebar" hidden>
+  <div class="wrap">
+    <span class="status" id="status" role="status" aria-live="polite">No changes</span>
+    <button class="btn" id="save" type="button" disabled>Save changes</button>
+  </div>
+</div>
+
+<template id="cardTpl">
+  <article class="card">
+    <div class="card-head">
+      <div><p class="role"></p><h2></h2></div>
+      <label class="switch"><input type="checkbox" data-f="accepting"><span class="track"></span><span>Taking bookings</span></label>
+    </div>
+    <p class="preview"></p>
+    <div data-when-open>
+      <div class="row">
+        <div>
+          <label class="lbl">Next available date</label>
+          <input type="date" data-f="nextAvailable">
+          <div class="quick">
+            <button class="chip-btn" type="button" data-days="0">From today</button>
+            <button class="chip-btn" type="button" data-days="10">+10 days</button>
+            <button class="chip-btn" type="button" data-days="14">+2 weeks</button>
+            <button class="chip-btn" type="button" data-days="30">+1 month</button>
+          </div>
+        </div>
+        <div>
+          <label class="lbl">Note for clients (optional)</label>
+          <input type="text" data-f="note" maxlength="120" placeholder="e.g. Usually 2–4 weeks wait">
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="lbl">Days off (blocked)</span>
+      <div class="blocked-add">
+        <div><label class="lbl">From</label><input type="date" data-block-from></div>
+        <div><label class="lbl">To (optional)</label><input type="date" data-block-to></div>
+        <button class="btn btn-line" type="button" data-block-add>Block</button>
+      </div>
+      <ul class="chips" data-chips></ul>
+      <p class="muted" data-no-blocked>No days blocked.</p>
+    </div>
+  </article>
+</template>
+
+<script>
+(function () {
+  'use strict';
+  var API = '/api/availability';
+  var KEY = 'affinityAdminPw';
+  var pw = '';
+  var artists = [];   // working copy, edited in place
+  var saved = '';     // JSON of the last saved state, to detect changes
+
+  var $ = function (id) { return document.getElementById(id); };
+  function store(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} }
+  function stored() { try { return sessionStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
+
+  function iso(d) {
+    var m = d.getMonth() + 1, day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day;
+  }
+  var today = iso(new Date());
+  function addDays(s, n) { var d = new Date(s + 'T00:00:00'); d.setDate(d.getDate() + n); return iso(d); }
+  function nice(s, long) {
+    return new Date(s + 'T00:00:00').toLocaleDateString('en-IN', long
+      ? { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }
+      : { weekday: 'short', day: 'numeric', month: 'short' });
+  }
+  function firstOpen(a) {
+    var d = a.nextAvailable && a.nextAvailable > today ? a.nextAvailable : today;
+    for (var i = 0; i < 400 && a.blocked.indexOf(d) !== -1; i++) d = addDays(d, 1);
+    return d;
+  }
+
+  function call(body) {
+    return fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': pw },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (data) {
+        if (!r.ok) { var err = new Error(data.error || 'Something went wrong (' + r.status + ')'); err.status = r.status; throw err; }
+        return data;
+      });
+    });
+  }
+
+  function payload() {
+    var out = {};
+    artists.forEach(function (a) {
+      out[a.id] = { accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked };
+    });
+    return { artists: out };
+  }
+
+  function setStatus(text, kind) {
+    var s = $('status');
+    s.textContent = text;
+    s.className = 'status' + (kind ? ' ' + kind : '');
+  }
+  function refreshDirty() {
+    var dirty = JSON.stringify(payload()) !== saved;
+    $('save').disabled = !dirty;
+    if (dirty) setStatus('Unsaved changes');
+    return dirty;
+  }
+
+  function renderCard(card, a) {
+    var open = firstOpen(a);
+    var pv = card.querySelector('.preview');
+    pv.className = 'preview ' + (!a.accepting ? 'is-closed' : open > today ? 'is-wait' : 'is-open');
+    pv.innerHTML = '';
+    var b = document.createElement('b');
+    b.textContent = 'Clients see: ' + (!a.accepting ? 'Not taking new bookings right now'
+      : open > today ? 'Next available: ' + nice(open) : 'Available from today');
+    pv.appendChild(b);
+    if (a.note) { var sm = document.createElement('small'); sm.textContent = a.note; pv.appendChild(sm); }
+
+    card.querySelector('[data-f="accepting"]').checked = a.accepting;
+    card.querySelector('[data-f="nextAvailable"]').value = a.nextAvailable;
+    card.querySelector('[data-f="note"]').value = a.note;
+    card.querySelector('[data-when-open]').hidden = !a.accepting;
+
+    var chips = card.querySelector('[data-chips]');
+    chips.innerHTML = '';
+    a.blocked.forEach(function (d) {
+      var li = document.createElement('li');
+      li.appendChild(document.createTextNode(nice(d, true)));
+      var x = document.createElement('button');
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Unblock ' + nice(d, true));
+      x.textContent = '×';
+      x.addEventListener('click', function () {
+        a.blocked = a.blocked.filter(function (v) { return v !== d; });
+        changed(card, a);
+      });
+      li.appendChild(x);
+      chips.appendChild(li);
+    });
+    card.querySelector('[data-no-blocked]').hidden = a.blocked.length > 0;
+  }
+
+  function changed(card, a) {
+    renderCard(card, a);
+    var original = JSON.parse(saved).artists[a.id];
+    card.classList.toggle('dirty', JSON.stringify(original) !== JSON.stringify({ accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked }));
+    refreshDirty();
+  }
+
+  function render() {
+    var list = $('list');
+    list.innerHTML = '';
+    var tpl = $('cardTpl');
+    artists.forEach(function (a) {
+      var card = tpl.content.firstElementChild.cloneNode(true);
+      card.querySelector('h2').textContent = a.name;
+      card.querySelector('.role').textContent = a.role;
+      // Unique ids so every label points at its own input
+      card.querySelectorAll('input').forEach(function (input, i) {
+        input.id = a.id + '-f' + i;
+        var lbl = input.previousElementSibling;
+        if (lbl && lbl.tagName === 'LABEL') lbl.htmlFor = input.id;
+      });
+      card.querySelectorAll('input[type="date"]').forEach(function (d) { d.min = today; });
+
+      card.querySelector('[data-f="accepting"]').addEventListener('change', function (e) { a.accepting = e.target.checked; changed(card, a); });
+      card.querySelector('[data-f="nextAvailable"]').addEventListener('change', function (e) { a.nextAvailable = e.target.value > today ? e.target.value : ''; changed(card, a); });
+      card.querySelector('[data-f="note"]').addEventListener('input', function (e) { a.note = e.target.value; changed(card, a); });
+      card.querySelectorAll('[data-days]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var n = Number(btn.getAttribute('data-days'));
+          a.nextAvailable = n ? addDays(today, n) : '';
+          changed(card, a);
+        });
+      });
+      card.querySelector('[data-block-add]').addEventListener('click', function () {
+        var from = card.querySelector('[data-block-from]');
+        var to = card.querySelector('[data-block-to]');
+        if (!from.value) { from.focus(); return; }
+        var end = to.value && to.value > from.value ? to.value : from.value;
+        if (from.value < today) { from.value = today; }
+        var set = {};
+        a.blocked.forEach(function (d) { set[d] = true; });
+        // Cap a range at 120 days so a typo cannot block a whole year
+        for (var d = from.value, i = 0; d <= end && i < 120; d = addDays(d, 1), i++) set[d] = true;
+        a.blocked = Object.keys(set).sort();
+        from.value = ''; to.value = '';
+        changed(card, a);
+      });
+      renderCard(card, a);
+      list.appendChild(card);
+    });
+  }
+
+  function load(data) {
+    artists = data.artists.map(function (a) {
+      return { id: a.id, name: a.name, role: a.role, accepting: a.accepting, nextAvailable: a.nextAvailable, note: a.note, blocked: a.blocked.slice() };
+    });
+    saved = JSON.stringify(payload());
+    render();
+    $('save').disabled = true;
+    setStatus(data.updatedAt ? 'Last saved ' + new Date(data.updatedAt).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) : 'Nothing saved yet');
+  }
+
+  function showApp(on) {
+    $('login').hidden = on;
+    $('app').hidden = !on;
+    $('savebar').hidden = !on;
+    $('logout').hidden = !on;
+  }
+
+  function signIn(password, quiet) {
+    pw = password;
+    $('loginBtn').disabled = true;
+    $('loginError').hidden = true;
+    return call({ verify: true }).then(function (data) {
+      store(pw);
+      load(data);
+      showApp(true);
+    }).catch(function (err) {
+      store('');
+      showApp(false);
+      if (!quiet) {
+        $('loginError').textContent = err.status === 401 ? 'That password is not right.' : err.message;
+        $('loginError').hidden = false;
+      }
+    }).then(function () { $('loginBtn').disabled = false; });
+  }
+
+  $('login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('pw').value;
+    if (v) signIn(v);
+  });
+
+  $('logout').addEventListener('click', function () {
+    if (refreshDirty() && !confirm('You have unsaved changes. Sign out anyway?')) return;
+    pw = ''; store(''); artists = []; saved = '';
+    $('pw').value = '';
+    showApp(false);
+  });
+
+  $('save').addEventListener('click', function () {
+    var btn = $('save');
+    btn.disabled = true;
+    setStatus('Saving…');
+    call(payload()).then(function (data) {
+      load(data);
+      setStatus('Saved. The website is updated.', 'ok');
+    }).catch(function (err) {
+      setStatus(err.status === 401 ? 'Password changed. Please sign in again.' : err.message, 'bad');
+      btn.disabled = false;
+      if (err.status === 401) { store(''); showApp(false); }
+    });
+  });
+
+  window.addEventListener('beforeunload', function (e) {
+    if (saved && JSON.stringify(payload()) !== saved) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  var remembered = stored();
+  if (remembered) signIn(remembered, true);
+})();
+</script>
+</body>
+</html>
