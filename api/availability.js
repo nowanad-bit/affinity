@@ -105,8 +105,9 @@ function passwordOk(given) {
 
 export async function GET() {
   try {
-    // Short shared cache: a busy page load costs one Blob read every few seconds at most
-    return json(shape(await load()), 200, 'public, max-age=0, s-maxage=10, stale-while-revalidate=30');
+    // Short shared cache so busy pages cost one Blob read every few seconds,
+    // while a save from /admin shows on the site within about 10 seconds
+    return json(shape(await load()), 200, 'public, max-age=0, s-maxage=5, stale-while-revalidate=5');
   } catch (err) {
     console.error('availability GET failed', err);
     return json({ error: 'Availability is not available right now.' }, 503);

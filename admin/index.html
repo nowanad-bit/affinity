@@ -387,7 +387,7 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
     setStatus('Saving…');
     call(payload()).then(function (data) {
       load(data);
-      setStatus('Saved. The website is updated.', 'ok');
+      setStatus('Saved. The website shows it within 10 seconds.', 'ok');
     }).catch(function (err) {
       setStatus(err.status === 401 ? 'Password changed. Please sign in again.' : err.message, 'bad');
       btn.disabled = false;
