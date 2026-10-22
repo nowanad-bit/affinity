@@ -5,6 +5,18 @@
   "regions": [
     "bom1"
   ],
+  "redirects": [
+    {
+      "source": "/api/:name.js",
+      "destination": "/api/:name",
+      "permanent": false
+    },
+    {
+      "source": "/(vercel\\.json|package\\.json|package-lock\\.json|\\.gitignore)",
+      "destination": "/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
