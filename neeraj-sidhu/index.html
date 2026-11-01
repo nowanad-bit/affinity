@@ -212,7 +212,8 @@
     /* Package booking links and the WhatsApp booking form */
     .tier-book { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); text-decoration: none; border-bottom: 1px solid currentColor; }
     .tier-book:hover { color: var(--text-dark); }
-    .book-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 12px; align-items: end; max-width: 860px; margin: 40px auto 0; text-align: left; }
+    .book-form { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: end; max-width: 960px; margin: 40px auto 0; text-align: left; }
+    .book-form .btn { grid-column: 1 / -1; }
     .book-form label { display: grid; gap: 6px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted-light); }
     .book-form input, .book-form select { width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line-dark); border-radius: 3px; background: var(--ink-2); color: var(--ivory); font: 400 16px var(--sans); color-scheme: dark; }
     .book-form input:focus, .book-form select:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
@@ -288,7 +289,7 @@
       </div>
       <p class="place">Chandigarh &middot; Affinity Luxury Salon, Sector 9</p>
       <div class="actions">
-        <a class="btn btn-wa" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20check%20a%20date%20for%20makeup." target="_blank" rel="noopener">
+        <a class="btn btn-wa" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20check%20a%20date%20for%20makeup." data-wa-source target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.09c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.91-1.26-4.81-4.19-4.95-4.38-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.78-.36l.56.01c.18.01.42-.07.66.5.24.58.83 2 .9 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.56.16.28.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.19 1.36.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.19-.28.37-.23.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.13.07.72-.17 1.4z"/></svg>
           Book on WhatsApp
         </a>
@@ -395,9 +396,9 @@
             <p>Perfect for your big day &mdash; HD finish, long-lasting base and premium luxury products.</p>
           </div>
           <ul class="tiers">
-            <li><span class="rn">I</span><div><h3>HD Bridal Makeup</h3><p>High-definition, flawless base with smooth coverage &mdash; ideal for photography, videography &amp; long events.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Bridal%20Makeup%20%28Rs%2020%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>20,000</span></li>
-            <li><span class="rn">II</span><div><h3>Celebrity Bridal Makeup</h3><p>Premium celebrity-style makeup with high-end products &amp; expert techniques for a glamorous, radiant look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Bridal%20Makeup%20%28Rs%2030%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>30,000</span></li>
-            <li><span class="rn">III</span><div><h3>Signature Bridal Makeup</h3><p>Exclusive luxury bridal makeover curated personally &mdash; ultra-polished, timeless and red-carpet inspired.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Signature%20Bridal%20Makeup%20%28Rs%2040%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>40,000</span></li>
+            <li><span class="rn">I</span><div><h3>HD Bridal Makeup</h3><p>High-definition, flawless base with smooth coverage &mdash; ideal for photography, videography &amp; long events.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Bridal%20Makeup%20%28Rs%2020%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>20,000</span></li>
+            <li><span class="rn">II</span><div><h3>Celebrity Bridal Makeup</h3><p>Premium celebrity-style makeup with high-end products &amp; expert techniques for a glamorous, radiant look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Bridal%20Makeup%20%28Rs%2030%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>30,000</span></li>
+            <li><span class="rn">III</span><div><h3>Signature Bridal Makeup</h3><p>Exclusive luxury bridal makeover curated personally &mdash; ultra-polished, timeless and red-carpet inspired.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Signature%20Bridal%20Makeup%20%28Rs%2040%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>40,000</span></li>
           </ul>
         </div>
 
@@ -411,9 +412,9 @@
             <p>Soft glam to bold glam &mdash; designed to match your outfit and occasion.</p>
           </div>
           <ul class="tiers">
-            <li><span class="rn">I</span><div><h3>Soft Glam Engagement</h3><p>Fresh, natural and glowing look, perfect for roka &amp; engagement ceremonies.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Soft%20Glam%20Engagement%20%28Rs%207%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>7,000</span></li>
-            <li><span class="rn">II</span><div><h3>HD Engagement</h3><p>Smooth, flawless HD base with enhanced features &mdash; great for photos &amp; videos.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Engagement%20%28Rs%2012%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>12,000</span></li>
-            <li><span class="rn">III</span><div><h3>Signature Engagement Look</h3><p>Premium, customised glam inspired by celebrity engagement looks.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Signature%20Engagement%20Look%20%28Rs%2017%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>17,000</span></li>
+            <li><span class="rn">I</span><div><h3>Soft Glam Engagement</h3><p>Fresh, natural and glowing look, perfect for roka &amp; engagement ceremonies.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Soft%20Glam%20Engagement%20%28Rs%207%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>7,000</span></li>
+            <li><span class="rn">II</span><div><h3>HD Engagement</h3><p>Smooth, flawless HD base with enhanced features &mdash; great for photos &amp; videos.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Engagement%20%28Rs%2012%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>12,000</span></li>
+            <li><span class="rn">III</span><div><h3>Signature Engagement Look</h3><p>Premium, customised glam inspired by celebrity engagement looks.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Signature%20Engagement%20Look%20%28Rs%2017%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>17,000</span></li>
           </ul>
         </div>
 
@@ -427,9 +428,9 @@
             <p>Elegant, long-lasting and glamorous looks that come alive in evening light.</p>
           </div>
           <ul class="tiers">
-            <li><span class="rn">I</span><div><h3>HD Reception Look</h3><p>Elegant evening glam with a flawless HD finish for stunning reception photos.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Reception%20Look%20%28Rs%2010%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>10,000</span></li>
-            <li><span class="rn">II</span><div><h3>Celebrity Reception</h3><p>Premium celebrity-style makeup with high-end products for a glamorous evening look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Reception%20%28Rs%2012%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>12,000</span></li>
-            <li><span class="rn">III</span><div><h3>Signature Reception Look</h3><p>Rich, glamorous and luxurious makeover for a royal reception appearance.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Signature%20Reception%20Look%20%28Rs%2015%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>15,000</span></li>
+            <li><span class="rn">I</span><div><h3>HD Reception Look</h3><p>Elegant evening glam with a flawless HD finish for stunning reception photos.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Reception%20Look%20%28Rs%2010%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>10,000</span></li>
+            <li><span class="rn">II</span><div><h3>Celebrity Reception</h3><p>Premium celebrity-style makeup with high-end products for a glamorous evening look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Reception%20%28Rs%2012%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>12,000</span></li>
+            <li><span class="rn">III</span><div><h3>Signature Reception Look</h3><p>Rich, glamorous and luxurious makeover for a royal reception appearance.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Signature%20Reception%20Look%20%28Rs%2015%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>15,000</span></li>
           </ul>
         </div>
 
@@ -443,9 +444,9 @@
             <p>Fresh, dewy and natural looks suited to daytime functions.</p>
           </div>
           <ul class="tiers">
-            <li><span class="rn">I</span><div><h3>Haldi Natural Look</h3><p>Fresh, minimal and dewy makeup, perfect for daytime haldi ceremonies.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Haldi%20Natural%20Look%20%28Rs%205%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>5,000</span></li>
-            <li><span class="rn">II</span><div><h3>HD Mehendi Look</h3><p>Clean, bright and vibrant look, ideal for mehendi celebrations.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Mehendi%20Look%20%28Rs%207%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>7,000</span></li>
-            <li><span class="rn">III</span><div><h3>Celebrity Mehendi Look</h3><p>Advanced techniques with premium products for a glamorous, head-turning look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Mehendi%20Look%20%28Rs%208%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>8,000</span></li>
+            <li><span class="rn">I</span><div><h3>Haldi Natural Look</h3><p>Fresh, minimal and dewy makeup, perfect for daytime haldi ceremonies.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Haldi%20Natural%20Look%20%28Rs%205%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>5,000</span></li>
+            <li><span class="rn">II</span><div><h3>HD Mehendi Look</h3><p>Clean, bright and vibrant look, ideal for mehendi celebrations.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Mehendi%20Look%20%28Rs%207%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>7,000</span></li>
+            <li><span class="rn">III</span><div><h3>Celebrity Mehendi Look</h3><p>Advanced techniques with premium products for a glamorous, head-turning look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Mehendi%20Look%20%28Rs%208%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>8,000</span></li>
           </ul>
         </div>
 
@@ -459,9 +460,9 @@
             <p>For functions, family events, club nights and celebrations.</p>
           </div>
           <ul class="tiers">
-            <li><span class="rn">I</span><div><h3>Basic Party Makeup</h3><p>Quick, soft and refreshing glam for simple occasions.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Basic%20Party%20Makeup%20%28Rs%203%2C500%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>3,500</span></li>
-            <li><span class="rn">II</span><div><h3>HD Party Makeup</h3><p>Photo-ready base with defined eyes &mdash; perfect for parties &amp; celebrations.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Party%20Makeup%20%28Rs%204%2C500%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>4,500</span></li>
-            <li><span class="rn">III</span><div><h3>Celebrity Party Makeup</h3><p>Advanced techniques with premium products for a glamorous, head-turning look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Party%20Makeup%20%28Rs%207%2C000%29.%20My%20date%20is%3A%20" target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>7,000</span></li>
+            <li><span class="rn">I</span><div><h3>Basic Party Makeup</h3><p>Quick, soft and refreshing glam for simple occasions.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Basic%20Party%20Makeup%20%28Rs%203%2C500%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>3,500</span></li>
+            <li><span class="rn">II</span><div><h3>HD Party Makeup</h3><p>Photo-ready base with defined eyes &mdash; perfect for parties &amp; celebrations.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20HD%20Party%20Makeup%20%28Rs%204%2C500%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>4,500</span></li>
+            <li><span class="rn">III</span><div><h3>Celebrity Party Makeup</h3><p>Advanced techniques with premium products for a glamorous, head-turning look.</p><a class="tier-book" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%27d%20like%20to%20book%20the%20Celebrity%20Party%20Makeup%20%28Rs%207%2C000%29.%20My%20date%20is%3A%20" data-wa-source target="_blank" rel="noopener">Book this look</a></div><span class="price"><small>&#8377;</small>7,000</span></li>
           </ul>
         </div>
 
@@ -518,11 +519,19 @@
             </select>
           </label>
           <label>Date<input name="date" type="date"></label>
+          <label>Found Neeraj via
+            <select name="source" data-source required>
+              <option value="">Choose one</option>
+              <option>Instagram</option><option>Google search</option><option>Facebook</option><option>WhatsApp</option>
+              <option>Friend or family</option><option>Walked past the salon</option><option>Wedding planner or photographer</option>
+              <option>Portfolio PDF or QR code</option><option>Returning client</option><option>Other</option>
+            </select>
+          </label>
           <button class="btn btn-wa" type="submit">Send</button>
           <p class="date-hint" data-date-hint hidden></p>
         </form>
         <div class="actions">
-          <a class="btn btn-wa" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20check%20a%20date%20for%20makeup." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-wa" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20check%20a%20date%20for%20makeup." data-wa-source target="_blank" rel="noopener">WhatsApp</a>
           <a class="btn btn-solid" href="tel:+919501791259">Call to book</a>
           <a class="btn btn-ghost" href="https://www.instagram.com/makeup_by_neerajsidhu_1/" target="_blank" rel="noopener">Instagram &middot; @makeup_by_neerajsidhu_1</a>
           <a class="btn btn-ghost" href="/neeraj-sidhu/Neeraj_Sidhu_Portfolio_2026.pdf" download>Download PDF</a>
@@ -539,7 +548,7 @@
   </footer>
 
   <nav class="dock" aria-label="Quick actions">
-    <a class="btn btn-wa" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20check%20a%20date%20for%20makeup." target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn btn-wa" href="https://wa.me/919501791259?text=Hi%20Neeraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20check%20a%20date%20for%20makeup." data-wa-source target="_blank" rel="noopener">WhatsApp</a>
     <a class="btn btn-solid" href="tel:+919501791259">Call</a>
     <a class="btn btn-ghost" href="#gallery">Gallery</a>
   </nav>
@@ -622,7 +631,7 @@
       form.date.min = new Date().toISOString().slice(0, 10);
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var lines = ['Hi Neeraj, I saw your portfolio and would like to book makeup.', '', 'Name: ' + form.name.value.trim(), 'Occasion: ' + form.occasion.value];
+        var lines = ['Hi Neeraj, I saw your portfolio and would like to book makeup.', '', 'Name: ' + form.name.value.trim(), 'Occasion: ' + form.occasion.value, 'How I found you: ' + form.source.value];
         if (form.date.value) {
           var d = new Date(form.date.value + 'T00:00:00');
           lines.push('Date: ' + d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' }));
@@ -631,6 +640,7 @@
       });
     })();
   </script>
+  <script src="/assets/booking-source.js" defer></script>
   <script src="/assets/availability.js" defer></script>
 </body>
 </html>
