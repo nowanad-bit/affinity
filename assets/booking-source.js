@@ -59,12 +59,18 @@
     });
   });
 
-  document.querySelectorAll('a[data-wa-source]').forEach(function (a) {
-    try {
-      var url = new URL(a.href);
-      var text = url.searchParams.get('text') || '';
-      url.searchParams.set('text', (text ? text + '\n\n' : '') + 'Found you via: ' + label);
-      a.href = url.toString();
-    } catch (e) { /* leave the link as it is */ }
-  });
+  function tagLinks() {
+    document.querySelectorAll('a[data-wa-source]:not([data-wa-tagged])').forEach(function (a) {
+      try {
+        var url = new URL(a.href);
+        var text = url.searchParams.get('text') || '';
+        url.searchParams.set('text', (text ? text + '\n\n' : '') + 'Found you via: ' + label);
+        a.href = url.toString();
+        a.setAttribute('data-wa-tagged', '');
+      } catch (e) { /* leave the link as it is */ }
+    });
+  }
+  tagLinks();
+  // Links added later (an artist's saved rates from /studio) get tagged too
+  document.addEventListener('artist-profile-ready', tagLinks);
 })();

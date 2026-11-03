@@ -268,7 +268,7 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
-<body>
+<body data-artist-page="neeraj-sidhu" data-phone="919501791259" data-first="Neeraj">
 
   <header class="hero dark">
     <div class="topbar">
@@ -318,7 +318,7 @@
         <div>
           <p class="kicker">01 &mdash; The Artist</p>
           <h2>Artistry that lets your beauty <em>lead</em></h2>
-          <p class="lead">I am Neeraj Sidhu, a professional makeup artist based in Chandigarh with nine years of experience in the beauty industry. I specialise in flawless, elegant and long-lasting looks that enhance your natural beauty &mdash; from traditional bridal makeup to modern, camera-ready glam. Every look is personal, created so you feel confident, beautiful and truly special on your big day.</p>
+          <div data-p="bio"><p class="lead">I am Neeraj Sidhu, a professional makeup artist based in Chandigarh with nine years of experience in the beauty industry. I specialise in flawless, elegant and long-lasting looks that enhance your natural beauty &mdash; from traditional bridal makeup to modern, camera-ready glam. Every look is personal, created so you feel confident, beautiful and truly special on your big day.</p></div>
           <blockquote>&ldquo;Where every bride shines like royalty.&rdquo;</blockquote>
           <p class="kicker" style="margin-top: 40px">Why choose us</p>
           <ul class="why">
@@ -346,7 +346,7 @@
             <img src="/neeraj-sidhu/img/services.jpg" alt="Bride in a red dupatta with a kundan necklace and maang tikka" width="518" height="731" loading="lazy">
           </div>
         </div>
-        <div class="svc-grid">
+        <div class="svc-grid" data-p="services">
           <div class="svc"><span class="n">01</span><h3>Bridal Makeup</h3><ul><li>HD Bridal Makeup</li><li>Airbrush Bridal</li><li>Signature Bridal Look</li><li>Complete Bridal Package</li><li>Bridal Hairstyling &amp; Draping</li></ul></div>
           <div class="svc"><span class="n">02</span><h3>Engagement / Roka</h3><ul><li>Soft Glam Look</li><li>HD Engagement Makeup</li><li>Custom Theme-Based Makeup</li></ul></div>
           <div class="svc"><span class="n">03</span><h3>Reception Makeup</h3><ul><li>HD Reception Makeup</li><li>Elegant Glam Look</li><li>Long-Lasting Finish</li></ul></div>
@@ -363,7 +363,7 @@
           <div><p class="kicker">Gallery</p><h2>Recent <em>looks</em></h2></div>
           <p>Tap any photo to see it full screen. More of Neeraj&rsquo;s latest work is on Instagram.</p>
         </div>
-        <div class="gallery">
+        <div class="gallery" data-p="gallery">
           <a href="/neeraj-sidhu/img/bridal-1.jpg" data-lb><img src="/neeraj-sidhu/img/bridal-1.jpg" alt="Bride in a red sari with an emerald and kundan necklace" width="522" height="719" loading="lazy"><span>Bridal</span></a>
           <a href="/neeraj-sidhu/img/bridal-2.jpg" data-lb><img src="/neeraj-sidhu/img/bridal-2.jpg" alt="Bride in an orange outfit with a gold dupatta and passa" width="520" height="719" loading="lazy"><span>Bridal</span></a>
           <a href="/neeraj-sidhu/img/services.jpg" data-lb><img src="/neeraj-sidhu/img/services.jpg" alt="Bride in a red dupatta with a kundan necklace and maang tikka" width="518" height="731" loading="lazy"><span>Bridal</span></a>
@@ -384,7 +384,7 @@
     </section>
 
     <section class="light" id="pricing">
-      <div class="wrap">
+      <div class="wrap" data-p="rates">
 
         <div class="price-block">
           <div class="price-photos">
@@ -495,7 +495,7 @@
         <div class="contact-grid">
           <div>
             <p class="kicker" style="margin: 0">Bookings</p>
-            <a class="big" href="tel:+919501791259">+91 95017 91259</a>
+            <a class="big" data-p="phone-text" href="tel:+919501791259">+91 95017 91259</a>
             <small>Call to check dates &amp; reserve your look</small>
           </div>
           <div>
@@ -636,11 +636,12 @@
           var d = new Date(form.date.value + 'T00:00:00');
           lines.push('Date: ' + d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' }));
         }
-        window.open('https://wa.me/919501791259?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+        window.open('https://wa.me/' + document.body.getAttribute('data-phone') + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
       });
     })();
   </script>
   <script src="/assets/booking-source.js" defer></script>
   <script src="/assets/availability.js" defer></script>
+  <script src="/assets/artist-profile.js" defer></script>
 </body>
 </html>

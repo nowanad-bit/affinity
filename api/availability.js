@@ -3,6 +3,8 @@
 //
 // GET  /api/availability  -> public JSON the site uses to show waits and limit the booking date
 // POST /api/availability  -> admin save; needs the X-Admin-Password header to match ADMIN_PASSWORD
+//                            artist save from /studio: X-Artist + X-Artist-Pin, body { settings }
+//                            changes only that artist's entry
 //
 // Stored as one private JSON file in Vercel Blob (BLOB_READ_WRITE_TOKEN is added by Vercel
 // when the Blob store is connected to the project). For local testing without Blob, set
@@ -11,6 +13,7 @@
 import { get, put } from '@vercel/blob';
 import { createHash, timingSafeEqual } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
+import { whoIs } from './_store.js';
 
 const KEY = 'availability.json';
 
@@ -121,6 +124,28 @@ export async function GET() {
 }
 
 export async function POST(request) {
+  // An artist editing only their own dates from /studio
+  if (request.headers.get('x-artist')) {
+    const who = await whoIs(request);
+    if (who.error) return json({ error: who.error }, who.status);
+    if (!who.artist) return json({ error: 'Choose an artist.' }, 400);
+    let body;
+    try { body = await request.json(); } catch { return json({ error: 'Invalid request.' }, 400); }
+    try {
+      const current = (await load()) || {};
+      if (body && body.verify) return json(shape(current));
+      const stored = {
+        updatedAt: new Date().toISOString(),
+        artists: { ...(current.artists || {}), [who.artist]: cleanArtist(body && body.settings, todayIST()) },
+      };
+      await save(stored);
+      return json(shape(stored));
+    } catch (err) {
+      console.error('availability artist POST failed', err);
+      return json({ error: 'Could not save. Please try again.' }, 500);
+    }
+  }
+
   if (!process.env.ADMIN_PASSWORD) {
     return json({ error: 'Admin password is not set up on the server yet.' }, 503);
   }
@@ -139,8 +164,10 @@ export async function POST(request) {
 
     const today = todayIST();
     const incoming = (body && body.artists) || {};
+    // Artists not sent keep what is stored (they may have changed it themselves in /studio)
+    const current = ((await load()) || {}).artists || {};
     const artists = {};
-    for (const a of ARTISTS) artists[a.id] = cleanArtist(incoming[a.id], today);
+    for (const a of ARTISTS) artists[a.id] = cleanArtist(a.id in incoming ? incoming[a.id] : current[a.id], today);
     const stored = { updatedAt: new Date().toISOString(), artists };
     await save(stored);
     return json(shape(stored));

@@ -139,6 +139,11 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
       <p>Set when each artist can take new bookings. Clients see this on the website, and the booking form only allows open days.</p>
     </div>
     <div class="list" id="list"></div>
+    <div class="intro" id="pinsIntro">
+      <h1>Artist Studio PINs</h1>
+      <p>Each artist signs in to <a href="/studio" style="color:var(--gold)">affinitychandigarh.com/studio</a> with their own 6-digit PIN to edit their rates, dates, photos, videos, bio and phone number. Changes go live instantly. You can also sign in to /studio as any artist using the admin password, to help them or undo a change.</p>
+    </div>
+    <div class="list" id="pins" style="padding-bottom:140px"></div>
   </section>
 </main>
 
@@ -427,7 +432,9 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
     var btn = $('save');
     btn.disabled = true;
     setStatus('Saving…');
-    call(payload()).then(function (data) {
+    var all = payload().artists, before = JSON.parse(saved).artists, changedOnly = {};
+    Object.keys(all).forEach(function (id) { if (JSON.stringify(all[id]) !== JSON.stringify(before[id])) changedOnly[id] = all[id]; });
+    call({ artists: changedOnly }).then(function (data) {
       load(data);
       setStatus('Saved. The website shows it within 10 seconds.', 'ok');
     }).catch(function (err) {
@@ -440,6 +447,53 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
   window.addEventListener('beforeunload', function (e) {
     if (saved && JSON.stringify(payload()) !== saved) { e.preventDefault(); e.returnValue = ''; }
   });
+
+  // ---- Artist Studio PINs ----
+  function pinCall(body) {
+    return fetch('/api/profile', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Admin-Password': pw }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { if (!r.ok) throw new Error(d.error || 'Could not update PINs.'); return d; }); });
+  }
+  function renderPins(data) {
+    var box = $('pins'); box.textContent = '';
+    data.artists.forEach(function (a) {
+      var card = document.createElement('article'); card.className = 'card';
+      var head = document.createElement('div'); head.className = 'card-head';
+      var t = document.createElement('div');
+      var role = document.createElement('p'); role.className = 'role';
+      role.textContent = a.locked ? 'Locked after wrong tries — set a new PIN to unlock' : a.hasPin ? 'PIN set ' + new Date(a.setAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'No PIN yet';
+      var h2 = document.createElement('h2'); h2.textContent = a.name;
+      t.appendChild(role); t.appendChild(h2); head.appendChild(t);
+      var link = document.createElement('a'); link.className = 'link'; link.href = '/studio?artist=' + a.id; link.target = '_blank'; link.textContent = 'Studio link';
+      head.appendChild(link);
+      var row = document.createElement('div'); row.className = 'blocked-add';
+      var wrap = document.createElement('div');
+      var lbl = document.createElement('label'); lbl.className = 'lbl'; lbl.textContent = a.hasPin ? 'New PIN' : 'Set a PIN';
+      var input = document.createElement('input'); input.type = 'text'; input.inputMode = 'numeric'; input.maxLength = 6; input.placeholder = '6 digits'; input.autocomplete = 'off';
+      wrap.appendChild(lbl); wrap.appendChild(input);
+      var gen = document.createElement('button'); gen.type = 'button'; gen.className = 'btn btn-line'; gen.textContent = 'Random';
+      gen.addEventListener('click', function () { var n = new Uint32Array(1); crypto.getRandomValues(n); input.value = String(n[0] % 1000000).padStart(6, '0'); });
+      var set = document.createElement('button'); set.type = 'button'; set.className = 'btn'; set.textContent = 'Save PIN';
+      var msg = document.createElement('p'); msg.className = 'muted';
+      set.addEventListener('click', function () {
+        if (!/^\d{6}$/.test(input.value)) { msg.className = 'error'; msg.textContent = 'The PIN must be exactly 6 digits.'; return; }
+        set.disabled = true;
+        var chosen = input.value;
+        pinCall({ setPin: { artist: a.id, pin: chosen } }).then(function (d) {
+          renderPins(d);
+          var m = $('pins').querySelector('[data-msg="' + a.id + '"]');
+          if (m) { m.className = 'status ok'; m.textContent = 'Saved. Give ' + a.name + ' this PIN: ' + chosen + ' (it won’t be shown again).'; }
+        }).catch(function (e) { msg.className = 'error'; msg.textContent = e.message; set.disabled = false; });
+      });
+      row.appendChild(wrap); row.appendChild(gen); row.appendChild(set);
+      msg.setAttribute('data-msg', a.id);
+      card.appendChild(head); card.appendChild(row); card.appendChild(msg);
+      box.appendChild(card);
+    });
+  }
+  function loadPins() {
+    pinCall({ pins: 'list' }).then(renderPins).catch(function (e) { $('pins').textContent = e.message; });
+  }
+  new MutationObserver(function () { if (!$('app').hidden && pw && !$('pins').childElementCount) loadPins(); }).observe($('app'), { attributes: true, attributeFilter: ['hidden'] });
 
   var remembered = stored();
   if (remembered) signIn(remembered, true);

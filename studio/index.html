@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Artist Studio | Affinity Luxury Salon</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="/assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Artist tool: each artist edits their own portfolio page from their phone */
+:root {
+  --bg: #0b0b0b; --surface: #131211; --surface-2: #1a1917;
+  --ink: #f2eee6; --ink-soft: #a7a097;
+  --line: rgba(201, 164, 92, 0.18); --line-strong: rgba(201, 164, 92, 0.42);
+  --gold: #c9a45c; --gold-bright: #e3c47f; --ok: #6fbf73; --bad: #f0a090;
+  --f-display: "Cormorant Garamond", Georgia, serif;
+  --f-body: "Jost", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.5 var(--f-body); -webkit-font-smoothing: antialiased; }
+[hidden] { display: none !important; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 500; line-height: 1.1; }
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+header { border-bottom: 1px solid var(--line); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; }
+.brand { font: 500 0.78rem var(--f-body); letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+.link { background: none; border: 0; padding: 8px 0; color: var(--ink-soft); font-size: 0.85rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 1px solid var(--gold); border-radius: 2px; background: var(--gold); color: #0b0b0b; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; text-decoration: none; }
+.btn:hover { background: var(--gold-bright); }
+.btn:disabled { opacity: 0.55; cursor: progress; }
+.btn-line { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-line:hover { background: transparent; border-color: var(--gold); color: var(--gold-bright); }
+.btn-sm { min-height: 40px; padding: 0 14px; font-size: 0.74rem; }
+.chip-btn { min-height: 38px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; font-size: 0.82rem; cursor: pointer; }
+.chip-btn:hover { border-color: var(--gold); color: var(--gold-bright); }
+.icon-btn { width: 40px; height: 40px; flex: none; border: 1px solid var(--line-strong); border-radius: 2px; background: transparent; cursor: pointer; font-size: 1rem; line-height: 1; }
+.icon-btn:hover { border-color: var(--gold); color: var(--gold-bright); }
+.icon-btn.danger:hover { border-color: var(--bad); color: var(--bad); }
+
+input[type="date"], input[type="text"], input[type="tel"], input[type="password"], input[type="url"], select, textarea {
+  width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid rgba(242,238,230,.18); border-radius: 2px; background: var(--bg); font-size: 16px;
+}
+textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+.lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+.muted { color: var(--ink-soft); font-size: 0.85rem; }
+.error { color: var(--bad); font-size: 0.92rem; }
+
+/* Login */
+.login { max-width: 400px; margin: 10vh auto 0; padding: 28px; background: var(--surface); border: 1px solid var(--line-strong); display: grid; gap: 16px; }
+.login h1 { font-size: 2.2rem; }
+.login p { color: var(--ink-soft); font-size: 0.92rem; }
+.pin { letter-spacing: 0.5em; font-size: 1.3rem !important; text-align: center; }
+
+/* Dashboard */
+.intro { padding: 28px 0 8px; display: grid; gap: 8px; }
+.intro .role { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.intro h1 { font-size: clamp(2.2rem, 7vw, 2.8rem); }
+.intro .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.tabs { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; overflow-x: auto; padding: 12px 0; background: var(--bg); border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a { flex: none; padding: 9px 14px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 0.82rem; text-decoration: none; color: var(--ink-soft); white-space: nowrap; }
+.tabs a:hover { color: var(--gold-bright); border-color: var(--gold); }
+.list { display: grid; gap: 18px; padding: 18px 0 130px; }
+.card { background: var(--surface); border: 1px solid var(--line); padding: 20px 18px; display: grid; gap: 16px; scroll-margin-top: 70px; }
+.card > h2 { font-size: 1.7rem; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.card > h2 small { font: 400 0.8rem var(--f-body); color: var(--ink-soft); }
+.card > p.muted { margin-top: -8px; }
+.sub { border: 1px solid var(--line); background: var(--surface-2); padding: 14px; display: grid; gap: 12px; }
+.sub-head { display: flex; gap: 8px; align-items: flex-end; }
+.sub-head > div { flex: 1; }
+.rate-row { display: grid; grid-template-columns: minmax(0, 1fr) 140px auto; gap: 8px; align-items: start; padding-top: 12px; border-top: 1px dashed var(--line); }
+.rate-row textarea { grid-column: 1 / -1; min-height: 64px; }
+.price-wrap { position: relative; }
+.price-wrap span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gold); pointer-events: none; }
+.price-wrap input { padding-left: 28px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.add-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Availability (same controls as /admin) */
+.preview { padding: 10px 12px; border-left: 2px solid var(--gold); background: rgba(201,164,92,.07); font-size: 0.9rem; }
+.preview.is-open { border-left-color: var(--ok); }
+.preview.is-closed { border-left-color: var(--bad); }
+.preview small { display: block; color: var(--ink-soft); font-size: 0.82rem; }
+.switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem; user-select: none; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch .track { position: relative; width: 46px; height: 26px; border-radius: 999px; background: #3a3632; transition: background .2s; flex: none; }
+.switch .track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); transition: transform .2s; }
+.switch input:checked + .track { background: var(--ok); }
+.switch input:checked + .track::after { transform: translateX(20px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.weekdays { display: flex; flex-wrap: wrap; gap: 8px; }
+.day-btn { min-width: 52px; min-height: 42px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 2px; background: transparent; font-size: 0.85rem; cursor: pointer; }
+.day-btn[aria-pressed="true"] { background: rgba(240,160,144,.14); border-color: var(--bad); color: var(--bad); text-decoration: line-through; }
+.blocked-add { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 8px; align-items: end; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 10px 0 0; }
+.chips li { display: inline-flex; align-items: center; gap: 4px; padding: 4px 4px 4px 12px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 0.85rem; }
+.chips button { width: 30px; height: 30px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 1.1rem; line-height: 1; }
+.chips button:hover { color: var(--bad); }
+
+/* Photos */
+.photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.photo { display: grid; gap: 6px; }
+.photo figure { position: relative; margin: 0; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 2px; background: var(--surface-2); }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.photo .n { position: absolute; left: 6px; top: 6px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px; background: rgba(11,11,11,.75); font-size: 0.75rem; display: grid; place-items: center; }
+.photo .tools { display: flex; gap: 4px; }
+.photo .tools .icon-btn { width: auto; flex: 1; height: 36px; font-size: 0.85rem; }
+.photo input { min-height: 40px; font-size: 14px; padding: 6px 10px; }
+.drop { display: grid; place-items: center; gap: 6px; min-height: 120px; padding: 18px; border: 1px dashed var(--line-strong); border-radius: 2px; text-align: center; cursor: pointer; }
+.drop:hover { border-color: var(--gold); }
+.drop b { font-weight: 500; color: var(--gold-bright); }
+.progress { font-size: 0.88rem; color: var(--gold-bright); }
+
+/* Reels */
+.reels { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.reels li { display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 12px; border: 1px solid var(--line); background: var(--surface-2); }
+.reels li a { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); font-size: 0.9rem; }
+.reel-add { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+
+/* Save bar */
+.savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: rgba(11,11,11,.96); border-top: 1px solid var(--line-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.savebar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+.status { font-size: 0.88rem; color: var(--ink-soft); }
+.status.ok { color: var(--ok); }
+.status.bad { color: var(--bad); }
+.status.dirty { color: var(--gold-bright); }
+
+@media (max-width: 560px) {
+  .row { grid-template-columns: 1fr; }
+  .blocked-add { grid-template-columns: 1fr 1fr; }
+  .blocked-add .btn { grid-column: 1 / -1; }
+  .photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rate-row { grid-template-columns: minmax(0, 1fr) 110px auto; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">Affinity · Artist Studio</a>
+    <button class="link" id="logout" type="button" hidden>Sign out</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <form class="login" id="login">
+    <h1>Artist Studio</h1>
+    <p>Edit your own portfolio page: your dates, rates, photos, videos and details. Changes go live on the website as soon as you save.</p>
+    <div>
+      <label class="lbl" for="who">Your name</label>
+      <select id="who" required>
+        <option value="">Choose your name</option>
+        <option value="neeraj-sidhu">Neeraj Sidhu</option>
+        <option value="sunny-ali">Sunny Ali</option>
+        <option value="saleem-salmani">Saleem Salmani</option>
+        <option value="imran-ahmad">Imran Ahmad</option>
+        <option value="azeem-alvi">Azeem Alvi</option>
+        <option value="naushad">Naushad</option>
+        <option value="nisha-sharma">Nisha Sharma</option>
+      </select>
+    </div>
+    <div>
+      <label class="lbl" for="pin">6-digit PIN</label>
+      <input id="pin" class="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="64" required>
+      <p class="muted" style="margin-top:6px">Don&rsquo;t have a PIN? Ask the salon reception to set one for you.</p>
+    </div>
+    <p class="error" id="loginError" role="alert" hidden></p>
+    <button class="btn" type="submit" id="loginBtn">Sign in</button>
+  </form>
+
+  <section id="app" hidden>
+    <div class="intro">
+      <p class="role">Your portfolio</p>
+      <h1 id="artistName"></h1>
+      <p class="muted" id="lastSaved"></p>
+      <div class="actions">
+        <a class="btn btn-line btn-sm" id="viewPage" target="_blank" rel="noopener">View my page</a>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#s-dates">Dates</a><a href="#s-rates">Rates</a><a href="#s-photos">Photos</a><a href="#s-videos">Videos</a><a href="#s-about">About &amp; services</a><a href="#s-contact">Phone</a>
+    </nav>
+    <div class="list">
+
+      <article class="card" id="s-dates">
+        <h2>Dates <small>When you can take bookings</small></h2>
+        <label class="switch"><input type="checkbox" id="accepting"><span class="track"></span><span>Taking new bookings</span></label>
+        <p class="preview" id="datePreview"></p>
+        <div class="row" id="openFields">
+          <div>
+            <label class="lbl" for="nextAvailable">Next available date</label>
+            <input type="date" id="nextAvailable">
+            <div class="quick">
+              <button class="chip-btn" type="button" data-days="0">From today</button>
+              <button class="chip-btn" type="button" data-days="7">+1 week</button>
+              <button class="chip-btn" type="button" data-days="14">+2 weeks</button>
+              <button class="chip-btn" type="button" data-days="30">+1 month</button>
+            </div>
+          </div>
+          <div>
+            <label class="lbl" for="note">Note for clients (optional)</label>
+            <input type="text" id="note" maxlength="120" placeholder="e.g. Weekends book up fast">
+          </div>
+        </div>
+        <div>
+          <span class="lbl">Weekly day off (tap to turn on or off)</span>
+          <div class="weekdays" id="weekdays" role="group"></div>
+        </div>
+        <div>
+          <span class="lbl">Other days off (holidays, leave)</span>
+          <div class="blocked-add">
+            <div><label class="lbl" for="blockFrom">From</label><input type="date" id="blockFrom"></div>
+            <div><label class="lbl" for="blockTo">To (optional)</label><input type="date" id="blockTo"></div>
+            <button class="btn btn-line" type="button" id="blockAdd">Block</button>
+          </div>
+          <ul class="chips" id="blockedChips"></ul>
+          <p class="muted" id="noBlocked">No days blocked.</p>
+        </div>
+      </article>
+
+      <article class="card" id="s-rates">
+        <h2>Rates <small>Shown as price cards on your page</small></h2>
+        <p class="muted">Group your services (for example &ldquo;Hair Colour&rdquo; or &ldquo;Bridal Makeup&rdquo;). Price can be a number or text like &ldquo;From 3,000&rdquo;. Leave rates empty to show &ldquo;Get a quote&rdquo; instead.</p>
+        <div id="rates" style="display:grid;gap:12px"></div>
+        <div class="add-row"><button class="btn btn-line btn-sm" type="button" id="addGroup">+ Add a rate group</button></div>
+      </article>
+
+      <article class="card" id="s-photos">
+        <h2>Photos <small id="photoCount"></small></h2>
+        <p class="muted">Your best work first. Photos are resized automatically and go live right after uploading. Up to 24.</p>
+        <label class="drop" id="drop">
+          <input type="file" id="photoInput" accept="image/*" multiple hidden>
+          <b>+ Add photos</b>
+          <span class="muted">From your phone gallery or camera</span>
+        </label>
+        <p class="progress" id="uploadProgress" role="status" aria-live="polite" hidden></p>
+        <div class="photos" id="photos"></div>
+      </article>
+
+      <article class="card" id="s-videos">
+        <h2>Videos <small>Instagram reels &amp; posts</small></h2>
+        <p class="muted">On Instagram, open your reel, tap <b>Share</b> then <b>Copy link</b>, and paste it here. Up to 12. They show after your photos.</p>
+        <div class="reel-add">
+          <input type="url" id="reelInput" placeholder="https://www.instagram.com/reel/…" inputmode="url">
+          <button class="btn btn-line" type="button" id="reelAdd">Add</button>
+        </div>
+        <p class="error" id="reelError" hidden></p>
+        <ul class="reels" id="reels"></ul>
+      </article>
+
+      <article class="card" id="s-about">
+        <h2>About &amp; services</h2>
+        <div>
+          <label class="lbl" for="tagline">One-line intro (under your name)</label>
+          <input type="text" id="tagline" maxlength="220">
+        </div>
+        <div>
+          <label class="lbl" for="bio">About you</label>
+          <textarea id="bio" rows="7" placeholder="Leave an empty line between paragraphs"></textarea>
+          <p class="muted" style="margin-top:6px">Leave an empty line between paragraphs (up to 4).</p>
+        </div>
+        <div>
+          <span class="lbl">Services (up to 6 groups)</span>
+          <div id="services" style="display:grid;gap:12px"></div>
+          <div class="add-row" style="margin-top:12px"><button class="btn btn-line btn-sm" type="button" id="addService">+ Add a service group</button></div>
+        </div>
+      </article>
+
+      <article class="card" id="s-contact">
+        <h2>Phone <small>Calls and WhatsApp bookings</small></h2>
+        <div>
+          <label class="lbl" for="phone">Mobile number (with WhatsApp)</label>
+          <input type="tel" id="phone" inputmode="tel" autocomplete="tel" placeholder="98765 43210">
+          <p class="muted" style="margin-top:6px">All the WhatsApp and Call buttons on your page, and your card on the homepage, use this number.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</main>
+
+<div class="savebar" id="savebar" hidden>
+  <div class="wrap">
+    <span class="status" id="status" role="status" aria-live="polite">All changes saved</span>
+    <button class="btn" id="save" type="button" disabled>Save changes</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var NAMES = { 'neeraj-sidhu': 'Neeraj Sidhu', 'sunny-ali': 'Sunny Ali', 'saleem-salmani': 'Saleem Salmani', 'imran-ahmad': 'Imran Ahmad', 'azeem-alvi': 'Azeem Alvi', 'naushad': 'Naushad', 'nisha-sharma': 'Nisha Sharma' };
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var LIMITS = { photos: 24, reels: 12, groups: 8, items: 8, services: 6 };
+  var $ = function (id) { return document.getElementById(id); };
+
+  var artist = '', pin = '', profile = null, dates = null;
+  var dirtyProfile = false, dirtyDates = false, busy = false;
+
+  // ---- small helpers ----
+  function h(tag, attrs, kids) {
+    var el = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === 'text') el.textContent = attrs[k];
+      else if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), attrs[k]);
+      else if (attrs[k] !== false && attrs[k] != null) el.setAttribute(k, attrs[k] === true ? '' : attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c) el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return el;
+  }
+  function session(k, v) { try { if (v === undefined) return sessionStorage.getItem(k) || ''; v ? sessionStorage.setItem(k, v) : sessionStorage.removeItem(k); } catch (e) { return ''; } }
+  function local(k, v) { try { if (v === undefined) return localStorage.getItem(k) || ''; localStorage.setItem(k, v); } catch (e) { return ''; } }
+  function iso(d) { var m = d.getMonth() + 1, day = d.getDate(); return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day; }
+  function addDays(s, n) { var d = new Date(s + 'T00:00:00'); d.setDate(d.getDate() + n); return iso(d); }
+  function nice(s) { return new Date(s + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }); }
+  var today = iso(new Date());
+
+  function api(url, method, body, extraHeaders) {
+    var headers = Object.assign({ 'X-Artist': artist, 'X-Artist-Pin': pin }, extraHeaders || {});
+    if (body && !(body instanceof Blob)) headers['Content-Type'] = 'application/json';
+    return fetch(url, { method: method, headers: headers, body: body instanceof Blob ? body : body ? JSON.stringify(body) : undefined })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (data) {
+          if (!r.ok) { var e = new Error(data.error || 'Something went wrong. Please try again.'); e.status = r.status; throw e; }
+          return data;
+        });
+      });
+  }
+
+  function setStatus(text, kind) { var s = $('status'); s.textContent = text; s.className = 'status' + (kind ? ' ' + kind : ''); }
+  function markDirty(which) {
+    if (which === 'dates') dirtyDates = true; else dirtyProfile = true;
+    $('save').disabled = false;
+    setStatus('Unsaved changes', 'dirty');
+  }
+  window.addEventListener('beforeunload', function (e) { if (dirtyDates || dirtyProfile) { e.preventDefault(); e.returnValue = ''; } });
+
+  // ================= Dates =================
+  function isOff(d) { return dates.blocked.indexOf(d) !== -1 || dates.weeklyOff.indexOf(new Date(d + 'T00:00:00').getDay()) !== -1; }
+  function firstOpen() {
+    var d = dates.nextAvailable && dates.nextAvailable > today ? dates.nextAvailable : today;
+    for (var i = 0; i < 400 && isOff(d); i++) d = addDays(d, 1);
+    return d;
+  }
+  function renderDates() {
+    $('accepting').checked = dates.accepting;
+    $('openFields').hidden = !dates.accepting;
+    $('nextAvailable').value = dates.nextAvailable || '';
+    $('note').value = dates.note || '';
+    var open = firstOpen();
+    var p = $('datePreview');
+    p.className = 'preview ' + (!dates.accepting ? 'is-closed' : open > today ? 'is-wait' : 'is-open');
+    p.textContent = '';
+    p.appendChild(h('b', { text: 'Clients see: ' + (!dates.accepting ? 'Not taking new bookings right now' : open > today ? 'Next available: ' + nice(open) : 'Available from today') }));
+    var offs = dates.weeklyOff.map(function (n) { return DAYS[n]; });
+    if (dates.accepting && offs.length) p.appendChild(h('small', { text: 'Off every ' + offs.join(', ') }));
+    if (dates.note) p.appendChild(h('small', { text: dates.note }));
+    var wd = $('weekdays'); wd.textContent = '';
+    [1, 2, 3, 4, 5, 6, 0].forEach(function (n) {
+      var on = dates.weeklyOff.indexOf(n) !== -1;
+      wd.appendChild(h('button', { type: 'button', class: 'day-btn', 'aria-pressed': on ? 'true' : 'false', text: SHORT[n], onclick: function () {
+        if (!on && dates.weeklyOff.length >= 6) return;
+        dates.weeklyOff = on ? dates.weeklyOff.filter(function (v) { return v !== n; }) : dates.weeklyOff.concat(n).sort();
+        markDirty('dates'); renderDates();
+      } }));
+    });
+    var chips = $('blockedChips'); chips.textContent = '';
+    dates.blocked.forEach(function (d) {
+      chips.appendChild(h('li', {}, [nice(d), h('button', { type: 'button', 'aria-label': 'Unblock ' + nice(d), text: '×', onclick: function () {
+        dates.blocked = dates.blocked.filter(function (v) { return v !== d; }); markDirty('dates'); renderDates();
+      } })]));
+    });
+    $('noBlocked').hidden = dates.blocked.length > 0;
+  }
+  function bindDates() {
+    ['nextAvailable', 'blockFrom', 'blockTo'].forEach(function (id) { $(id).min = today; });
+    $('accepting').addEventListener('change', function (e) { dates.accepting = e.target.checked; markDirty('dates'); renderDates(); });
+    $('nextAvailable').addEventListener('change', function (e) { dates.nextAvailable = e.target.value > today ? e.target.value : ''; markDirty('dates'); renderDates(); });
+    $('note').addEventListener('input', function (e) { dates.note = e.target.value; markDirty('dates'); renderDates(); });
+    document.querySelectorAll('[data-days]').forEach(function (b) {
+      b.addEventListener('click', function () { var n = +b.getAttribute('data-days'); dates.nextAvailable = n ? addDays(today, n) : ''; markDirty('dates'); renderDates(); });
+    });
+    $('blockAdd').addEventListener('click', function () {
+      var from = $('blockFrom').value, to = $('blockTo').value || from;
+      if (!from || from < today) return;
+      if (to < from) { var t = to; to = from; from = t; }
+      var set = {}; dates.blocked.forEach(function (d) { set[d] = true; });
+      for (var d = from, i = 0; d <= to && i < 120; d = addDays(d, 1), i++) set[d] = true;
+      dates.blocked = Object.keys(set).sort().slice(0, 200);
+      $('blockFrom').value = ''; $('blockTo').value = '';
+      markDirty('dates'); renderDates();
+    });
+  }
+
+  // ================= Rates =================
+  function field(label, value, onInput, opts) {
+    opts = opts || {};
+    var input = h(opts.area ? 'textarea' : 'input', { type: opts.area ? null : 'text', maxlength: opts.max || 60, placeholder: opts.ph || '', 'aria-label': label, rows: opts.area ? 2 : null });
+    input.value = value || '';
+    input.addEventListener('input', function () { onInput(input.value); markDirty(); });
+    return input;
+  }
+  function renderRates() {
+    var box = $('rates'); box.textContent = '';
+    profile.rates.forEach(function (g, gi) {
+      var items = h('div', { style: 'display:grid;gap:0' });
+      g.items.forEach(function (it, ii) {
+        var price = h('div', { class: 'price-wrap' }, [h('span', { text: '₹' }), field('Price', it.price, function (v) { it.price = v; }, { max: 24, ph: '5,000' })]);
+        items.appendChild(h('div', { class: 'rate-row' }, [
+          field('Service name', it.name, function (v) { it.name = v; }, { ph: 'Service name' }),
+          price,
+          h('button', { type: 'button', class: 'icon-btn danger', 'aria-label': 'Remove ' + (it.name || 'this rate'), text: '×', onclick: function () { g.items.splice(ii, 1); markDirty(); renderRates(); } }),
+          field('Description', it.desc, function (v) { it.desc = v; }, { area: true, max: 220, ph: 'Short description (optional)' })
+        ]));
+      });
+      box.appendChild(h('div', { class: 'sub' }, [
+        h('div', { class: 'sub-head' }, [
+          h('div', {}, [h('label', { class: 'lbl', text: 'Group name' }), field('Group name', g.title, function (v) { g.title = v; }, { max: 50, ph: 'e.g. Hair Colour' })]),
+          h('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Move group up', text: '↑', disabled: gi === 0, onclick: function () { move(profile.rates, gi, -1); renderRates(); } }),
+          h('button', { type: 'button', class: 'icon-btn danger', 'aria-label': 'Remove group', text: '×', onclick: function () { if (confirmRemove(g.title || 'this group')) { profile.rates.splice(gi, 1); markDirty(); renderRates(); } } })
+        ]),
+        field('Group note', g.note, function (v) { g.note = v; }, { max: 160, ph: 'Short note under the heading (optional)' }),
+        items,
+        g.items.length < LIMITS.items ? h('div', { class: 'add-row' }, [h('button', { type: 'button', class: 'chip-btn', text: '+ Add a rate', onclick: function () { g.items.push({ name: '', price: '', desc: '' }); markDirty(); renderRates(); } })]) : null
+      ]));
+    });
+    $('addGroup').hidden = profile.rates.length >= LIMITS.groups;
+  }
+  function move(arr, i, d) { var j = i + d; if (j < 0 || j >= arr.length) return; var t = arr[i]; arr[i] = arr[j]; arr[j] = t; markDirty(); }
+  // Inline confirmation instead of a browser dialog: first tap arms, second tap removes
+  var armed = null;
+  function confirmRemove(name) {
+    if (armed === name) { armed = null; return true; }
+    armed = name; setStatus('Tap × again to remove ' + name, 'dirty');
+    setTimeout(function () { if (armed === name) armed = null; }, 4000);
+    return false;
+  }
+
+  // ================= Photos =================
+  function renderPhotos() {
+    var box = $('photos'); box.textContent = '';
+    profile.photos.forEach(function (ph, i) {
+      var cap = h('input', { type: 'text', maxlength: 60, placeholder: 'Caption (e.g. Bridal)', 'aria-label': 'Caption for photo ' + (i + 1) });
+      cap.value = ph.caption || '';
+      cap.addEventListener('input', function () { ph.caption = cap.value; markDirty(); });
+      box.appendChild(h('div', { class: 'photo' }, [
+        h('figure', {}, [h('img', { src: ph.src, alt: ph.caption || 'Photo ' + (i + 1), loading: 'lazy' }), h('span', { class: 'n', text: String(i + 1) })]),
+        cap,
+        h('div', { class: 'tools' }, [
+          h('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Move earlier', text: '←', disabled: i === 0, onclick: function () { move(profile.photos, i, -1); renderPhotos(); } }),
+          h('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Move later', text: '→', disabled: i === profile.photos.length - 1, onclick: function () { move(profile.photos, i, 1); renderPhotos(); } }),
+          h('button', { type: 'button', class: 'icon-btn danger', 'aria-label': 'Delete photo ' + (i + 1), text: 'Delete', onclick: function () { if (confirmRemove('photo ' + (i + 1))) { profile.photos.splice(i, 1); markDirty(); renderPhotos(); } } })
+        ])
+      ]));
+    });
+    $('photoCount').textContent = profile.photos.length + ' / ' + LIMITS.photos;
+    $('drop').hidden = profile.photos.length >= LIMITS.photos;
+  }
+
+  // Shrink to at most 1600px on the long side, as JPEG, before uploading
+  function shrink(file) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var max = 1600, w = img.naturalWidth, hgt = img.naturalHeight, s = Math.min(1, max / Math.max(w, hgt));
+        var c = document.createElement('canvas'); c.width = Math.round(w * s); c.height = Math.round(hgt * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        c.toBlob(function (b) { b ? resolve(b) : reject(new Error('Could not read that photo.')); }, 'image/jpeg', 0.84);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('Could not read that photo. Try a JPEG or PNG.')); };
+      img.src = url;
+    });
+  }
+  function uploadFiles(files) {
+    files = Array.prototype.slice.call(files, 0, LIMITS.photos - profile.photos.length);
+    if (!files.length) return;
+    var prog = $('uploadProgress'); prog.hidden = false;
+    var done = 0, failed = 0;
+    var chain = Promise.resolve();
+    files.forEach(function (f) {
+      chain = chain.then(function () {
+        prog.textContent = 'Uploading ' + (done + failed + 1) + ' of ' + files.length + '…';
+        return shrink(f).then(function (blob) {
+          return api('/api/profile?artist=' + artist, 'PUT', blob, { 'Content-Type': 'image/jpeg' });
+        }).then(function (r) {
+          profile.photos.push({ src: r.src, key: r.key, caption: '' }); done++; renderPhotos();
+        }).catch(function (e) { failed++; prog.textContent = e.message; });
+      });
+    });
+    chain.then(function () {
+      $('photoInput').value = '';
+      if (!done) { prog.textContent = 'No photos were added. ' + prog.textContent; return; }
+      prog.textContent = done + ' photo' + (done > 1 ? 's' : '') + ' added' + (failed ? ', ' + failed + ' failed' : '') + '. Publishing…';
+      dirtyProfile = true;
+      return saveAll().then(function () { prog.textContent = done + ' photo' + (done > 1 ? 's' : '') + ' added and live on your page.' + (failed ? ' ' + failed + ' failed.' : ''); });
+    });
+  }
+
+  // ================= Videos =================
+  function parseReel(v) {
+    var m = String(v || '').trim().match(/instagram\.com\/(?:[\w.]+\/)?(reels?|p|tv)\/([\w-]{5,40})/i);
+    return m ? (/^reel/i.test(m[1]) ? 'reel' : 'p') + '/' + m[2] : '';
+  }
+  function renderReels() {
+    var box = $('reels'); box.textContent = '';
+    profile.reels.forEach(function (r, i) {
+      var url = 'https://www.instagram.com/' + r + '/';
+      box.appendChild(h('li', {}, [
+        h('a', { href: url, target: '_blank', rel: 'noopener', text: (r.indexOf('reel') === 0 ? 'Reel · ' : 'Post · ') + r.split('/')[1] }),
+        h('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Move up', text: '↑', disabled: i === 0, onclick: function () { move(profile.reels, i, -1); renderReels(); } }),
+        h('button', { type: 'button', class: 'icon-btn danger', 'aria-label': 'Remove', text: '×', onclick: function () { profile.reels.splice(i, 1); markDirty(); renderReels(); } })
+      ]));
+    });
+    if (!profile.reels.length) box.appendChild(h('li', {}, [h('span', { class: 'muted', text: 'No videos yet.' })]));
+    $('reelAdd').disabled = profile.reels.length >= LIMITS.reels;
+  }
+  function addReel() {
+    var r = parseReel($('reelInput').value), err = $('reelError');
+    err.hidden = true;
+    if (!r) { err.textContent = 'That doesn’t look like an Instagram reel or post link.'; err.hidden = false; return; }
+    if (profile.reels.indexOf(r) !== -1) { err.textContent = 'That video is already added.'; err.hidden = false; return; }
+    profile.reels.unshift(r); $('reelInput').value = ''; markDirty(); renderReels();
+  }
+
+  // ================= About & services =================
+  function renderServices() {
+    var box = $('services'); box.textContent = '';
+    profile.services.forEach(function (g, gi) {
+      var items = h('textarea', { rows: 4, maxlength: 600, 'aria-label': 'Services in ' + (g.title || 'this group'), placeholder: 'One service per line' });
+      items.value = g.items.join('\n');
+      items.addEventListener('input', function () { g.items = items.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean).slice(0, 8); markDirty(); });
+      box.appendChild(h('div', { class: 'sub' }, [
+        h('div', { class: 'sub-head' }, [
+          h('div', {}, [h('label', { class: 'lbl', text: 'Group name' }), field('Group name', g.title, function (v) { g.title = v; }, { max: 40, ph: 'e.g. Haircuts' })]),
+          h('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Move group up', text: '↑', disabled: gi === 0, onclick: function () { move(profile.services, gi, -1); renderServices(); } }),
+          h('button', { type: 'button', class: 'icon-btn danger', 'aria-label': 'Remove group', text: '×', onclick: function () { if (confirmRemove(g.title || 'this group')) { profile.services.splice(gi, 1); markDirty(); renderServices(); } } })
+        ]),
+        h('div', {}, [h('label', { class: 'lbl', text: 'Services (one per line, up to 8)' }), items])
+      ]));
+    });
+    $('addService').hidden = profile.services.length >= LIMITS.services;
+  }
+
+  // ================= Load & save =================
+  function renderAll() {
+    $('artistName').textContent = NAMES[artist];
+    $('viewPage').href = '/' + artist + '?updated=' + Date.now();
+    $('tagline').value = profile.tagline || '';
+    $('bio').value = (profile.bio || []).join('\n\n');
+    $('phone').value = profile.phone ? profile.phone.replace(/^91(\d{5})(\d{5})$/, '$1 $2') : '';
+    renderDates(); renderRates(); renderPhotos(); renderReels(); renderServices();
+  }
+  function showSaved(at) {
+    $('lastSaved').textContent = at ? 'Last saved ' + new Date(at).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) : 'Not edited yet — your page shows the salon’s starting version.';
+  }
+
+  function payload() {
+    return {
+      phone: $('phone').value,
+      tagline: profile.tagline,
+      bio: profile.bio,
+      services: profile.services,
+      rates: profile.rates.map(function (g) { return { title: g.title, note: g.note, items: g.items.filter(function (i) { return i.name.trim(); }) }; }),
+      photos: profile.photos,
+      reels: profile.reels
+    };
+  }
+  function validate() {
+    var digits = $('phone').value.replace(/\D/g, '').replace(/^91(?=\d{10}$)/, '').replace(/^0/, '');
+    if (!/^[6-9]\d{9}$/.test(digits)) return 'Please enter a 10-digit mobile number in Phone.';
+    for (var i = 0; i < profile.rates.length; i++) {
+      var g = profile.rates[i];
+      if (!g.title.trim() && g.items.some(function (x) { return x.name.trim(); })) return 'Every rate group needs a name.';
+    }
+    return '';
+  }
+
+  function saveAll() {
+    if (busy) return Promise.resolve();
+    var problem = dirtyProfile ? validate() : '';
+    if (problem) { setStatus(problem, 'bad'); return Promise.resolve(); }
+    busy = true; $('save').disabled = true; setStatus('Saving…');
+    var jobs = [];
+    if (dirtyProfile) jobs.push(api('/api/profile', 'POST', { profile: payload() }).then(function (r) {
+      profile = r.profile; dirtyProfile = false; showSaved(r.updatedAt);
+    }));
+    if (dirtyDates) jobs.push(api('/api/availability', 'POST', { settings: dates }).then(function (r) {
+      var mine = r.artists.filter(function (a) { return a.id === artist; })[0];
+      if (mine) dates = mine; dirtyDates = false;
+    }));
+    return Promise.all(jobs).then(function () {
+      busy = false; renderAll();
+      setStatus('Saved — live on your page', 'ok');
+    }).catch(function (e) {
+      busy = false; $('save').disabled = false;
+      setStatus(e.message, 'bad');
+      if (e.status === 401) setTimeout(signOut, 1500);
+    });
+  }
+
+  function signIn(quiet) {
+    var btn = $('loginBtn'), err = $('loginError');
+    btn.disabled = true; err.hidden = true;
+    return Promise.all([
+      api('/api/profile', 'POST', { verify: true }),
+      fetch('/api/availability', { cache: 'no-store' }).then(function (r) { return r.json(); })
+    ]).then(function (res) {
+      profile = res[0].profile;
+      profile.rates = (profile.rates || []).map(function (g) { return { title: g.title || '', note: g.note || '', items: (g.items || []).map(function (i) { return { name: i.name || '', price: i.price || '', desc: i.desc || '' }; }) }; });
+      ['services', 'photos', 'reels', 'bio'].forEach(function (k) { profile[k] = profile[k] || []; });
+      var mine = (res[1].artists || []).filter(function (a) { return a.id === artist; })[0];
+      dates = mine || { accepting: true, nextAvailable: '', note: '', blocked: [], weeklyOff: [] };
+      if (res[1].today) today = res[1].today;
+      session('studioPin', pin); session('studioArtist', artist); local('studioLastArtist', artist);
+      $('login').hidden = true; $('app').hidden = false; $('savebar').hidden = false; $('logout').hidden = false;
+      showSaved(res[0].updatedAt); renderAll();
+      setStatus(res[0].admin ? 'Signed in as staff — editing ' + NAMES[artist] : 'All changes saved');
+    }).catch(function (e) {
+      session('studioPin', '');
+      if (!quiet) { err.textContent = e.message; err.hidden = false; }
+    }).then(function () { btn.disabled = false; });
+  }
+  function signOut() {
+    dirtyDates = dirtyProfile = false;
+    session('studioPin', ''); session('studioArtist', '');
+    location.reload();
+  }
+
+  // ---- wire up ----
+  bindDates();
+  $('addGroup').addEventListener('click', function () { profile.rates.push({ title: '', note: '', items: [{ name: '', price: '', desc: '' }] }); markDirty(); renderRates(); });
+  $('addService').addEventListener('click', function () { profile.services.push({ title: '', items: [] }); markDirty(); renderServices(); });
+  $('photoInput').addEventListener('change', function (e) { uploadFiles(e.target.files); });
+  $('reelAdd').addEventListener('click', addReel);
+  $('reelInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addReel(); } });
+  $('tagline').addEventListener('input', function (e) { profile.tagline = e.target.value; markDirty(); });
+  $('bio').addEventListener('input', function (e) { profile.bio = e.target.value.split(/\n\s*\n/).map(function (s) { return s.replace(/\s+/g, ' ').trim(); }).filter(Boolean).slice(0, 4); markDirty(); });
+  $('phone').addEventListener('input', function () { markDirty(); });
+  $('save').addEventListener('click', saveAll);
+  $('logout').addEventListener('click', signOut);
+  $('login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    artist = $('who').value; pin = $('pin').value.trim();
+    if (!artist) { $('loginError').textContent = 'Choose your name.'; $('loginError').hidden = false; return; }
+    signIn(false);
+  });
+
+  // ?artist=sunny-ali preselects the name (handy as a bookmark for each artist)
+  var pre = new URLSearchParams(location.search).get('artist') || local('studioLastArtist');
+  if (NAMES[pre]) $('who').value = pre;
+  if (session('studioPin') && NAMES[session('studioArtist')]) { artist = session('studioArtist'); pin = session('studioPin'); signIn(true); }
+})();
+</script>
+</body>
+</html>
