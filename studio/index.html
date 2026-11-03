@@ -128,8 +128,10 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
 .avatar-prev { width: 140px; height: 140px; border-radius: 50%; padding: 4px; border: 1px solid var(--gold); display: grid; place-items: center; overflow: hidden; }
 .avatar-prev img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
 .avatar-prev span { font: 500 2.4rem var(--f-display); color: var(--gold); }
-.cover-prev { position: relative; aspect-ratio: 16 / 7; border: 1px solid var(--line-strong); border-radius: 2px; overflow: hidden; background: linear-gradient(135deg, #1d1a16, #0b0b0b); display: grid; place-items: center; }
-.cover-prev img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.cover-prev { position: relative; aspect-ratio: 820 / 312; border: 1px solid var(--line-strong); border-radius: 2px; overflow: hidden; background: linear-gradient(135deg, #1d1a16, #0b0b0b); display: grid; place-items: center; }
+.cover-prev img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pos-btns { display: flex; gap: 6px; align-items: center; margin-top: 10px; }
+.pos-btns .chip-btn[aria-pressed="true"] { border-color: var(--gold); color: var(--gold-bright); background: rgba(201,164,92,.12); }
 .cover-prev span { position: relative; color: var(--ink-soft); font-size: 0.85rem; }
 .img-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .img-tools .btn { cursor: pointer; }
@@ -219,13 +221,19 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
             </div>
           </div>
           <div>
-            <span class="lbl">Cover photo (top of your page)</span>
+            <span class="lbl">Cover photo (banner at the top of your page)</span>
             <div class="cover-prev" id="coverPrev"></div>
             <div class="img-tools">
               <label class="btn btn-line btn-sm"><input type="file" accept="image/*" id="coverInput" hidden><span id="coverBtn">Upload</span></label>
               <button class="btn btn-line btn-sm" type="button" id="coverRemove" hidden>Remove</button>
             </div>
-            <p class="muted" style="margin-top:8px">A clear photo of you works best for the profile picture (it&rsquo;s cut to a circle). For the cover, use a wide photo: your work, your station or the salon.</p>
+            <div class="pos-btns" id="coverPos" hidden>
+              <span class="muted">Show:</span>
+              <button class="chip-btn" type="button" data-pos="top">Top</button>
+              <button class="chip-btn" type="button" data-pos="center">Middle</button>
+              <button class="chip-btn" type="button" data-pos="bottom">Bottom</button>
+            </div>
+            <p class="muted" style="margin-top:8px">A clear photo of you works best for the profile picture (it&rsquo;s cut to a circle). For the cover, use a <b>wide (landscape) photo</b>, like a Facebook or YouTube cover: your work, your station or the salon. If the important part gets cut off, choose Top, Middle or Bottom.</p>
           </div>
         </div>
         <p class="progress" id="lookProgress" role="status" aria-live="polite" hidden></p>
@@ -565,8 +573,15 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
     $('avatarBtn').textContent = profile.avatar ? 'Change' : 'Upload';
     $('avatarRemove').hidden = !profile.avatar;
     var c = $('coverPrev'); c.textContent = '';
-    if (profile.cover) c.appendChild(h('img', { src: profile.cover.src, alt: 'Your cover photo' }));
-    else c.appendChild(h('span', { text: 'Salon photo (default)' }));
+    if (profile.cover) {
+      var ci = h('img', { src: profile.cover.src, alt: 'Your cover photo' });
+      ci.style.objectPosition = 'center ' + ({ top: '0%', bottom: '100%' }[profile.cover.pos] || '50%');
+      c.appendChild(ci);
+    } else c.appendChild(h('span', { text: 'No cover yet' }));
+    $('coverPos').hidden = !profile.cover;
+    document.querySelectorAll('#coverPos [data-pos]').forEach(function (b) {
+      b.setAttribute('aria-pressed', profile.cover && (profile.cover.pos || 'center') === b.getAttribute('data-pos') ? 'true' : 'false');
+    });
     $('coverBtn').textContent = profile.cover ? 'Change' : 'Upload';
     $('coverRemove').hidden = !profile.cover;
   }
@@ -739,6 +754,9 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
   $('photoInput').addEventListener('change', function (e) { uploadFiles(e.target.files); });
   $('avatarInput').addEventListener('change', function (e) { uploadLook('avatar', e.target.files[0]); });
   $('coverInput').addEventListener('change', function (e) { uploadLook('cover', e.target.files[0]); });
+  document.querySelectorAll('#coverPos [data-pos]').forEach(function (b) {
+    b.addEventListener('click', function () { if (!profile.cover) return; profile.cover.pos = b.getAttribute('data-pos'); markDirty(); renderLook(); });
+  });
   ['avatar', 'cover'].forEach(function (f) {
     $(f + 'Remove').addEventListener('click', function () {
       if (!confirmRemove(f === 'avatar' ? 'your profile picture' : 'your cover')) return;

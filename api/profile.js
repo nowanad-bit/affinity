@@ -45,6 +45,7 @@ function okPhotoSrc(src, id) {
 function cleanImage(v, id) {
   if (!v || typeof v !== 'object') return null;
   const img = { src: str(v.src, 400), key: str(v.key, 200) };
+  if (['top', 'center', 'bottom'].includes(v.pos)) img.pos = v.pos;
   return okPhotoSrc(img.src, id) && (!img.key || img.key.startsWith(`artist-photos/${id}/`)) ? img : null;
 }
 

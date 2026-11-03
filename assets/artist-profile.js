@@ -11,8 +11,9 @@
 //   [data-p="phone-text"]  visible phone number
 //   [data-p="stats"]       the highlights under the name (experience etc.)
 //   [data-p="avatar"]      replaced by the round profile picture
-//   [data-p="cover"]       an <img> gets the cover as its src; any other element gets it as --cover
-//                          and the class has-cover
+//   [data-p="cover"]       shows the cover as a wide banner, like a Facebook or YouTube cover:
+//                          an <img> is swapped and reshaped; on any other element (the page header)
+//                          a banner is added at the top and the profile picture overlaps its edge
 //   a[href^="https://wa.me/<old>"], a[href="tel:+<old>"]  switched to the saved number
 //
 // On the homepage, [data-artist-phones] makes artist cards and the booking form use saved numbers,
@@ -104,6 +105,19 @@
     '.p-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}' +
     '.hero-body .p-avatar{margin-top:-40px;position:relative;z-index:3}' +
     '@media (max-width:600px){.p-avatar{width:108px;height:108px}}' +
+    /* Cover banner: wide strip at full brightness (Facebook desktop shape, 16:9 on phones) */
+    '.hero-type.has-banner{padding-top:0}' +
+    '.hero-type.has-banner::before{display:none}' +
+    '.hero-type.has-banner .topbar{position:absolute;z-index:4}' +
+    '.p-banner{position:relative;width:100%;aspect-ratio:820/312;max-height:460px;overflow:hidden;background:#1a1714}' +
+    '.p-banner img{width:100%;height:100%;object-fit:cover;display:block}' +
+    '.p-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,13,11,.5),rgba(14,13,11,0) 24%,rgba(14,13,11,0) 82%,rgba(14,13,11,.55))}' +
+    '.has-banner .wrap > .p-avatar{margin-top:-72px;position:relative;z-index:3}' +
+    '.has-banner .wrap > .mono{margin-top:40px}' +
+    '.hero-img.is-banner{max-width:none}' +
+    '.hero-img.is-banner img{aspect-ratio:820/312;max-height:460px;object-fit:cover;-webkit-mask-image:none;mask-image:none}' +
+    '.hero-img.is-banner + .hero-body .p-avatar{margin-top:-72px}' +
+    '@media (max-width:600px){.p-banner,.hero-img.is-banner img{aspect-ratio:16/9}.has-banner .wrap > .p-avatar,.hero-img.is-banner + .hero-body .p-avatar{margin-top:-58px}}' +
     '.rates-wrap .price-head{margin-top:0}' +
     '.rates-cta{display:flex;justify-content:center;margin-top:48px}';
 
@@ -220,8 +234,20 @@
     }
     var cv = document.querySelector('[data-p="cover"]');
     if (cv && p.cover) {
-      if (cv.tagName === 'IMG') { cv.src = p.cover.src; cv.removeAttribute('srcset'); cv.style.objectFit = 'cover'; cv.style.objectPosition = 'center 30%'; }
-      else { cv.style.setProperty('--cover', 'url("' + p.cover.src.replace(/"/g, '%22') + '")'); cv.classList.add('has-cover'); }
+      var pos = 'center ' + ({ top: '0%', bottom: '100%' }[p.cover.pos] || '50%');
+      var alt = (body.getAttribute('data-name') || first || 'Artist') + ', cover photo';
+      if (cv.tagName === 'IMG') {
+        cv.src = p.cover.src; cv.alt = alt; cv.removeAttribute('srcset'); cv.removeAttribute('width'); cv.removeAttribute('height');
+        cv.style.objectPosition = pos;
+        if (cv.parentElement) cv.parentElement.classList.add('is-banner');
+      } else {
+        var img = h('img', { src: p.cover.src, alt: alt, fetchpriority: 'high' });
+        img.style.objectPosition = pos;
+        var banner = h('div', { class: 'p-banner' }, [img]);
+        var top = cv.querySelector('.topbar');
+        cv.insertBefore(banner, top ? top.nextSibling : cv.firstChild);
+        cv.classList.add('has-banner');
+      }
     }
 
     var st = document.querySelector('[data-p="stats"]');
