@@ -2,6 +2,42 @@
 // Matches what is written into each artist page.
 export default {
  "neeraj-sidhu": {
+  "name": "Neeraj Sidhu",
+  "role": "Professional Makeup Artist",
+  "instagram": "makeup_by_neerajsidhu_1",
+  "why": [
+   {
+    "title": "9 Years of Experience",
+    "desc": "Expertise in bridal & special-occasion makeup."
+   },
+   {
+    "title": "1000+ Happy Clients",
+    "desc": "A trusted name for brides across Chandigarh."
+   },
+   {
+    "title": "Bridal, Engagement, Party & Celebrity Looks",
+    "desc": "One artist for every function of your wedding."
+   },
+   {
+    "title": "Premium International Products",
+    "desc": "MAC, Huda Beauty, NARS, Dior and more."
+   },
+   {
+    "title": "Customised for Every Skin Type",
+    "desc": "HD, Airbrush & Signature finishes."
+   },
+   {
+    "title": "Photography-Friendly Makeup",
+    "desc": "Long-lasting, flawless finish on camera."
+   },
+   {
+    "title": "Hygienic & Professional Setup",
+    "desc": "100% sanitised tools, every appointment."
+   }
+  ],
+  "tags": [],
+  "quote": "Where every bride shines like royalty.",
+  "card": "Bridal, engagement, reception, mehendi and party looks. See his portfolio and packages.",
   "avatar": null,
   "cover": null,
   "phone": "919501791259",
@@ -237,6 +273,37 @@ export default {
   "reels": []
  },
  "sunny-ali": {
+  "name": "Sunny Ali",
+  "role": "Senior Hair Artist · Colour Specialist",
+  "instagram": "sunny_ali_hair_artist",
+  "why": [
+   {
+    "title": "Trained at Sassoon Academy, London",
+    "desc": "Classic precision cutting and colour technique."
+   },
+   {
+    "title": "Colour without bleach",
+    "desc": "Gentler on your hair, with natural-looking depth."
+   },
+   {
+    "title": "1M+ followers on Instagram",
+    "desc": "Thousands of real transformations to browse before you book."
+   },
+   {
+    "title": "Cut and colour together",
+    "desc": "Your cut and colour are planned as one finished look."
+   }
+  ],
+  "tags": [
+   "Colour without bleach",
+   "Babylights",
+   "Mocha & ash browns",
+   "Colour transformations",
+   "Haircuts",
+   "Hair treatments"
+  ],
+  "quote": "Colour that looks like it was always yours",
+  "card": "Hair transformation specialist.",
   "avatar": null,
   "cover": null,
   "phone": "919872366050",
@@ -300,6 +367,37 @@ export default {
   ]
  },
  "saleem-salmani": {
+  "name": "Saleem Salmani",
+  "role": "Senior Hair Artist · Celebrity Stylist",
+  "instagram": "saleem_hair_art",
+  "why": [
+   {
+    "title": "Precision cutting",
+    "desc": "Layers, bobs and refresh cuts shaped to your face."
+   },
+   {
+    "title": "Colour specialist",
+    "desc": "Rich browns and bold transformations."
+   },
+   {
+    "title": "Celebrity-inspired looks",
+    "desc": "Bring a reference — he’ll adapt it to your hair."
+   },
+   {
+    "title": "Consultation first",
+    "desc": "Every appointment starts with a conversation."
+   }
+  ],
+  "tags": [
+   "Layer cuts",
+   "Bob cuts",
+   "Refresh cuts",
+   "Chocolate browns",
+   "Hair transformations",
+   "Styling"
+  ],
+  "quote": "Precision in every cut",
+  "card": "Precision barber.",
   "avatar": null,
   "cover": null,
   "phone": "919780422854",
@@ -361,6 +459,37 @@ export default {
   ]
  },
  "imran-ahmad": {
+  "name": "Imran Ahmad",
+  "role": "Senior Hair Artist · Colour & Styling",
+  "instagram": "imran.hairartist",
+  "why": [
+   {
+    "title": "Delhi, Mumbai & Russian academy training",
+    "desc": "Celebrity hairstyling techniques."
+   },
+   {
+    "title": "Hair colour specialist",
+    "desc": "Warm browns, mochas and cool ash blondes."
+   },
+   {
+    "title": "Hairdos for every occasion",
+    "desc": "Brides, parties and special events."
+   },
+   {
+    "title": "1,400+ posts of real work",
+    "desc": "See his results before you book."
+   }
+  ],
+  "tags": [
+   "Mocha & warm browns",
+   "Ash blonde",
+   "Butterfly cut",
+   "Long layers",
+   "Bridal hairdos",
+   "Party hairdos"
+  ],
+  "quote": "Hair that turns heads",
+  "card": "Colour and styling expert.",
   "avatar": null,
   "cover": null,
   "phone": "919779813285",
@@ -423,6 +552,37 @@ export default {
   ]
  },
  "azeem-alvi": {
+  "name": "Azeem Alvi",
+  "role": "Senior Hair Artist · Cut & Colour",
+  "instagram": "hair_artist_azeem",
+  "why": [
+   {
+    "title": "Modern cuts specialist",
+    "desc": "Current shapes that grow out well."
+   },
+   {
+    "title": "Cut + colour transformations",
+    "desc": "Planned together for one finished look."
+   },
+   {
+    "title": "Warm and cool tones",
+    "desc": "Honey, caramel, brownie and ash."
+   },
+   {
+    "title": "Hundreds of real results",
+    "desc": "Browse his work before you book."
+   }
+  ],
+  "tags": [
+   "Modern cuts",
+   "Honey blonde",
+   "Toffee caramel",
+   "Cool ash",
+   "Gloss",
+   "Transformations"
+  ],
+  "quote": "Cut and colour, made for you",
+  "card": "Modern cuts specialist.",
   "avatar": null,
   "cover": null,
   "phone": "917696887421",
@@ -484,6 +644,36 @@ export default {
   ]
  },
  "naushad": {
+  "name": "Naushad",
+  "role": "Senior Hair Artist · Colour Specialist",
+  "instagram": "hairartist_naushad",
+  "why": [
+   {
+    "title": "Trending styles expert",
+    "desc": "The latest cuts, adapted to your hair."
+   },
+   {
+    "title": "Colour specialist",
+    "desc": "New shades and colour refreshes."
+   },
+   {
+    "title": "Cut + colour days",
+    "desc": "Book both together for a full change."
+   },
+   {
+    "title": "Hundreds of real results",
+    "desc": "Browse his work before you book."
+   }
+  ],
+  "tags": [
+   "Butterfly cut",
+   "Short cuts",
+   "Refresh cuts",
+   "Hair colour",
+   "Trending styles"
+  ],
+  "quote": "Stay on trend",
+  "card": "Trending styles expert.",
   "avatar": null,
   "cover": null,
   "phone": "919888055835",
@@ -545,6 +735,38 @@ export default {
   ]
  },
  "jassi": {
+  "name": "Jassi",
+  "role": "Hair Artist · Colour Transformations",
+  "instagram": "jassi.hairstylist",
+  "why": [
+   {
+    "title": "Colour transformation specialist",
+    "desc": "From natural browns to bold burgundy."
+   },
+   {
+    "title": "Glossy, healthy-looking finish",
+    "desc": "Rich colour with shine."
+   },
+   {
+    "title": "Cut and style to finish",
+    "desc": "Face-framing layers and blowouts."
+   },
+   {
+    "title": "See his work first",
+    "desc": "Real transformations on Instagram."
+   }
+  ],
+  "tags": [
+   "Natural & rich browns",
+   "Dark chocolate",
+   "Burgundy",
+   "Red-violet",
+   "Brown highlights",
+   "Face-framing layers",
+   "90s blowout"
+  ],
+  "quote": "Colour that transforms",
+  "card": "Rich browns, burgundy and red-violet.",
   "avatar": null,
   "cover": null,
   "phone": "919855001529",
@@ -606,6 +828,37 @@ export default {
   ]
  },
  "nisha-sharma": {
+  "name": "Nisha Sharma",
+  "role": "Certified Bridal Makeup Artist",
+  "instagram": "nisha_mua_artist",
+  "why": [
+   {
+    "title": "Certified makeup artist",
+    "desc": "Trained, professional technique."
+   },
+   {
+    "title": "Bridal specialist",
+    "desc": "Signature and celebrity bridal glam."
+   },
+   {
+    "title": "Every function covered",
+    "desc": "Engagement, cocktail and party looks."
+   },
+   {
+    "title": "Travels globally",
+    "desc": "Destination weddings welcome."
+   }
+  ],
+  "tags": [
+   "Signature bridal glam",
+   "Celebrity bridal glam",
+   "Engagement",
+   "Cocktail glam",
+   "Soft party glam",
+   "Destination weddings"
+  ],
+  "quote": "Glam that glows",
+  "card": "Bridal and makeup specialist.",
   "avatar": null,
   "cover": null,
   "phone": "919780823215",

@@ -172,7 +172,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
 <main class="wrap">
   <form class="login" id="login">
     <h1>Artist Studio</h1>
-    <p>Edit your own portfolio page: your profile picture, cover, experience, dates, rates, photos, videos and details. Changes go live on the website as soon as you save.</p>
+    <p>Edit everything on your own portfolio page: your name, title, profile picture, cover, experience, dates, rates, photos, videos and details. Changes go live on the website as soon as you save.</p>
     <div>
       <label class="lbl" for="who">Your name</label>
       <select id="who" required>
@@ -206,7 +206,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
       </div>
     </div>
     <nav class="tabs" aria-label="Sections">
-      <a href="#s-look">Photo &amp; cover</a><a href="#s-dates">Dates</a><a href="#s-rates">Rates</a><a href="#s-photos">Photos</a><a href="#s-videos">Videos</a><a href="#s-about">Experience &amp; about</a><a href="#s-contact">Phone</a>
+      <a href="#s-look">Photo &amp; cover</a><a href="#s-details">Name &amp; details</a><a href="#s-dates">Dates</a><a href="#s-rates">Rates</a><a href="#s-photos">Photos</a><a href="#s-videos">Videos</a><a href="#s-about">Experience &amp; about</a><a href="#s-contact">Phone</a>
     </nav>
     <div class="list">
 
@@ -238,6 +238,26 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
           </div>
         </div>
         <p class="progress" id="lookProgress" role="status" aria-live="polite" hidden></p>
+      </article>
+
+      <article class="card" id="s-details">
+        <h2>Name &amp; details</h2>
+        <div class="row">
+          <div><label class="lbl" for="dName">Display name</label><input type="text" id="dName" maxlength="40" data-f="name"></div>
+          <div><label class="lbl" for="dIg">Instagram username</label><input type="text" id="dIg" maxlength="60" data-f="instagram" placeholder="@yourname" autocapitalize="off" spellcheck="false"></div>
+        </div>
+        <div><label class="lbl" for="dRole">Title (under your name)</label><input type="text" id="dRole" maxlength="70" data-f="role" placeholder="e.g. Senior Hair Artist · Colour Specialist"></div>
+        <div><label class="lbl" for="dCard">Short line on the homepage card</label><input type="text" id="dCard" maxlength="140" data-f="card" placeholder="e.g. Hair transformation specialist."></div>
+        <div><label class="lbl" for="dQuote">Closing line (signature at the bottom of your page)</label><input type="text" id="dQuote" maxlength="100" data-f="quote"></div>
+        <div>
+          <span class="lbl">Why clients choose you (up to 8)</span>
+          <div id="why" style="display:grid;gap:8px"></div>
+          <div class="add-row" style="margin-top:10px"><button class="btn btn-line btn-sm" type="button" id="addWhy">+ Add a reason</button></div>
+        </div>
+        <div>
+          <label class="lbl" for="dTags">Specialties (one per line, up to 12)</label>
+          <textarea id="dTags" rows="5" maxlength="600"></textarea>
+        </div>
       </article>
 
       <article class="card" id="s-dates">
@@ -628,6 +648,27 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
     profile.reels.unshift(r); $('reelInput').value = ''; markDirty(); renderReels();
   }
 
+  // ================= Name & details =================
+  function renderDetails() {
+    document.querySelectorAll('#s-details [data-f]').forEach(function (el) {
+      var k = el.getAttribute('data-f');
+      el.value = k === 'instagram' && profile[k] ? '@' + profile[k] : (profile[k] || '');
+    });
+    $('dTags').value = (profile.tags || []).join('\n');
+    var box = $('why'); box.textContent = '';
+    profile.why.forEach(function (w, i) {
+      box.appendChild(h('div', { class: 'sub', style: 'gap:8px' }, [
+        h('div', { class: 'sub-head' }, [
+          h('div', {}, [field('Reason ' + (i + 1), w.title, function (v) { w.title = v; }, { ph: 'e.g. Trained at Sassoon, London' })]),
+          h('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Move up', text: '↑', disabled: i === 0, onclick: function () { move(profile.why, i, -1); renderDetails(); } }),
+          h('button', { type: 'button', class: 'icon-btn danger', 'aria-label': 'Remove reason', text: '×', onclick: function () { profile.why.splice(i, 1); markDirty(); renderDetails(); } })
+        ]),
+        field('Reason ' + (i + 1) + ' detail', w.desc, function (v) { w.desc = v; }, { max: 140, ph: 'One short line (optional)' })
+      ]));
+    });
+    $('addWhy').hidden = profile.why.length >= 8;
+  }
+
   // ================= Experience & highlights =================
   function renderStats() {
     var box = $('stats'); box.textContent = '';
@@ -661,12 +702,12 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
 
   // ================= Load & save =================
   function renderAll() {
-    $('artistName').textContent = NAMES[artist];
+    $('artistName').textContent = profile.name || NAMES[artist];
     $('viewPage').href = '/' + artist + '?updated=' + Date.now();
     $('tagline').value = profile.tagline || '';
     $('bio').value = (profile.bio || []).join('\n\n');
     $('phone').value = profile.phone ? profile.phone.replace(/^91(\d{5})(\d{5})$/, '$1 $2') : '';
-    renderLook(); renderStats(); renderDates(); renderRates(); renderPhotos(); renderReels(); renderServices();
+    renderLook(); renderDetails(); renderStats(); renderDates(); renderRates(); renderPhotos(); renderReels(); renderServices();
   }
   function showSaved(at) {
     $('lastSaved').textContent = at ? 'Last saved ' + new Date(at).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) : 'Not edited yet — your page shows the salon’s starting version.';
@@ -695,6 +736,13 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
       avatar: profile.avatar || null,
       cover: profile.cover || null,
       tagline: profile.tagline,
+      name: profile.name,
+      role: profile.role,
+      instagram: profile.instagram,
+      card: profile.card,
+      quote: profile.quote,
+      why: profile.why.filter(function (w) { return w.title.trim(); }),
+      tags: profile.tags,
       stats: profile.stats.filter(function (x) { return x.value.trim(); }),
       bio: (function (exp) { return profile.bio.map(function (t) { return syncYears(t, exp); }); })(experienceOf(profile.stats)),
       services: profile.services,
@@ -704,6 +752,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
     };
   }
   function validate() {
+    if (!(profile.name || '').trim()) return 'Please enter your display name in Name & details.';
     var digits = $('phone').value.replace(/\D/g, '').replace(/^91(?=\d{10}$)/, '').replace(/^0/, '');
     if (!/^[6-9]\d{9}$/.test(digits)) return 'Please enter a 10-digit mobile number in Phone.';
     for (var i = 0; i < profile.rates.length; i++) {
@@ -746,6 +795,8 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
       profile = res[0].profile;
       profile.rates = (profile.rates || []).map(function (g) { return { title: g.title || '', note: g.note || '', items: (g.items || []).map(function (i) { return { name: i.name || '', price: i.price || '', desc: i.desc || '' }; }) }; });
       ['services', 'photos', 'reels', 'bio'].forEach(function (k) { profile[k] = profile[k] || []; });
+      profile.why = (profile.why || []).map(function (w) { return { title: w.title || '', desc: w.desc || '' }; });
+      profile.tags = profile.tags || [];
       profile.stats = (profile.stats || []).map(function (x) { return { value: x.value || '', label: x.label || '' }; });
       var mine = (res[1].artists || []).filter(function (a) { return a.id === artist; })[0];
       dates = mine || { accepting: true, nextAvailable: '', note: '', blocked: [], weeklyOff: [] };
@@ -768,6 +819,11 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
   // ---- wire up ----
   bindDates();
   $('addGroup').addEventListener('click', function () { profile.rates.push({ title: '', note: '', items: [{ name: '', price: '', desc: '' }] }); markDirty(); renderRates(); });
+  document.querySelectorAll('#s-details [data-f]').forEach(function (el) {
+    el.addEventListener('input', function () { profile[el.getAttribute('data-f')] = el.value.trim().replace(/^@/, ''); markDirty(); });
+  });
+  $('dTags').addEventListener('input', function (e) { profile.tags = e.target.value.split('\n').map(function (t) { return t.trim(); }).filter(Boolean).slice(0, 12); markDirty(); });
+  $('addWhy').addEventListener('click', function () { profile.why.push({ title: '', desc: '' }); markDirty(); renderDetails(); });
   $('addService').addEventListener('click', function () { profile.services.push({ title: '', items: [] }); markDirty(); renderServices(); });
   $('photoInput').addEventListener('change', function (e) { uploadFiles(e.target.files); });
   $('avatarInput').addEventListener('change', function (e) { uploadLook('avatar', e.target.files[0]); });

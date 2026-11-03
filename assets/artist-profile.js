@@ -10,6 +10,12 @@
 //   [data-p="rates"]       price groups with "Book this look"; left alone if no rates saved
 //   [data-p="phone-text"]  visible phone number
 //   [data-p="stats"]       the highlights under the name (experience etc.)
+//   [data-p="name"]        display name in capitals; [data-p="name-plain"] as typed;
+//                          [data-p="first"] first name (also used in WhatsApp greetings)
+//   [data-p="role"]        title; [data-p="role-short"] the part before "·"
+//   [data-p="ig-text"]     "@handle"; profile links to the old handle are switched
+//   [data-p="why"]         "Why clients choose" list; [data-p="tags"] specialty chips
+//   [data-p="quote"]       closing line; [data-p="quote-marks"] the same in quotation marks
 //   [data-p="avatar"]      replaced by the round profile picture
 //   [data-p="cover"]       shows the cover as a wide banner, like a Facebook or YouTube cover:
 //                          an <img> is swapped and reshaped; on any other element (the page header)
@@ -29,6 +35,24 @@
     });
     (kids || []).forEach(function (c) { if (c) el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
     return el;
+  }
+
+  function swapGreeting(scope, oldFirst, newFirst) {
+    if (!oldFirst || !newFirst || oldFirst === newFirst) return;
+    var from = 'Hi%20' + encodeURIComponent(oldFirst) + '%2C', to = 'Hi%20' + encodeURIComponent(newFirst) + '%2C';
+    scope.querySelectorAll('a[href*="wa.me/"]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (href.indexOf(from) !== -1) a.setAttribute('href', href.split(from).join(to));
+    });
+  }
+  function swapInstagram(scope, oldH, newH) {
+    if (!oldH || !newH || oldH.toLowerCase() === newH.toLowerCase()) return;
+    var re = new RegExp('instagram\\.com/' + oldH.replace(/\./g, '\\.') + '(?=/|$|\\?)', 'i');
+    scope.querySelectorAll('a[href*="instagram.com/"]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (re.test(href)) a.setAttribute('href', href.replace(re, 'instagram.com/' + newH));
+      if (a.textContent.indexOf('@' + oldH) !== -1 && !a.children.length) a.textContent = a.textContent.split('@' + oldH).join('@' + newH);
+    });
   }
 
   function swapPhone(oldP, newP) {
@@ -56,6 +80,33 @@
         var txt = /^[\d+.\s]+$/.test(v) ? v + ' years' : d.years[id];
         if (/^[\d+.\s]+years?/i.test(y.textContent)) y.textContent = y.textContent.replace(/^[\d+.\s]+years?/i, txt);
         else y.textContent = txt + '.';
+      });
+      // Name, title, short line and Instagram on each artist's card and in the booking form
+      Object.keys(d.cards || {}).forEach(function (id) {
+        var c = d.cards[id];
+        var marker = document.querySelector('.artist [data-availability="' + id + '"]');
+        var card = marker && marker.closest('.artist');
+        if (!card) return;
+        var h3 = card.querySelector('h3');
+        var oldName = h3 ? h3.textContent.trim() : '';
+        if (c.name && h3) {
+          h3.textContent = c.name;
+          swapGreeting(card, oldName.split(/\s+/)[0], c.name.split(/\s+/)[0]);
+          var opt = document.querySelector('option[data-artist="' + id + '"]');
+          if (opt) opt.textContent = opt.textContent.replace(oldName, c.name);
+        }
+        var role = card.querySelector('.role');
+        if (c.role && role) role.textContent = c.role.split('\u00b7')[0].trim();
+        var years = card.querySelector('.years');
+        if (c.card && years && years.parentNode) {
+          var para = years.parentNode;
+          while (years.nextSibling) para.removeChild(years.nextSibling);
+          para.appendChild(document.createTextNode(' ' + c.card));
+          // A non-experience lead-in ("Certified.") gives way to the artist's own line
+          if (!/^\s*\d/.test(years.textContent) && !(d.years || {})[id]) years.remove();
+        }
+        var ig = card.querySelector('a[href*="instagram.com/"]');
+        if (c.instagram && ig) ig.setAttribute('href', 'https://www.instagram.com/' + c.instagram);
       });
       Object.keys(d.avatars || {}).forEach(function (id) {
         var marker = document.querySelector('.artist [data-availability="' + id + '"]');
@@ -265,6 +316,41 @@
         cv.insertBefore(banner, top ? top.nextSibling : cv.firstChild);
         cv.classList.add('has-banner');
       }
+    }
+
+    // ---- Name, title, Instagram, lists, closing line ----
+    var oldFirst = first;
+    if (p.name) {
+      first = p.name.split(/\s+/)[0];
+      document.querySelectorAll('[data-p="name"]').forEach(function (el) { el.textContent = p.name.toUpperCase(); });
+      document.querySelectorAll('[data-p="name-plain"]').forEach(function (el) { el.textContent = p.name; });
+      document.querySelectorAll('[data-p="first"]').forEach(function (el) { el.textContent = first; });
+      body.setAttribute('data-first', first); body.setAttribute('data-name', p.name);
+      swapGreeting(document, oldFirst, first);
+    }
+    if (p.role) {
+      document.querySelectorAll('[data-p="role"]').forEach(function (el) { el.textContent = p.role; });
+      document.querySelectorAll('[data-p="role-short"]').forEach(function (el) { el.textContent = p.role.split('\u00b7')[0].trim(); });
+    }
+    var igText = document.querySelector('[data-p="ig-text"]');
+    var oldIg = body.getAttribute('data-ig') || (igText ? igText.textContent.replace(/^@/, '') : '');
+    if (p.instagram) {
+      swapInstagram(document, oldIg, p.instagram);
+      if (igText) igText.textContent = '@' + p.instagram;
+    }
+    var why = document.querySelector('[data-p="why"]');
+    if (why && (p.why || []).length) {
+      why.textContent = '';
+      p.why.forEach(function (w, i) {
+        why.appendChild(h('li', {}, [h('span', { class: 'n', text: (i < 9 ? '0' : '') + (i + 1) }), h('div', {}, [h('strong', { text: w.title }), w.desc ? h('span', { text: w.desc }) : null])]));
+      });
+    }
+    var tags = document.querySelector('[data-p="tags"]');
+    if (tags && (p.tags || []).length) { tags.textContent = ''; p.tags.forEach(function (t) { tags.appendChild(h('span', { text: t })); }); }
+    if (p.quote) {
+      var q = p.quote.replace(/^["\u201c]+|["\u201d]+$/g, '');
+      document.querySelectorAll('[data-p="quote"]').forEach(function (el) { el.textContent = q.replace(/\.$/, ''); });
+      document.querySelectorAll('[data-p="quote-marks"]').forEach(function (el) { el.textContent = '\u201c' + q + '\u201d'; });
     }
 
     var st = document.querySelector('[data-p="stats"]');

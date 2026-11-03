@@ -25,6 +25,13 @@ export function cleanPhone(v) {
   return /^[6-9]\d{9}$/.test(local) ? '91' + local : '';
 }
 
+// "@name", "instagram.com/name/" -> "name"
+export function cleanHandle(v) {
+  const s = String(v || '').trim();
+  const m = s.match(/instagram\.com\/([A-Za-z0-9._]{1,30})/i) || s.match(/^@?([A-Za-z0-9._]{1,30})$/);
+  return m && !/^(p|reel|reels|tv|stories|explore)$/i.test(m[1]) ? m[1] : '';
+}
+
 // "https://www.instagram.com/reel/ABC123/?igsh=..." -> "reel/ABC123"
 export function cleanReel(v) {
   const s = String(v || '').trim();
@@ -54,6 +61,15 @@ function clean(raw, id) {
   const phone = cleanPhone(p.phone);
   return {
     phone: phone || DEFAULTS[id].phone,
+    name: str(p.name, 40) || DEFAULTS[id].name,
+    role: str(p.role, 70),
+    instagram: cleanHandle(p.instagram),
+    card: str(p.card, 140),
+    quote: str(p.quote, 100),
+    why: list(p.why, 8)
+      .map((w) => ({ title: str(w && w.title, 60), desc: str(w && w.desc, 140) }))
+      .filter((w) => w.title),
+    tags: list(p.tags, 12).map((t) => str(t, 40)).filter(Boolean),
     avatar: cleanImage(p.avatar, id),
     cover: cleanImage(p.cover, id),
     tagline: str(p.tagline, 220),
@@ -100,15 +116,19 @@ export async function GET(request) {
     }
 
     if (url.searchParams.get('phones')) {
-      const out = {}, avatars = {}, years = {};
+      const out = {}, avatars = {}, years = {}, cards = {};
       await Promise.all(ARTISTS.map(async (a) => {
         const s = await readJson(key(a.id));
         if (s && s.profile && s.profile.phone) out[a.id] = s.profile.phone;
         if (s && s.profile && s.profile.avatar) avatars[a.id] = s.profile.avatar.src;
         const exp = s && s.profile && (s.profile.stats || []).find((x) => /experien/i.test(x.label));
         if (exp) years[a.id] = exp.value;
+        if (s && s.profile) {
+          const pr = s.profile;
+          cards[a.id] = { name: pr.name || '', role: pr.role || '', card: pr.card || '', instagram: pr.instagram || '' };
+        }
       }));
-      return json({ artists: out, avatars, years }, 200, 'public, max-age=0, s-maxage=30, stale-while-revalidate=60');
+      return json({ artists: out, avatars, years, cards }, 200, 'public, max-age=0, s-maxage=30, stale-while-revalidate=60');
     }
 
     const id = url.searchParams.get('artist');
