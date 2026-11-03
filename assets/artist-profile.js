@@ -9,9 +9,14 @@
 //   [data-p="gallery"]     photos first, then Instagram reels/posts
 //   [data-p="rates"]       price groups with "Book this look"; left alone if no rates saved
 //   [data-p="phone-text"]  visible phone number
+//   [data-p="stats"]       the highlights under the name (experience etc.)
+//   [data-p="avatar"]      replaced by the round profile picture
+//   [data-p="cover"]       an <img> gets the cover as its src; any other element gets it as --cover
+//                          and the class has-cover
 //   a[href^="https://wa.me/<old>"], a[href="tel:+<old>"]  switched to the saved number
 //
-// On the homepage, [data-artist-phones] makes artist cards and the booking form use saved numbers.
+// On the homepage, [data-artist-phones] makes artist cards and the booking form use saved numbers,
+// and artist cards show saved profile pictures.
 (function () {
   'use strict';
 
@@ -40,6 +45,30 @@
       document.querySelectorAll('option[data-artist][data-wa]').forEach(function (o) {
         var saved = d.artists[o.getAttribute('data-artist')];
         if (saved) swapPhone(o.getAttribute('data-wa'), saved);
+      });
+      // "10+ years." on artist cards follows the experience the artist saved
+      Object.keys(d.years || {}).forEach(function (id) {
+        var marker = document.querySelector('.artist [data-availability="' + id + '"]');
+        var y = marker && marker.closest('.artist').querySelector('.years');
+        if (!y) return;
+        var v = d.years[id].replace(/\s*years?\b/i, '').trim();
+        var txt = /^[\d+.\s]+$/.test(v) ? v + ' years' : d.years[id];
+        if (/^[\d+.\s]+years?/i.test(y.textContent)) y.textContent = y.textContent.replace(/^[\d+.\s]+years?/i, txt);
+        else y.textContent = txt + '.';
+      });
+      Object.keys(d.avatars || {}).forEach(function (id) {
+        var marker = document.querySelector('.artist [data-availability="' + id + '"]');
+        var card = marker && marker.closest('.artist');
+        if (!card) return;
+        var name = (card.querySelector('h3') || {}).textContent || '';
+        var mono = card.querySelector('.monogram');
+        var img = card.querySelector(':scope > img');
+        if (mono) {
+          var a = h('img', { src: d.avatars[id], alt: name, class: 'monogram', loading: 'lazy', width: '76', height: '76' });
+          a.style.cssText = 'object-fit:cover;padding:3px;background:none';
+          a.style.borderRadius = '50%';
+          mono.replaceWith(a);
+        } else if (img) { img.src = d.avatars[id]; img.alt = name; }
       });
     }).catch(function () {});
     return;
@@ -71,6 +100,10 @@
     '.p-lb .n{display:flex;justify-content:center;gap:12px;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px))}' +
     '.p-lb button{min-width:48px;min-height:48px;padding:0 18px;border:1px solid rgba(217,191,140,.28);border-radius:999px;background:transparent;color:#f8f4ee;font:500 13px Jost,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}' +
     '.rates-wrap .price-block+.price-block{margin-top:64px}' +
+    '.p-avatar{width:132px;height:132px;margin:0 auto 26px;padding:4px;border-radius:50%;border:1px solid var(--gold,#d9bf8c);box-shadow:0 0 0 6px rgba(14,13,11,.55)}' +
+    '.p-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}' +
+    '.hero-body .p-avatar{margin-top:-40px;position:relative;z-index:3}' +
+    '@media (max-width:600px){.p-avatar{width:108px;height:108px}}' +
     '.rates-wrap .price-head{margin-top:0}' +
     '.rates-cta{display:flex;justify-content:center;margin-top:48px}';
 
@@ -179,6 +212,24 @@
     swapPhone(oldPhone, p.phone);
     body.setAttribute('data-phone', p.phone);
     document.querySelectorAll('[data-p="phone-text"]').forEach(function (el) { el.textContent = '+91 ' + p.phone.slice(2, 7) + ' ' + p.phone.slice(7); });
+
+    var av = document.querySelector('[data-p="avatar"]');
+    if (av && p.avatar) {
+      av.className = 'p-avatar'; av.textContent = ''; av.hidden = false; av.removeAttribute('aria-hidden');
+      av.appendChild(h('img', { src: p.avatar.src, alt: (body.getAttribute('data-name') || first || 'The artist') + ', profile picture' }));
+    }
+    var cv = document.querySelector('[data-p="cover"]');
+    if (cv && p.cover) {
+      if (cv.tagName === 'IMG') { cv.src = p.cover.src; cv.removeAttribute('srcset'); cv.style.objectFit = 'cover'; cv.style.objectPosition = 'center 30%'; }
+      else { cv.style.setProperty('--cover', 'url("' + p.cover.src.replace(/"/g, '%22') + '")'); cv.classList.add('has-cover'); }
+    }
+
+    var st = document.querySelector('[data-p="stats"]');
+    if (st && (p.stats || []).length) {
+      st.textContent = '';
+      st.style.gridTemplateColumns = 'repeat(' + p.stats.length + ', minmax(0, 1fr))';
+      p.stats.forEach(function (x) { st.appendChild(h('div', {}, [h('strong', { text: x.value }), x.label ? h('span', { text: x.label }) : null])); });
+    }
 
     var tag = document.querySelector('[data-p="tagline"]');
     if (tag && p.tagline) tag.textContent = p.tagline;

@@ -242,7 +242,9 @@
   
     /* Artist pages without a cover photo: salon interior behind a typographic hero */
     .hero-type { position: relative; padding: 150px 0 80px; text-align: center; overflow: hidden; }
-    .hero-type::before { content: ''; position: absolute; inset: 0; background: url('/assets/img/hero.jpg') center / cover no-repeat; opacity: 0.22; filter: grayscale(0.35); }
+    .hero-type::before { content: ''; position: absolute; inset: 0; background: var(--cover, url('/assets/img/hero.jpg')) center 30% / cover no-repeat; opacity: 0.22; filter: grayscale(0.35); }
+    .hero-type.has-cover::before { opacity: 0.62; filter: none; }
+    .hero-type.has-cover::after { background: linear-gradient(to bottom, rgba(14,13,11,0.55), rgba(14,13,11,0.35) 30%, rgba(14,13,11,0.75) 70%, var(--ink)); }
     .hero-type::after { content: ''; position: absolute; inset: 0; background: radial-gradient(900px 520px at 50% 35%, rgba(14,13,11,0.35), var(--ink) 78%); }
     .hero-type > * { position: relative; z-index: 2; }
     .hero-type h1 { font-size: clamp(44px, 10vw, 96px); letter-spacing: 0.12em; color: var(--gold); font-weight: 400; }
@@ -295,21 +297,21 @@
     }
   </style>
 </head>
-<body data-artist-page="imran-ahmad" data-phone="919779813285" data-first="Imran">
+<body data-artist-page="imran-ahmad" data-phone="919779813285" data-first="Imran" data-name="Imran Ahmad">
 
-  <header class="hero-type dark">
+  <header class="hero-type dark" data-p="cover">
     <div class="topbar">
       <a href="/">Affinity Luxury Salon</a>
       <span><a href="#work">Work</a> &nbsp;&middot;&nbsp; <a href="#book">Book</a></span>
     </div>
     <div class="wrap">
-      <div class="mono" aria-hidden="true"><span>IA</span></div>
+      <div class="mono" data-p="avatar" aria-hidden="true"><span>IA</span></div>
       <p class="kicker">Hair Portfolio</p>
       <h1>IMRAN AHMAD</h1>
       <p class="role">Senior Hair Artist &middot; Colour &amp; Styling</p>
       <p class="lede" data-p="tagline">Trained in Delhi, Mumbai and at a Russian academy &mdash; hair colour, cuts and hairdos for every occasion.</p>
       <a class="handle" href="https://www.instagram.com/imran.hairartist/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@imran.hairartist</a>
-      <div class="stats"><div><strong>8+ Years</strong><span>Experience</span></div><div><strong>25K+</strong><span>Instagram followers</span></div><div><strong>1,400+</strong><span>Posts of his work</span></div></div>
+      <div class="stats" data-p="stats"><div><strong>8+ Years</strong><span>Experience</span></div><div><strong>25K+</strong><span>Instagram followers</span></div><div><strong>1,400+</strong><span>Posts of his work</span></div></div>
       <p class="place">Chandigarh &middot; Affinity Luxury Salon, Sector 9</p>
       <p class="availability" data-availability="imran-ahmad" hidden></p>
       <div class="actions">

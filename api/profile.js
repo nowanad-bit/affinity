@@ -1,8 +1,8 @@
-// Artist portfolio content that each artist edits from /studio: phone, tagline, bio, services,
-// rates, photos and Instagram reels. Dates live in /api/availability.
+// Artist portfolio content that each artist edits from /studio: profile picture, cover, phone,
+// experience highlights, tagline, bio, services, rates, photos and Instagram reels. Dates live in /api/availability.
 //
 // GET  /api/profile?artist=sunny-ali  -> public profile (the built-in default until first save)
-// GET  /api/profile?phones=1          -> { artists: { id: phone } } for artists who saved a number
+// GET  /api/profile?phones=1          -> { artists: {id: phone}, avatars: {id: src}, years: {id: '10+ Years'} } for the homepage
 // GET  /api/profile?photo=<key>       -> a photo saved in a private Blob store
 // POST /api/profile                   -> { verify } | { profile } with X-Artist + X-Artist-Pin
 //                                        admin only: { pins: 'list' } | { setPin: { artist, pin } }
@@ -41,12 +41,25 @@ function okPhotoSrc(src, id) {
   );
 }
 
+// Profile picture or cover: { src, key } from an upload, or null
+function cleanImage(v, id) {
+  if (!v || typeof v !== 'object') return null;
+  const img = { src: str(v.src, 400), key: str(v.key, 200) };
+  return okPhotoSrc(img.src, id) && (!img.key || img.key.startsWith(`artist-photos/${id}/`)) ? img : null;
+}
+
 function clean(raw, id) {
   const p = raw && typeof raw === 'object' ? raw : {};
   const phone = cleanPhone(p.phone);
   return {
     phone: phone || DEFAULTS[id].phone,
+    avatar: cleanImage(p.avatar, id),
+    cover: cleanImage(p.cover, id),
     tagline: str(p.tagline, 220),
+    // Highlights under the name, e.g. { value: '10+ Years', label: 'Experience' }
+    stats: list(p.stats, 3)
+      .map((x) => ({ value: str(x && x.value, 16), label: str(x && x.label, 32) }))
+      .filter((x) => x.value),
     bio: list(p.bio, 4).map((t) => str(t, 900)).filter(Boolean),
     services: list(p.services, 6)
       .map((g) => ({ title: str(g && g.title, 40), items: list(g && g.items, 8).map((t) => str(t, 60)).filter(Boolean) }))
@@ -86,12 +99,15 @@ export async function GET(request) {
     }
 
     if (url.searchParams.get('phones')) {
-      const out = {};
+      const out = {}, avatars = {}, years = {};
       await Promise.all(ARTISTS.map(async (a) => {
         const s = await readJson(key(a.id));
         if (s && s.profile && s.profile.phone) out[a.id] = s.profile.phone;
+        if (s && s.profile && s.profile.avatar) avatars[a.id] = s.profile.avatar.src;
+        const exp = s && s.profile && (s.profile.stats || []).find((x) => /experien/i.test(x.label));
+        if (exp) years[a.id] = exp.value;
       }));
-      return json({ artists: out }, 200, 'public, max-age=0, s-maxage=30, stale-while-revalidate=60');
+      return json({ artists: out, avatars, years }, 200, 'public, max-age=0, s-maxage=30, stale-while-revalidate=60');
     }
 
     const id = url.searchParams.get('artist');
@@ -140,8 +156,9 @@ export async function POST(request) {
       const updatedAt = new Date().toISOString();
       await writeJson(key(id), { updatedAt, updatedBy: who.admin ? 'admin' : id, profile });
       // Remove uploaded photos the artist deleted
-      const keep = new Set(profile.photos.map((p) => p.key).filter(Boolean));
-      await Promise.all((before.profile.photos || []).filter((p) => p.key && !keep.has(p.key)).map((p) => deletePhoto(p.key)));
+      const images = (pr) => [...(pr.photos || []), pr.avatar, pr.cover].filter((p) => p && p.key);
+      const keep = new Set(images(profile).map((p) => p.key));
+      await Promise.all(images(before.profile).filter((p) => !keep.has(p.key)).map((p) => deletePhoto(p.key)));
       return json({ artist: id, saved: true, updatedAt, profile });
     }
     return json({ error: 'Nothing to save.' }, 400);

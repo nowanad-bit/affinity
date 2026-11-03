@@ -2,7 +2,23 @@
 // Matches what is written into each artist page.
 export default {
  "neeraj-sidhu": {
+  "avatar": null,
+  "cover": null,
   "phone": "919501791259",
+  "stats": [
+   {
+    "value": "9 Years",
+    "label": "Experience"
+   },
+   {
+    "value": "1000+",
+    "label": "Happy clients"
+   },
+   {
+    "value": "Global",
+    "label": "International expertise"
+   }
+  ],
   "tagline": "",
   "bio": [
    "I am Neeraj Sidhu, a professional makeup artist based in Chandigarh with nine years of experience in the beauty industry. I specialise in flawless, elegant and long-lasting looks that enhance your natural beauty — from traditional bridal makeup to modern, camera-ready glam. Every look is personal, created so you feel confident, beautiful and truly special on your big day."
@@ -221,7 +237,23 @@ export default {
   "reels": []
  },
  "sunny-ali": {
+  "avatar": null,
+  "cover": null,
   "phone": "919872366050",
+  "stats": [
+   {
+    "value": "10+ Years",
+    "label": "Experience"
+   },
+   {
+    "value": "1M+",
+    "label": "Instagram followers"
+   },
+   {
+    "value": "7,000+",
+    "label": "Posts of his work"
+   }
+  ],
   "tagline": "Celebrity hair artist trained at Sassoon Academy, London — known for colour transformations without bleach.",
   "bio": [
    "Sunny Ali is a senior hair artist and colour specialist at Affinity Luxury Salon, Sector 9, with more than ten years of experience. He trained at Sassoon Academy in London and has built one of India’s largest hair-artist followings on Instagram.",
@@ -268,7 +300,23 @@ export default {
   ]
  },
  "saleem-salmani": {
+  "avatar": null,
+  "cover": null,
   "phone": "919780422854",
+  "stats": [
+   {
+    "value": "9+ Years",
+    "label": "Experience"
+   },
+   {
+    "value": "12K+",
+    "label": "Instagram followers"
+   },
+   {
+    "value": "300+",
+    "label": "Posts of his work"
+   }
+  ],
   "tagline": "Precision cuts and warm, glossy colour — from soft layers and bobs to bold transformations.",
   "bio": [
    "Saleem Salmani is a senior hair artist at Affinity Luxury Salon, Sector 9, with more than nine years of experience. Clients know him as a precision cutter and a colour specialist.",
@@ -313,7 +361,23 @@ export default {
   ]
  },
  "imran-ahmad": {
+  "avatar": null,
+  "cover": null,
   "phone": "919779813285",
+  "stats": [
+   {
+    "value": "8+ Years",
+    "label": "Experience"
+   },
+   {
+    "value": "25K+",
+    "label": "Instagram followers"
+   },
+   {
+    "value": "1,400+",
+    "label": "Posts of his work"
+   }
+  ],
   "tagline": "Trained in Delhi, Mumbai and at a Russian academy — hair colour, cuts and hairdos for every occasion.",
   "bio": [
    "Imran Ahmad is a senior hair artist at Affinity Luxury Salon, Sector 9, with more than eight years of experience. He trained in celebrity hairstyling in Delhi and Mumbai and at a Russian academy.",
@@ -359,7 +423,23 @@ export default {
   ]
  },
  "azeem-alvi": {
+  "avatar": null,
+  "cover": null,
   "phone": "917696887421",
+  "stats": [
+   {
+    "value": "7+ Years",
+    "label": "Experience"
+   },
+   {
+    "value": "6K+",
+    "label": "Instagram followers"
+   },
+   {
+    "value": "390+",
+    "label": "Posts of his work"
+   }
+  ],
   "tagline": "Modern cuts and honey, caramel and ash colour — complete cut-and-colour transformations.",
   "bio": [
    "Azeem Alvi is a senior hair artist at Affinity Luxury Salon, Sector 9, with more than seven years of experience. He specialises in modern cuts and complete hair transformations.",
@@ -404,7 +484,23 @@ export default {
   ]
  },
  "naushad": {
+  "avatar": null,
+  "cover": null,
   "phone": "919888055835",
+  "stats": [
+   {
+    "value": "6+ Years",
+    "label": "Experience"
+   },
+   {
+    "value": "10K+",
+    "label": "Instagram followers"
+   },
+   {
+    "value": "500",
+    "label": "Posts of his work"
+   }
+  ],
   "tagline": "Trending cuts and colour — butterfly cuts, short cuts and fresh new shades.",
   "bio": [
    "Naushad is a senior hair artist at Affinity Luxury Salon, Sector 9, with more than six years of experience. He specialises in trending hairstyles and is a colour specialist.",
@@ -449,7 +545,23 @@ export default {
   ]
  },
  "nisha-sharma": {
+  "avatar": null,
+  "cover": null,
   "phone": "919780823215",
+  "stats": [
+   {
+    "value": "Certified",
+    "label": "Makeup artist"
+   },
+   {
+    "value": "4K+",
+    "label": "Instagram followers"
+   },
+   {
+    "value": "Global",
+    "label": "Travels for weddings"
+   }
+  ],
   "tagline": "Signature bridal glam, celebrity bridal looks and soft party glam — travelling wherever your wedding is.",
   "bio": [
    "Nisha Sharma is a certified bridal makeup artist at Affinity Luxury Salon, Sector 9, Chandigarh. She specialises in bridal, engagement and party makeup.",
