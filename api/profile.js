@@ -53,6 +53,9 @@ function cleanImage(v, id) {
   if (!v || typeof v !== 'object') return null;
   const img = { src: str(v.src, 400), key: str(v.key, 200) };
   if (['top', 'center', 'bottom'].includes(v.pos)) img.pos = v.pos;
+  // Cover framing from the studio: focus point (0-100 %) and zoom (1-3)
+  const num = (n, lo, hi) => (typeof n === 'number' && isFinite(n) ? Math.min(hi, Math.max(lo, Math.round(n * 100) / 100)) : null);
+  if (num(v.x, 0, 100) !== null && num(v.y, 0, 100) !== null) { img.x = num(v.x, 0, 100); img.y = num(v.y, 0, 100); img.z = num(v.z, 1, 3) || 1; }
   return okPhotoSrc(img.src, id) && (!img.key || img.key.startsWith(`artist-photos/${id}/`)) ? img : null;
 }
 

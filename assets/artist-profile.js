@@ -165,7 +165,7 @@
     '.p-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,13,11,.5),rgba(14,13,11,0) 24%,rgba(14,13,11,0) 82%,rgba(14,13,11,.55))}' +
     '.has-banner .wrap > .p-avatar{margin-top:-72px;position:relative;z-index:3}' +
     '.has-banner .wrap > .mono{margin-top:40px}' +
-    '.hero-img.is-banner{max-width:none}' +
+    '.hero-img.is-banner{max-width:none;overflow:hidden}' +
     '.hero-img.is-banner img{aspect-ratio:820/312;max-height:460px;object-fit:cover;-webkit-mask-image:none;mask-image:none}' +
     '.hero-img.is-banner + .hero-body .p-avatar{margin-top:-72px}' +
     '@media (max-width:600px){.p-banner,.hero-img.is-banner img{aspect-ratio:16/9}.has-banner .wrap > .p-avatar,.hero-img.is-banner + .hero-body .p-avatar{margin-top:-58px}}' +
@@ -302,15 +302,20 @@
     }
     var cv = document.querySelector('[data-p="cover"]');
     if (cv && p.cover) {
-      var pos = 'center ' + ({ top: '0%', bottom: '100%' }[p.cover.pos] || '50%');
+      // Framing set in the studio: focus point + zoom (older saves only have top/center/bottom)
+      var fx = typeof p.cover.x === 'number' ? p.cover.x : 50;
+      var fy = typeof p.cover.y === 'number' ? p.cover.y : ({ top: 0, bottom: 100 }[p.cover.pos] !== undefined ? { top: 0, bottom: 100 }[p.cover.pos] : 50);
+      var fz = p.cover.z > 1 ? p.cover.z : 1;
+      var pos = fx + '% ' + fy + '%';
+      function frame(img) { img.style.objectPosition = img.style.transformOrigin = pos; if (fz > 1) img.style.transform = 'scale(' + fz + ')'; }
       var alt = (body.getAttribute('data-name') || first || 'Artist') + ', cover photo';
       if (cv.tagName === 'IMG') {
         cv.src = p.cover.src; cv.alt = alt; cv.removeAttribute('srcset'); cv.removeAttribute('width'); cv.removeAttribute('height');
-        cv.style.objectPosition = pos;
+        frame(cv);
         if (cv.parentElement) cv.parentElement.classList.add('is-banner');
       } else {
         var img = h('img', { src: p.cover.src, alt: alt, fetchpriority: 'high' });
-        img.style.objectPosition = pos;
+        frame(img);
         var banner = h('div', { class: 'p-banner' }, [img]);
         var top = cv.querySelector('.topbar');
         cv.insertBefore(banner, top ? top.nextSibling : cv.firstChild);
