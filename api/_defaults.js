@@ -544,6 +544,67 @@ export default {
    "p/Db-nnHmRIyy"
   ]
  },
+ "jassi": {
+  "avatar": null,
+  "cover": null,
+  "phone": "919855001529",
+  "stats": [
+   {
+    "value": "Colour",
+    "label": "Transformation specialist"
+   },
+   {
+    "value": "190+",
+    "label": "Posts of his work"
+   },
+   {
+    "value": "Sector 9",
+    "label": "Affinity Chandigarh"
+   }
+  ],
+  "tagline": "Hair colour transformations by Jassi — rich browns, burgundy and red-violet, with cuts and blowouts to finish.",
+  "bio": [
+   "Jaswinder Singh, known to clients as Jassi, is a hair artist at Affinity Luxury Salon, Sector 9, Chandigarh. He specialises in hair colour transformations.",
+   "His work ranges from natural and rich browns, dark chocolate and brown highlights to bold burgundy and red-violet, finished with face-framing layers or a bouncy 90s blowout."
+  ],
+  "services": [
+   {
+    "title": "Hair Colour",
+    "items": [
+     "Natural & rich brown",
+     "Dark chocolate brown",
+     "Burgundy & red-violet",
+     "Colour transformation"
+    ]
+   },
+   {
+    "title": "Highlights & Gloss",
+    "items": [
+     "Brown highlights",
+     "Gloss & shine",
+     "Tone refresh"
+    ]
+   },
+   {
+    "title": "Cut & Style",
+    "items": [
+     "Face-framing layers",
+     "90s blowout",
+     "Consultation"
+    ]
+   }
+  ],
+  "rates": [],
+  "photos": [],
+  "reels": [
+   "reel/DfPMhSqvjxh",
+   "reel/DebuRJ3tycp",
+   "reel/DdTwjDwBmM5",
+   "reel/DZ2MfaDoazO",
+   "reel/DZe5VN9oul0",
+   "reel/DZSQnFEItRQ"
+  ]
+ },
  "nisha-sharma": {
   "avatar": null,
   "cover": null,

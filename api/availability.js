@@ -25,6 +25,8 @@ const ARTISTS = [
   { id: 'imran-ahmad', name: 'Imran Ahmad', role: 'Senior hair artist' },
   { id: 'azeem-alvi', name: 'Azeem Alvi', role: 'Senior hair artist' },
   { id: 'naushad', name: 'Naushad', role: 'Senior hair artist' },
+  // defaults: used until staff or the artist save their own settings (Thursday = 4)
+  { id: 'jassi', name: 'Jassi', role: 'Hair artist', defaults: { weeklyOff: [4] } },
   { id: 'nisha-sharma', name: 'Nisha Sharma', role: 'Makeup artist' },
 ];
 
@@ -70,7 +72,7 @@ function shape(stored) {
   return {
     today,
     updatedAt: (stored && stored.updatedAt) || null,
-    artists: ARTISTS.map((a) => ({ ...a, ...cleanArtist(saved[a.id], today) })),
+    artists: ARTISTS.map(({ defaults, ...a }) => ({ ...a, ...cleanArtist(saved[a.id] || defaults, today) })),
   };
 }
 
@@ -167,7 +169,7 @@ export async function POST(request) {
     // Artists not sent keep what is stored (they may have changed it themselves in /studio)
     const current = ((await load()) || {}).artists || {};
     const artists = {};
-    for (const a of ARTISTS) artists[a.id] = cleanArtist(a.id in incoming ? incoming[a.id] : current[a.id], today);
+    for (const a of ARTISTS) artists[a.id] = cleanArtist(a.id in incoming ? incoming[a.id] : current[a.id] || a.defaults, today);
     const stored = { updatedAt: new Date().toISOString(), artists };
     await save(stored);
     return json(shape(stored));

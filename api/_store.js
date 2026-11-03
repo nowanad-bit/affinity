@@ -17,6 +17,7 @@ export const ARTISTS = [
   { id: 'imran-ahmad', name: 'Imran Ahmad', role: 'Senior hair artist' },
   { id: 'azeem-alvi', name: 'Azeem Alvi', role: 'Senior hair artist' },
   { id: 'naushad', name: 'Naushad', role: 'Senior hair artist' },
+  { id: 'jassi', name: 'Jassi', role: 'Hair artist' },
   { id: 'nisha-sharma', name: 'Nisha Sharma', role: 'Makeup artist' },
 ];
 export const isArtist = (id) => ARTISTS.some((a) => a.id === id);
