@@ -671,6 +671,23 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
     $('lastSaved').textContent = at ? 'Last saved ' + new Date(at).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) : 'Not edited yet — your page shows the salon’s starting version.';
   }
 
+  // "with more than eight years of experience" -> "with more than 12 years of experience" when the
+  // artist's Experience highlight says "12+ Years". Only touches phrases followed by "experience".
+  var WORDS = 'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|twenty-five|thirty';
+  var EXP_RE = new RegExp('\\b(more than |over )?(\\d+|' + WORDS + ')\\+?\\s+(years?)(?=\\s+(?:of\\s+)?(?:professional\\s+)?experience)', 'gi');
+  function experienceOf(stats) {
+    var x = (stats || []).filter(function (s) { return /experien/i.test(s.label || ''); })[0];
+    var m = x && String(x.value).match(/(\d+)\s*(\+)?/);
+    return m ? { n: m[1], plus: !!m[2] } : null;
+  }
+  function syncYears(text, exp) {
+    if (!exp || !text) return text;
+    return text.replace(EXP_RE, function (all, more, num, word) {
+      var unit = /^Y/.test(word) ? 'Years' : 'years';
+      return (exp.plus || more ? (more || 'more than ') : '') + exp.n + ' ' + unit;
+    });
+  }
+
   function payload() {
     return {
       phone: $('phone').value,
@@ -678,7 +695,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
       cover: profile.cover || null,
       tagline: profile.tagline,
       stats: profile.stats.filter(function (x) { return x.value.trim(); }),
-      bio: profile.bio,
+      bio: (function (exp) { return profile.bio.map(function (t) { return syncYears(t, exp); }); })(experienceOf(profile.stats)),
       services: profile.services,
       rates: profile.rates.map(function (g) { return { title: g.title, note: g.note, items: g.items.filter(function (i) { return i.name.trim(); }) }; }),
       photos: profile.photos,

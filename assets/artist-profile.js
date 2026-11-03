@@ -121,6 +121,23 @@
     '.rates-wrap .price-head{margin-top:0}' +
     '.rates-cta{display:flex;justify-content:center;margin-top:48px}';
 
+  // "with more than eight years of experience" -> "with more than 12 years of experience" when the
+  // artist's Experience highlight says "12+ Years". Only touches phrases followed by "experience".
+  var WORDS = 'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|twenty-five|thirty';
+  var EXP_RE = new RegExp('\\b(more than |over )?(\\d+|' + WORDS + ')\\+?\\s+(years?)(?=\\s+(?:of\\s+)?(?:professional\\s+)?experience)', 'gi');
+  function experienceOf(stats) {
+    var x = (stats || []).filter(function (s) { return /experien/i.test(s.label || ''); })[0];
+    var m = x && String(x.value).match(/(\d+)\s*(\+)?/);
+    return m ? { n: m[1], plus: !!m[2] } : null;
+  }
+  function syncYears(text, exp) {
+    if (!exp || !text) return text;
+    return text.replace(EXP_RE, function (all, more, num, word) {
+      var unit = /^Y/.test(word) ? 'Years' : 'years';
+      return (exp.plus || more ? (more || 'more than ') : '') + exp.n + ' ' + unit;
+    });
+  }
+
   function wa(phone, text) { return 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text); }
 
   // ---------- Lightbox for uploaded photos ----------
@@ -259,6 +276,16 @@
 
     var tag = document.querySelector('[data-p="tagline"]');
     if (tag && p.tagline) tag.textContent = p.tagline;
+    // Keep "X years of experience" in the text in line with the Experience highlight
+    var exp = experienceOf(p.stats);
+    if (exp) {
+      if (p.bio) p.bio = p.bio.map(function (t) { return syncYears(t, exp); });
+      document.querySelectorAll('[data-p="bio"] p, .why strong, .why span, [data-p="tagline"]').forEach(function (el) {
+        if (el.children.length) return;
+        var t = syncYears(el.textContent, exp);
+        if (t !== el.textContent) el.textContent = t;
+      });
+    }
     var bio = document.querySelector('[data-p="bio"]');
     if (bio && (p.bio || []).length) { bio.textContent = ''; p.bio.forEach(function (t) { bio.appendChild(h('p', { class: 'lead', text: t })); }); }
     var s = document.querySelector('[data-p="services"]'); if (s) renderServices(s, p);
