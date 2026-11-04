@@ -38,7 +38,11 @@ button, input { font: inherit; color: inherit; }
 .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
 
 header { border-bottom: 1px solid var(--line); }
-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; flex-wrap: wrap; }
+.admin-nav { display: flex; gap: 4px; }
+.admin-nav a { padding: 8px 12px; border-radius: 2px; color: var(--ink-soft); text-decoration: none; font-size: 0.85rem; }
+.admin-nav a:hover { color: var(--ink); }
+.admin-nav a[aria-current="page"] { color: var(--ink); background: var(--surface-2); box-shadow: inset 0 -2px 0 var(--gold); }
 .brand { font: 500 0.78rem var(--f-body); letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
 .link { background: none; border: 0; padding: 8px 0; color: var(--ink-soft); font-size: 0.85rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 
@@ -117,6 +121,10 @@ label.lbl, .lbl { display: block; margin-bottom: 6px; font-size: 0.7rem; letter-
 <header>
   <div class="wrap">
     <a class="brand" href="/">Affinity · Admin</a>
+    <nav class="admin-nav" aria-label="Admin pages">
+      <a href="/admin" aria-current="page">Availability</a>
+      <a href="/admin/analytics">Analytics</a>
+    </nav>
     <button class="link" id="logout" type="button" hidden>Sign out</button>
   </div>
 </header>
